@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Star, Trophy, Users, Target } from "lucide-react"
+import { Star, Trophy, Users, Target, Award, Heart, Palette, Zap, Crown, Medal } from "lucide-react"
 
 export default function CanadianChoiceAward() {
   const [timeLeft, setTimeLeft] = useState({
@@ -33,6 +33,63 @@ export default function CanadianChoiceAward() {
 
     return () => clearInterval(timer)
   }, [])
+
+  const categories = [
+    {
+      title: "Outstanding Community Leadership",
+      icon: Users,
+      image: "/diverse.jpg",
+      description: "Recognizing leaders who make a positive impact in their communities",
+    },
+    {
+      title: "African Entrepreneur of the Year",
+      icon: Target,
+      image: "/successful.jpg",
+      description: "Celebrating innovative African entrepreneurs driving business success",
+    },
+    {
+      title: "Excellence in Arts & Culture",
+      icon: Palette,
+      image: "/arts-and-culture-creative-expression-painting-musi.jpg",
+      description: "Honoring outstanding contributions to arts and cultural preservation",
+    },
+    {
+      title: "African Youth Achievement Award",
+      icon: Award,
+      image: "/young.jpg",
+      description: "Recognizing exceptional achievements by young African Canadians",
+    },
+    {
+      title: "Excellence in Sports of the Year",
+      icon: Medal,
+      image: "/sports.jpg",
+      description: "Celebrating outstanding athletic performance and sportsmanship",
+    },
+    {
+      title: "Humanitarian Impact Award",
+      icon: Heart,
+      image: "/humanitarian.jpg",
+      description: "Honoring those who dedicate their lives to helping others",
+    },
+    {
+      title: "African Innovator of the Year",
+      icon: Zap,
+      image: "/innovation.jpg",
+      description: "Recognizing groundbreaking innovations and technological advances",
+    },
+    {
+      title: "Lifetime Achievement Award",
+      icon: Crown,
+      image: "/lifetime.jpg",
+      description: "Celebrating a lifetime of exceptional contributions and service",
+    },
+    {
+      title: "Community Recognition Award",
+      icon: Star,
+      image: "/community.jpg",
+      description: "Acknowledging unsung heroes who strengthen our communities",
+    },
+  ]
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-100">
@@ -97,6 +154,56 @@ export default function CanadianChoiceAward() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Award Categories Section */}
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/30">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">AWARD CATEGORIES</h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              We have a wide range of Award categories. Here are the categories available for nominations:
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            {categories.map((category, index) => {
+              const IconComponent = category.icon
+              return (
+                <Card
+                  key={index}
+                  className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white/90 backdrop-blur-sm border-amber-200 hover:border-amber-400"
+                >
+                  <CardContent className="p-0">
+                    <div className="relative overflow-hidden rounded-t-lg">
+                      <img
+                        src={category.image || "/placeholder.svg"}
+                        alt={category.title}
+                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+                      <div className="absolute top-4 right-4 w-12 h-12 bg-amber-500/90 rounded-full flex items-center justify-center">
+                        <IconComponent className="w-6 h-6 text-white" />
+                      </div>
+                    </div>
+                    <div className="p-6">
+                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                        {category.title}
+                      </h3>
+                      <p className="text-gray-600 text-sm mb-4">{category.description}</p>
+                      <Button
+                        variant="outline"
+                        className="w-full border-amber-300 text-amber-700 hover:bg-amber-50 hover:border-amber-400 bg-transparent"
+                      >
+                        Vote in This Category
+                      </Button>
+                    </div>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -239,7 +346,7 @@ export default function CanadianChoiceAward() {
             CHOICE
           </h2>
           <p className="text-gray-600 mb-12">
-            Curious how your favourite business becomes a Canadian Choice Award winner? Here is a look at the key
+            Curious how your favourite business becomes a Canadian Choice Award winner? Here's a look at the key
             journey, from community nominations to the final celebration.
           </p>
 
@@ -251,7 +358,7 @@ export default function CanadianChoiceAward() {
               <div className="text-left">
                 <h3 className="text-2xl font-bold text-gray-900 mb-2">NOMINATIONS</h3>
                 <p className="text-gray-600">
-                  Support your favorite Canadian businesses by submitting a nomination. Business owners can also
+                  Support your favourite Canadian businesses by submitting a nomination. Business owners can also
                   nominate themselves. Once nominated, businesses become a business nominee, the closer they get to
                   becoming an Official Nominee and receiving exclusive benefits.
                 </p>
@@ -301,7 +408,7 @@ export default function CanadianChoiceAward() {
                 Can I nominate more than one business?
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-gray-600">
-               Absolutely, you can nominate as many deserving businesses as you’d like!
+                Yes, you can nominate multiple businesses across different categories.
               </AccordionContent>
             </AccordionItem>
 
@@ -310,35 +417,34 @@ export default function CanadianChoiceAward() {
                 Does it cost anything to nominate?
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-gray-600">
-                No, it’s 100% free.
+                No, nominations are completely free for both nominators and businesses.
               </AccordionContent>
             </AccordionItem>
 
             <AccordionItem value="item-3" className="bg-white/80 rounded-lg border border-amber-200">
               <AccordionTrigger className="px-6 py-4 text-left font-semibold">
-                When does a business become an official nominee?
+                What does a business receive as the Nominee?
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-gray-600">
-                After they receive enough support and complete nominations, we’ll review and notify them during the season.
+                Nominees receive recognition badges, marketing materials, and eligibility to advance to Top 3 Finalists.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-3" className="bg-white/80 rounded-lg border border-amber-200">
+            <AccordionItem value="item-4" className="bg-white/80 rounded-lg border border-amber-200">
               <AccordionTrigger className="px-6 py-4 text-left font-semibold">
-                Will the business know who nominated them?
+                Will my business be automatically listed?
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-gray-600">
-                No, nominations are anonymous unless you tell them yourself.
+                Businesses must meet certain criteria and go through a review process before being officially listed.
               </AccordionContent>
             </AccordionItem>
-
 
             <AccordionItem value="item-5" className="bg-white/80 rounded-lg border border-amber-200">
               <AccordionTrigger className="px-6 py-4 text-left font-semibold">
-                What if I do not have the exact category?
+                What if I don't have the exact category?
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-gray-600">
-                Just choose the closest one, they can request a change later
+                You can select the closest matching category or contact us for guidance on the best fit.
               </AccordionContent>
             </AccordionItem>
 
@@ -347,7 +453,7 @@ export default function CanadianChoiceAward() {
                 What if they have multiple locations?
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-gray-600">
-                Try to use the main business address if possible, but all nominations are reviewed by our team.
+                Each location can be nominated separately as they serve different communities.
               </AccordionContent>
             </AccordionItem>
           </Accordion>
