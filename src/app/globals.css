@@ -1,26 +1,134 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@layer base {
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+  /* ---------- Light Mode Variables ---------- */
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+    --background: oklch(0.98 0 0);
+    /* bright white */
+    --foreground: oklch(0.22 0.02 265);
+    /* dark gray */
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+    --card: oklch(1 0 0);
+    --card-foreground: oklch(0.22 0.02 265);
+
+    --primary: oklch(0.63 0.2 265);
+    /* vibrant purple-blue */
+    --primary-foreground: oklch(0.98 0 0);
+
+    --secondary: oklch(0.9 0.02 265);
+    --secondary-foreground: oklch(0.22 0.02 265);
+
+    --muted: oklch(0.93 0.01 265);
+    --muted-foreground: oklch(0.45 0.02 265);
+
+    --border: oklch(0.85 0.01 265);
+    --ring: oklch(0.63 0.2 265);
+  }
+
+  /* ---------- Dark Mode Variables ---------- */
+  .dark {
+    --background: oklch(0.141 0.005 285.823);
+    /* deep gray */
+    --foreground: oklch(0.985 0 0);
+    /* white */
+
+    --card: oklch(0.21 0.006 285.885);
+    --card-foreground: oklch(0.985 0 0);
+
+    --primary: oklch(0.92 0.004 286.32);
+    --primary-foreground: oklch(0.21 0.006 285.885);
+
+    --secondary: oklch(0.274 0.006 286.033);
+    --secondary-foreground: oklch(0.985 0 0);
+
+    --muted: oklch(0.274 0.006 286.033);
+    --muted-foreground: oklch(0.705 0.015 286.067);
+
+    --border: oklch(1 0 0 / 10%);
+    --ring: oklch(0.552 0.016 285.938);
+  }
+
+  /* ---------- Base Styles ---------- */
+  * {
+    border-color: var(--border);
+    outline-color: var(--ring);
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: system-ui, sans-serif;
+    line-height: 1.6;
+  }
+
+  /* ---------- Inputs ---------- */
+  input,
+  textarea,
+  select {
+    background-color: var(--card);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+    border-radius: 0.5rem;
+    padding: 0.5rem 0.75rem;
+    width: 100%;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: var(--muted-foreground);
+  }
+
+  /* ---------- Buttons ---------- */
+  button {
+    background-color: var(--primary);
+    color: var(--primary-foreground);
+    font-weight: 600;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+    transition: background-color 0.2s;
+  }
+
+  button:hover {
+    background-color: oklch(0.55 0.15 265);
+    /* darker shade */
+  }
+
+  /* ---------- Cards / Sections ---------- */
+  .card {
+    background-color: var(--card);
+    color: var(--card-foreground);
+    border: 1px solid var(--border);
+    border-radius: 1rem;
+    padding: 2rem;
+    box-shadow: 0 2px 8px oklch(0 0 0 / 0.1);
+  }
+
+  section {
+    margin-bottom: 3rem;
+  }
+
+  /* ---------- Headings ---------- */
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: 700;
+    color: var(--foreground);
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+  }
 }
