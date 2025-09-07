@@ -1,157 +1,331 @@
 "use client"
 
+import type React from "react"
+
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent } from "@/components/ui/card"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
-import { Star, Trophy, Users, Target, Award, Heart, Palette, Zap, Crown, Medal } from "lucide-react"
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Star, Trophy, Users, Target, Award, Heart, Palette, Medal } from "lucide-react"
+import emailjs from "@emailjs/browser"
+import Image from "next/image" 
+
+// Set your target date here
+const targetDate = new Date("2025-11-21T00:00:00")
 
 export default function CanadianChoiceAward() {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 57,
-    hours: 17,
-    minutes: 45,
-    seconds: 14,
+  
+   const [timeLeft, setTimeLeft] = useState({
+    days: 0,
+    hours: 0,
+    minutes: 0,
+    seconds: 0,
   })
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setTimeLeft((prev) => {
-        if (prev.seconds > 0) {
-          return { ...prev, seconds: prev.seconds - 1 }
-        } else if (prev.minutes > 0) {
-          return { ...prev, minutes: prev.minutes - 1, seconds: 59 }
-        } else if (prev.hours > 0) {
-          return { ...prev, hours: prev.hours - 1, minutes: 59, seconds: 59 }
-        } else if (prev.days > 0) {
-          return { ...prev, days: prev.days - 1, hours: 23, minutes: 59, seconds: 59 }
-        }
-        return prev
-      })
+      const now = new Date()
+      const difference = targetDate.getTime() - now.getTime()
+
+      if (difference > 0) {
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24))
+        const hours = Math.floor((difference / (1000 * 60 * 60)) % 24)
+        const minutes = Math.floor((difference / (1000 * 60)) % 60)
+        const seconds = Math.floor((difference / 1000) % 60)
+
+        setTimeLeft({ days, hours, minutes, seconds })
+      } else {
+        // Countdown finished
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 })
+        clearInterval(timer)
+      }
     }, 1000)
 
     return () => clearInterval(timer)
   }, [])
 
+  const [isVotingFormOpen, setIsVotingFormOpen] = useState(false)
+  const [selectedCategory, setSelectedCategory] = useState("")
+  const [votingFormData, setVotingFormData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    phone: "",
+    nominate: "",
+    nominee: "", 
+  })
+
+  const [isVotingSubmitting, setIsVotingSubmitting] = useState(false)
+  const [votingSubmitSuccess, setVotingSubmitSuccess] = useState(false)
+  
+
   const categories = [
     {
-      title: "Outstanding Community Leadership",
+      title: "Community & Social Impact",
       icon: Users,
-      image: "/diverse.jpg",
+      image: "/team.jpeg",
       description: "Recognizing leaders who make a positive impact in their communities",
     },
     {
-      title: "African Entrepreneur of the Year",
+      title: "Business & Innovation",
       icon: Target,
-      image: "/successful.jpg",
+      image: "/team.jpeg",
       description: "Celebrating innovative African entrepreneurs driving business success",
     },
     {
-      title: "Excellence in Arts & Culture",
+      title: "Arts & Culture",
       icon: Palette,
-      image: "/arts-and-culture-creative-expression-painting-musi.jpg",
+      image: "/team.jpeg",
       description: "Honoring outstanding contributions to arts and cultural preservation",
     },
     {
-      title: "African Youth Achievement Award",
+      title: " Leadership & Governance",
       icon: Award,
-      image: "/young.jpg",
+      image: "/team.jpeg",
       description: "Recognizing exceptional achievements by young African Canadians",
     },
     {
-      title: "Excellence in Sports of the Year",
+      title: "Health, Education & Development",
       icon: Medal,
-      image: "/sports.jpg",
+      image: "/team.jpeg",
       description: "Celebrating outstanding athletic performance and sportsmanship",
     },
     {
-      title: "Humanitarian Impact Award",
+      title: "Special Recognition",
       icon: Heart,
-      image: "/humanitarian.jpg",
+      image: "/team.jpeg",
       description: "Honoring those who dedicate their lives to helping others",
     },
-    {
-      title: "African Innovator of the Year",
-      icon: Zap,
-      image: "/innovation.jpg",
-      description: "Recognizing groundbreaking innovations and technological advances",
-    },
-    {
-      title: "Lifetime Achievement Award",
-      icon: Crown,
-      image: "/lifetime.jpg",
-      description: "Celebrating a lifetime of exceptional contributions and service",
-    },
-    {
-      title: "Community Recognition Award",
-      icon: Star,
-      image: "/community.jpg",
-      description: "Acknowledging unsung heroes who strengthen our communities",
-    },
+    
   ]
 
+  const subCategories = {
+    "Community & Social Impact": [
+      "Humanitarian Impact Award",
+      "Community Leadership Award",
+      "Grassroots Change Maker Award",
+      "African Unity & Inclusion Award",
+      "Youth Empowerment Award",
+    ],
+    "Business & Innovation": [
+      "African Entrepreneur of the Year",
+      "Business Excellence Award",
+      "Innovation & Technology Award",
+      "African Women in Business Leadership Award",
+      "African DJ of the year",
+       "African MC of the year",
+    ],
+    "Arts & Culture": [
+      "African Music Icon Award",
+      "African Fashion & Style Award",
+      "Creative Arts Excellence Award",
+      "Best Traditional Performer",
+      "Cultural Heritage Preservation Award",
+    ],
+    " Leadership & Governance": [
+      "African Trailblazer Award",
+      "Political Leadership Excellence Award",
+      "Pan-African Leadership Award",
+      "Lifetime Achievement in Leadership",
+      "Public Service Excellence Award",
+    ],
+    "Health, Education & Development": [
+      "African Educator of the Year",
+      "Health & Wellness Champion Award",
+      "African Research & Innovation Award",
+      "Sustainable Development Impact Award",
+      "Women & Girls Empowerment Award",
+    ],
+    "Special Recognition": [
+      "Lifetime Achievement Award",
+      "Diaspora Excellence Award",
+      "African Rising Star Award",
+      "Legacy Builder Award",
+    ],
+  }
+
+  const handleVoteClick = (categoryTitle: string) => {
+    setSelectedCategory(categoryTitle)
+    setIsVotingFormOpen(true)
+    setVotingFormData({
+      firstName: "",
+      lastName: "",
+      email: "",
+      phone: "",
+      nominate: "",
+      nominee: "",
+    })
+    setVotingSubmitSuccess(false)
+  }
+
+  const handleVotingSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsVotingSubmitting(true)
+
+    try {
+      const templateParams = {
+        to_email: "admin@canadianchoiceaward.ca", // Replace with your admin email
+        from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
+        from_email: votingFormData.email,
+        phone: votingFormData.phone,
+        category: selectedCategory,
+        nominee: votingFormData.nominee, // This now contains the selected sub-category
+        nominate: votingFormData.nominate,
+        subject: `New Vote Submission - ${selectedCategory}`,
+        message: `Vote submitted for sub-category "${votingFormData.nominee}" in ${selectedCategory} category.`, // Updated message to reflect sub-category
+      }
+
+      await emailjs.send(
+        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
+        "YOUR_VOTING_TEMPLATE_ID", // Replace with your EmailJS template ID for voting
+        templateParams,
+      )
+
+      setVotingSubmitSuccess(true)
+      setTimeout(() => {
+        setIsVotingFormOpen(false)
+        setVotingSubmitSuccess(false)
+      }, 2000)
+    } catch (error) {
+      console.error("[v0] Error sending voting email:", error)
+      alert("There was an error submitting your vote. Please try again.")
+    } finally {
+      setIsVotingSubmitting(false)
+    }
+  }
+
+  const handleInputChange = (field: string, value: string) => {
+    setVotingFormData((prev) => ({
+      ...prev,
+      [field]: value,
+    }))
+  }
+
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-50 to-orange-100">
+    <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, #efd984, #be9c43)' }}>
+      <style jsx global>{`
+        :root {
+          --canada-red: #FA0101;
+          --canada-navy: #000246;
+          --canada-black: #000000;
+          --canada-gold: #efd984;
+          --canada-gold-mid: #be9c43;
+          --canada-gold-dark: #a38235;
+        }
+        
+        .btn-primary {
+          background: linear-gradient(135deg, #FA0101, #d40000);
+          border: none;
+          color: white;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+          background: linear-gradient(135deg, #d40000, #b80000);
+          transform: translateY(-1px);
+          box-shadow: 0 4px 12px rgba(250, 1, 1, 0.3);
+        }
+        
+        .btn-secondary {
+          background: linear-gradient(135deg, #efd984, #be9c43);
+          border: 1px solid #a38235;
+          color: #000246;
+          transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+          background: linear-gradient(135deg, #be9c43, #a38235);
+          color: white;
+        }
+        
+        .card-hover {
+          transition: all 0.3s ease;
+          border: 2px solid #efd984;
+        }
+        
+        .card-hover:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 8px 25px rgba(239, 217, 132, 0.3);
+          border-color: #be9c43;
+        }
+        
+        .gradient-gold {
+          background: linear-gradient(135deg, #efd984, #be9c43, #a38235);
+        }
+        
+        .text-canada-red { color: #FA0101; }
+        .text-canada-navy { color: #000246; }
+        .text-canada-black { color: #000000; }
+        .text-canada-gold { color: #efd984; }
+        .bg-canada-navy { background-color: #000246; }
+        .bg-canada-red { background-color: #FA0101; }
+        .border-canada-gold { border-color: #efd984; }
+      `}</style>
+
       {/* Header */}
-      <header className="bg-white/80 backdrop-blur-sm border-b border-amber-200">
+      <header className="backdrop-blur-sm border-b fixed z-100 w-full border-canada-gold" style={{ backgroundColor: '#000240' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
+          <div className="flex items-center justify-between h-32">
             <div className="flex items-center space-x-2">
-              <Star className="h-8 w-8 text-amber-600 fill-amber-600" />
-              <span className="text-xl font-bold text-gray-900">CANADIAN CHOICE AWARD</span>
+               <Image
+                            src= "/migrate.png"
+                            alt= "immigration at large company logo"
+                            width={120}  
+                            height={59}  
+                            className=""
+                       />
             </div>
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-gray-700 hover:text-amber-600 font-medium">
+              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
                 HOME
               </a>
-              <a href="#" className="text-gray-700 hover:text-amber-600 font-medium">
+              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
                 OUR PROCESS
               </a>
-              <a href="#" className="text-gray-700 hover:text-amber-600 font-medium">
+              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
                 ADVANTAGES
               </a>
-              <a href="#" className="text-gray-700 hover:text-amber-600 font-medium">
+              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
                 FAQ
               </a>
-              <a href="#" className="text-gray-700 hover:text-amber-600 font-medium">
+              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
                 CONTACT
               </a>
-              <Button className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6">NOMINATE NOW</Button>
+              <Button className="btn-primary font-semibold px-6">NOMINATE NOW</Button>
             </nav>
           </div>
         </div>
       </header>
 
       {/* Hero Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
+      <section className="relative pt-60 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div>
-              <h1 className="text-6xl font-bold text-amber-600 mb-4">
+              <h1 className="text-6xl font-bold text-canada-red mb-4">
                 NOMINATIONS FOR
                 <br />
-                <span className="text-8xl">2026</span>
+                <span className="text-8xl text-canada-navy">2026</span>
                 <br />
-                <span className="text-4xl text-gray-900">ARE NOW OPEN</span>
+                <span className="text-4xl text-canada-black">ARE NOW OPEN</span>
               </h1>
-              <Button className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-8 py-3 text-lg mt-8">
+              <Button className="btn-primary font-semibold px-8 py-3 text-lg mt-8">
                 NOMINATE NOW
               </Button>
             </div>
             <div className="flex justify-center">
               <div className="relative">
-                <div className="w-80 h-80 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center shadow-2xl">
-                  <div className="w-64 h-64 bg-gradient-to-br from-yellow-300 to-amber-500 rounded-full flex items-center justify-center">
-                    <Trophy className="w-32 h-32 text-amber-800" />
-                  </div>
-                </div>
-                <div className="absolute -top-4 -left-4 w-16 h-16 bg-amber-300 rounded-full flex items-center justify-center">
-                  <Star className="w-8 h-8 text-amber-700 fill-amber-700" />
-                </div>
-                <div className="absolute -bottom-4 -right-4 w-12 h-12 bg-amber-400 rounded-full flex items-center justify-center">
-                  <Star className="w-6 h-6 text-amber-800 fill-amber-800" />
-                </div>
+                <Image
+                            src= "/AWARDS.png"
+                            alt= "award banner"
+                            width={500}  
+                            height={500}  
+                            className="drop-shadow-2xl"
+                       />
+                
               </div>
             </div>
           </div>
@@ -159,11 +333,11 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Award Categories Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/30">
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">AWARD CATEGORIES</h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+            <h2 className="text-4xl font-bold text-canada-navy mb-4">AWARD CATEGORIES</h2>
+            <p className="text-xl text-canada-black max-w-3xl mx-auto">
               We have a wide range of Award categories. Here are the categories available for nominations:
             </p>
           </div>
@@ -174,7 +348,7 @@ export default function CanadianChoiceAward() {
               return (
                 <Card
                   key={index}
-                  className="group hover:shadow-xl transition-all duration-300 cursor-pointer bg-white/90 backdrop-blur-sm border-amber-200 hover:border-amber-400"
+                  className="group card-hover cursor-pointer bg-white/95 backdrop-blur-sm"
                 >
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden rounded-t-lg">
@@ -183,19 +357,19 @@ export default function CanadianChoiceAward() {
                         alt={category.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                      <div className="absolute top-4 right-4 w-12 h-12 bg-amber-500/90 rounded-full flex items-center justify-center">
-                        <IconComponent className="w-6 h-6 text-white" />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+                      <div className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center gradient-gold">
+                        <IconComponent className="w-6 h-6 text-canada-navy" />
                       </div>
                     </div>
                     <div className="p-6">
-                      <h3 className="text-xl font-bold text-gray-900 mb-3 group-hover:text-amber-600 transition-colors">
+                      <h3 className="text-xl font-bold text-canada-navy mb-3 group-hover:text-canada-red transition-colors">
                         {category.title}
                       </h3>
-                      <p className="text-gray-600 text-sm mb-4">{category.description}</p>
+                      <p className="text-canada-black text-sm mb-4 opacity-80">{category.description}</p>
                       <Button
-                        variant="outline"
-                        className="w-full border-amber-300 text-amber-700 hover:bg-amber-50 hover:border-amber-400 bg-transparent"
+                        className="w-full btn-secondary"
+                        onClick={() => handleVoteClick(category.title)}
                       >
                         Vote in This Category
                       </Button>
@@ -208,68 +382,155 @@ export default function CanadianChoiceAward() {
         </div>
       </section>
 
-      {/* Nomination Form */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-2xl mx-auto">
-          <Card className="bg-white/90 backdrop-blur-sm shadow-xl border-amber-200">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-6 text-center">
-                NOMINATE YOUR FAVOURITE CANADIAN BUSINESS!
-              </h2>
-              <p className="text-gray-600 mb-8 text-center">
-                Nominate your favourite business to be considered for the Canadian Choice Award. Tell us why you think
-                they deserve to be recognized.
-              </p>
+      <Dialog open={isVotingFormOpen} onOpenChange={setIsVotingFormOpen}>
+        <DialogContent className="max-w-md mx-auto bg-white/98 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-canada-navy text-center">Vote in Category</DialogTitle>
+            <p className="text-canada-red font-semibold text-center">{selectedCategory}</p>
+          </DialogHeader>
 
-              <div className="space-y-6">
+          {votingSubmitSuccess ? (
+            <div className="text-center py-8">
+              <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4">
+                <Trophy className="w-8 h-8 text-canada-navy" />
+              </div>
+              <h3 className="text-xl font-bold text-canada-red mb-2">Vote Submitted Successfully!</h3>
+              <p className="text-canada-black">Thank you for your vote. We'll be in touch soon.</p>
+            </div>
+          ) : (
+            <form onSubmit={handleVotingSubmit} className="space-y-4">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-semibold text-gray-700 mb-2">
-                    STEP 1/2 PERSONAL INFORMATION
-                  </label>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    <Input placeholder="First Name" className="border-amber-200" />
-                    <Input placeholder="Last Name" className="border-amber-200" />
-                  </div>
+                  <label className="block text-sm font-medium text-canada-navy mb-1">First Name *</label>
+                  <Input
+                    required
+                    value={votingFormData.firstName}
+                    onChange={(e) => handleInputChange("firstName", e.target.value)}
+                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    placeholder="Enter first name"
+                  />
                 </div>
-
-                <div className="grid md:grid-cols-2 gap-4">
-                  <Input placeholder="Email Address" className="border-amber-200" />
-                  <Input placeholder="Phone Number" className="border-amber-200" />
+                <div>
+                  <label className="block text-sm font-medium text-canada-navy mb-1">Last Name *</label>
+                  <Input
+                    required
+                    value={votingFormData.lastName}
+                    onChange={(e) => handleInputChange("lastName", e.target.value)}
+                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    placeholder="Enter last name"
+                  />
                 </div>
+              </div>
 
-                <Input placeholder="Your Message (Optional)" className="border-amber-200" />
+              <div>
+                <label className="block text-sm font-medium text-canada-navy mb-1">Email Address *</label>
+                <Input
+                  type="email"
+                  required
+                  value={votingFormData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  placeholder="Enter email address"
+                />
+              </div>
 
-                <Button className="w-full bg-amber-600 hover:bg-amber-700 text-white font-semibold py-3">
-                  SEND VERIFICATION CODE
+              <div>
+                <label className="block text-sm font-medium text-canada-navy mb-1">Phone Number *</label>
+                <Input
+                  type="tel"
+                  required
+                  value={votingFormData.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  placeholder="Enter phone number"
+                />
+              </div>
+
+              <div>
+                <label className="block text-sm font-medium text-canada-navy mb-1">Who do you want to nominate*</label>
+                <Input
+                
+                  required
+                  value={votingFormData.nominate}
+                  onChange={(e) => handleInputChange("nominate", e.target.value)}
+                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  placeholder="Who do you want to vote"
+                />
+              </div>
+
+              <div className="relative">
+                <label className="block text-sm font-medium text-canada-navy mb-1">Select Sub-Category *</label>
+                <Select
+                  required
+                  value={votingFormData.nominee}
+                  onValueChange={(value) => handleInputChange("nominee", value)}
+                >
+                  <SelectTrigger className="w-full border-canada-gold focus:border-canada-red bg-white">
+                    <SelectValue placeholder="Choose a sub-category" />
+                  </SelectTrigger>
+                  <SelectContent
+                    className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]"
+                    position="popper"
+                    sideOffset={4}
+                  >
+                    {subCategories[selectedCategory as keyof typeof subCategories]?.map((subCategory, index) => (
+                      <SelectItem
+                        key={index}
+                        value={subCategory}
+                        className="cursor-pointer px-3 py-2 hover:bg-canada-gold"
+                      >
+                        {subCategory}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </div>
+
+              <div className="flex flex-col sm:flex-row gap-3 pt-4">
+                <Button
+                  type="button"
+                  variant="outline"
+                  onClick={() => setIsVotingFormOpen(false)}
+                  className="flex-1 border-gray-300 text-canada-navy hover:bg-gray-50"
+                  disabled={isVotingSubmitting}
+                >
+                  Cancel
+                </Button>
+                <Button
+                  type="submit"
+                  className="flex-1 btn-primary font-semibold"
+                  disabled={isVotingSubmitting}
+                >
+                  {isVotingSubmitting ? "Submitting..." : "Submit nomination"}
                 </Button>
               </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+            </form>
+          )}
+        </DialogContent>
+      </Dialog>
 
       {/* Countdown */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/50">
+      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-canada-navy">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-8">
+          <h2 className="text-4xl font-bold text-white mb-8">
             NOMINATION
             <br />
-            COUNTDOWN
+            <span className="text-canada-gold">COUNTDOWN</span>
           </h2>
           <div className="flex justify-center space-x-4">
-            <div className="bg-amber-600 text-white p-6 rounded-lg min-w-[80px]">
+            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
               <div className="text-3xl font-bold">{timeLeft.days}</div>
               <div className="text-sm">DAYS</div>
             </div>
-            <div className="bg-amber-600 text-white p-6 rounded-lg min-w-[80px]">
+            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
               <div className="text-3xl font-bold">{timeLeft.hours}</div>
               <div className="text-sm">HOURS</div>
             </div>
-            <div className="bg-amber-600 text-white p-6 rounded-lg min-w-[80px]">
+            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
               <div className="text-3xl font-bold">{timeLeft.minutes}</div>
               <div className="text-sm">MINUTES</div>
             </div>
-            <div className="bg-amber-600 text-white p-6 rounded-lg min-w-[80px]">
+            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
               <div className="text-3xl font-bold">{timeLeft.seconds}</div>
               <div className="text-sm">SECONDS</div>
             </div>
@@ -278,12 +539,12 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Benefits Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4 text-center">
+          <h2 className="text-4xl font-bold text-canada-navy mb-4 text-center">
             BENEFITS OF BECOMING AN OFFICIAL NOMINEE
           </h2>
-          <p className="text-gray-600 mb-12 text-center max-w-4xl mx-auto">
+          <p className="text-canada-black mb-12 text-center max-w-4xl mx-auto opacity-80">
             Nominating a business for Canadian Choice Award is a win-win for customers and businesses. Customers have a
             say about the businesses and businesses get recognized for their outstanding service, standing out from
             competitors.
@@ -291,44 +552,44 @@ export default function CanadianChoiceAward() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             <div className="text-center">
-              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-amber-600 fill-amber-600" />
+              <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <Star className="w-8 h-8 text-canada-navy" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Recognition Within the Community</h3>
-              <p className="text-gray-600 text-sm">
+              <h3 className="text-xl font-bold text-canada-navy mb-3">Recognition Within the Community</h3>
+              <p className="text-canada-black text-sm opacity-80">
                 Being nominated officially becomes highlights the confidence and appreciation customers and supporters
                 have in your business and services.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-amber-600 fill-amber-600" />
+              <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <Star className="w-8 h-8 text-canada-navy" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Personalized Bronze Badge</h3>
-              <p className="text-gray-600 text-sm">
+              <h3 className="text-xl font-bold text-canada-navy mb-3">Personalized Bronze Badge</h3>
+              <p className="text-canada-black text-sm opacity-80">
                 Receive an official digital badge to display on your website, social communications, or social media, a
                 mark of excellence supported by your community.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-amber-600 fill-amber-600" />
+              <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <Star className="w-8 h-8 text-canada-navy" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Exclusive Marketing Assets</h3>
-              <p className="text-gray-600 text-sm">
+              <h3 className="text-xl font-bold text-canada-navy mb-3">Exclusive Marketing Assets</h3>
+              <p className="text-canada-black text-sm opacity-80">
                 Receive customized digital and print-ready materials designed to help you communicate your nomination
                 with customers and stakeholders.
               </p>
             </div>
 
             <div className="text-center">
-              <div className="w-16 h-16 bg-amber-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Star className="w-8 h-8 text-amber-600 fill-amber-600" />
+              <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
+                <Star className="w-8 h-8 text-canada-navy" />
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-3">Eligibility to Advance</h3>
-              <p className="text-gray-600 text-sm">
+              <h3 className="text-xl font-bold text-canada-navy mb-3">Eligibility to Advance</h3>
+              <p className="text-canada-black text-sm opacity-80">
                 Official Nominees have the distinguished opportunity to progress further in the Canadian Choice Award
                 process, potentially earning the title of Top 3 Finalists or becoming a Winner.
               </p>
@@ -338,27 +599,27 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Steps Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-white/50">
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(239, 217, 132, 0.3)' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
-            STEPS TO BECOMING CANADIAN
+          <h2 className="text-4xl font-bold text-canada-navy mb-4">
+            STEPS TO BECOMING IMMIGRANT AT LARGE
             <br />
-            CHOICE
+            <span className="text-canada-red">CHOICE</span>
           </h2>
-          <p className="text-gray-600 mb-12">
-            Curious how your favourite business becomes a Canadian Choice Award winner? Here's a look at the key
+          <p className="text-canada-black mb-12 opacity-80">
+            Curious how your favorite business becomes a immigrant at large canada Award winner? Here's a look at the key
             journey, from community nominations to the final celebration.
           </p>
 
           <div className="space-y-12">
             <div className="flex items-start space-x-6">
-              <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Users className="w-10 h-10 text-amber-600" />
+              <div className="w-20 h-20 gradient-gold rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                <Users className="w-10 h-10 text-canada-navy" />
               </div>
               <div className="text-left">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">NOMINATIONS</h3>
-                <p className="text-gray-600">
-                  Support your favourite Canadian businesses by submitting a nomination. Business owners can also
+                <h3 className="text-2xl font-bold text-canada-navy mb-2">NOMINATIONS</h3>
+                <p className="text-canada-black opacity-80">
+                  Support your favorite Canadian businesses by submitting a nomination. Business owners can also
                   nominate themselves. Once nominated, businesses become a business nominee, the closer they get to
                   becoming an Official Nominee and receiving exclusive benefits.
                 </p>
@@ -366,12 +627,12 @@ export default function CanadianChoiceAward() {
             </div>
 
             <div className="flex items-start space-x-6">
-              <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Target className="w-10 h-10 text-amber-600" />
+              <div className="w-20 h-20 gradient-gold rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                <Target className="w-10 h-10 text-canada-navy" />
               </div>
               <div className="text-left">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">TOP 3 FINALISTS</h3>
-                <p className="text-gray-600">
+                <h3 className="text-2xl font-bold text-canada-navy mb-2">TOP 3 FINALISTS</h3>
+                <p className="text-canada-black opacity-80">
                   The expert panel regularly reviews all qualifying nominees and selects the Top 3 Finalists in each
                   category. These finalists receive enhanced recognition, including a special Top 3 Finalist badge,
                   press release distribution, social media recognition, and community impact.
@@ -380,12 +641,12 @@ export default function CanadianChoiceAward() {
             </div>
 
             <div className="flex items-start space-x-6">
-              <div className="w-20 h-20 bg-amber-100 rounded-full flex items-center justify-center flex-shrink-0">
-                <Trophy className="w-10 h-10 text-amber-600" />
+              <div className="w-20 h-20 gradient-gold rounded-full flex items-center justify-center flex-shrink-0 shadow-lg">
+                <Trophy className="w-10 h-10 text-canada-navy" />
               </div>
               <div className="text-left">
-                <h3 className="text-2xl font-bold text-gray-900 mb-2">WINNERS</h3>
-                <p className="text-gray-600">
+                <h3 className="text-2xl font-bold text-canada-navy mb-2">WINNERS</h3>
+                <p className="text-canada-black opacity-80">
                   One winner per category city is selected from the Top 3 Finalists. Winners receive the exclusive
                   supplemental recognition, including extensive marketing materials, enhanced community recognition, and
                   a prestigious Winner badge. Winners represent the highest standard of excellence, credibility, and
@@ -398,61 +659,61 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* FAQ Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-4xl font-bold text-gray-900 mb-12 text-center">FREQUENTLY ASKED QUESTIONS</h2>
+          <h2 className="text-4xl font-bold text-canada-navy mb-12 text-center">FREQUENTLY ASKED QUESTIONS</h2>
 
           <Accordion type="single" collapsible className="space-y-4">
-            <AccordionItem value="item-1" className="bg-white/80 rounded-lg border border-amber-200">
-              <AccordionTrigger className="px-6 py-4 text-left font-semibold">
+            <AccordionItem value="item-1" className="bg-white/90 rounded-lg border border-canada-gold shadow-sm">
+              <AccordionTrigger className="px-6 py-4 text-left font-semibold text-canada-navy hover:text-canada-red">
                 Can I nominate more than one business?
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-gray-600">
+              <AccordionContent className="px-6 pb-4 text-canada-black opacity-80">
                 Yes, you can nominate multiple businesses across different categories.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-2" className="bg-white/80 rounded-lg border border-amber-200">
-              <AccordionTrigger className="px-6 py-4 text-left font-semibold">
+            <AccordionItem value="item-2" className="bg-white/90 rounded-lg border border-canada-gold shadow-sm">
+              <AccordionTrigger className="px-6 py-4 text-left font-semibold text-canada-navy hover:text-canada-red">
                 Does it cost anything to nominate?
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-gray-600">
+              <AccordionContent className="px-6 pb-4 text-canada-black opacity-80">
                 No, nominations are completely free for both nominators and businesses.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-3" className="bg-white/80 rounded-lg border border-amber-200">
-              <AccordionTrigger className="px-6 py-4 text-left font-semibold">
+            <AccordionItem value="item-3" className="bg-white/90 rounded-lg border border-canada-gold shadow-sm">
+              <AccordionTrigger className="px-6 py-4 text-left font-semibold text-canada-navy hover:text-canada-red">
                 What does a business receive as the Nominee?
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-gray-600">
+              <AccordionContent className="px-6 pb-4 text-canada-black opacity-80">
                 Nominees receive recognition badges, marketing materials, and eligibility to advance to Top 3 Finalists.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-4" className="bg-white/80 rounded-lg border border-amber-200">
-              <AccordionTrigger className="px-6 py-4 text-left font-semibold">
+            <AccordionItem value="item-4" className="bg-white/90 rounded-lg border border-canada-gold shadow-sm">
+              <AccordionTrigger className="px-6 py-4 text-left font-semibold text-canada-navy hover:text-canada-red">
                 Will my business be automatically listed?
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-gray-600">
+              <AccordionContent className="px-6 pb-4 text-canada-black opacity-80">
                 Businesses must meet certain criteria and go through a review process before being officially listed.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-5" className="bg-white/80 rounded-lg border border-amber-200">
-              <AccordionTrigger className="px-6 py-4 text-left font-semibold">
+            <AccordionItem value="item-5" className="bg-white/90 rounded-lg border border-canada-gold shadow-sm">
+              <AccordionTrigger className="px-6 py-4 text-left font-semibold text-canada-navy hover:text-canada-red">
                 What if I don't have the exact category?
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-gray-600">
+              <AccordionContent className="px-6 pb-4 text-canada-black opacity-80">
                 You can select the closest matching category or contact us for guidance on the best fit.
               </AccordionContent>
             </AccordionItem>
 
-            <AccordionItem value="item-6" className="bg-white/80 rounded-lg border border-amber-200">
-              <AccordionTrigger className="px-6 py-4 text-left font-semibold">
+            <AccordionItem value="item-6" className="bg-white/90 rounded-lg border border-canada-gold shadow-sm">
+              <AccordionTrigger className="px-6 py-4 text-left font-semibold text-canada-navy hover:text-canada-red">
                 What if they have multiple locations?
               </AccordionTrigger>
-              <AccordionContent className="px-6 pb-4 text-gray-600">
+              <AccordionContent className="px-6 pb-4 text-canada-black opacity-80">
                 Each location can be nominated separately as they serve different communities.
               </AccordionContent>
             </AccordionItem>
@@ -461,14 +722,14 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-amber-100 to-orange-200">
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(135deg, #efd984, #be9c43)' }}>
         <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-white/90 backdrop-blur-sm rounded-2xl p-12 border border-amber-200">
-            <Trophy className="w-16 h-16 text-amber-600 mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-gray-900 mb-4">SIGN UP FOR ALL THE LATEST UPDATES!</h2>
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-12 border-2 border-canada-gold shadow-xl">
+            <Trophy className="w-16 h-16 text-canada-red mx-auto mb-6" />
+            <h2 className="text-3xl font-bold text-canada-navy mb-4">SIGN UP FOR ALL THE LATEST UPDATES!</h2>
             <div className="flex max-w-md mx-auto space-x-4">
-              <Input placeholder="EMAIL ADDRESS" className="flex-1 border-amber-200" />
-              <Button className="bg-amber-600 hover:bg-amber-700 text-white font-semibold px-6">
+              <Input placeholder="EMAIL ADDRESS" className="flex-1 border-canada-gold focus:border-canada-red" />
+              <Button className="btn-primary font-semibold px-6">
                 BE THE FIRST TO KNOW!
               </Button>
             </div>
@@ -477,68 +738,63 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Footer Trophy */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-gradient-to-b from-amber-200 to-yellow-300">
+      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(to bottom, #be9c43, #a38235)' }}>
         <div className="max-w-2xl mx-auto text-center">
           <div className="relative">
-            <div className="w-64 h-64 bg-gradient-to-br from-amber-400 to-amber-600 rounded-full flex items-center justify-center mx-auto shadow-2xl">
-              <div className="w-48 h-48 bg-gradient-to-br from-yellow-300 to-amber-500 rounded-full flex items-center justify-center">
-                <Trophy className="w-24 h-24 text-amber-800" />
-              </div>
+            <div className="w-64 h-64 gradient-gold rounded-full flex items-center justify-center mx-auto shadow-2xl border-4 border-white">
+              
+                <Image
+                            src= "/AWARDS.png"
+                            alt= "award banner"
+                            width={400}  
+                            height={400}  
+                            className="drop-shadow-xl"
+                       />
+                
+              
             </div>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="bg-amber-600 text-white py-12">
+      <footer className="bg-canada-navy text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
-            <h3 className="text-xl font-bold mb-4">CONNECT WITH US ON</h3>
-            <div className="flex justify-center space-x-6">
-              <a href="#" className="text-white hover:text-amber-200">
-                Facebook
-              </a>
-              <a href="#" className="text-white hover:text-amber-200">
-                Twitter
-              </a>
-              <a href="#" className="text-white hover:text-amber-200">
-                Instagram
-              </a>
-              <a href="#" className="text-white hover:text-amber-200">
-                LinkedIn
-              </a>
-              <a href="#" className="text-white hover:text-amber-200">
-                YouTube
-              </a>
-            </div>
+            <h3 className="font-semibold mb-4 text-canada-gold">Home</h3>
           </div>
 
           <div className="flex items-center justify-center mb-8">
-            <Star className="h-8 w-8 text-white fill-white mr-2" />
-            <span className="text-xl font-bold">CANADIAN CHOICE AWARD</span>
+             <Image
+                            src= "/migrate.png"
+                            alt= "immigration at large company logo"
+                            width={120}  
+                            height={59}  
+                            className=""
+                       />
           </div>
 
           <div className="grid md:grid-cols-5 gap-8 text-center md:text-left">
             <div>
-              <h4 className="font-semibold mb-2">Home</h4>
+              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">Home</h4>
             </div>
             <div>
-              <h4 className="font-semibold mb-2">About</h4>
+              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">About</h4>
             </div>
             <div>
-              <h4 className="font-semibold mb-2">Our Process</h4>
+              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">Our Process</h4>
             </div>
             <div>
-              <h4 className="font-semibold mb-2">Advantages</h4>
+              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">Advantages</h4>
             </div>
             <div>
-              <h4 className="font-semibold mb-2">Winners</h4>
+              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">Winners</h4>
             </div>
           </div>
 
-          <div className="text-center mt-8 pt-8 border-t border-amber-500">
-            <p className="text-sm">
-              © 2024 Canadian Choice Award. All Rights Reserved. Privacy Policy | Terms and Conditions
+          <div className="text-center mt-8 pt-8 border-t border-canada-gold">
+            <p className="text-sm opacity-80">
+              © 2024 immigrant at large canada Award. All Rights Reserved. Privacy Policy | Terms and Conditions
             </p>
           </div>
         </div>

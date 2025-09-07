@@ -132,3 +132,8 @@
     font-size: 1.25rem;
   }
 }
+
+/* Fix Select dropdown being hidden */
+[data-radix-popper-content-wrapper] {
+  z-index: 9999 !important;
+}
