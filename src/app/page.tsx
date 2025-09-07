@@ -84,7 +84,7 @@ export default function CanadianChoiceAward() {
       description: "Honoring outstanding contributions to arts and cultural preservation",
     },
     {
-      title: " Leadership & Governance",
+      title: "Leadership & Governance",
       icon: Award,
       image: "/team.jpeg",
       description: "Recognizing exceptional achievements by young African Canadians",
@@ -401,7 +401,7 @@ export default function CanadianChoiceAward() {
                 <Trophy className="w-8 h-8 text-canada-navy" />
               </div>
               <h3 className="text-xl font-bold text-canada-red mb-2">Nomination Submitted Successfully!</h3>
-              <p className="text-canada-black">Thank you for your nomination. We wll be in touch soon.</p>
+              <p className="text-canada-black">Thank you for your nomination. We will be in touch soon.</p>
             </div>
           ) : (
             <form onSubmit={handleVotingSubmit} className="space-y-4">
@@ -439,7 +439,6 @@ export default function CanadianChoiceAward() {
                   placeholder="Enter email address"
                 />
               </div>
-
               <div>
                 <label className="block text-sm  font-medium text-canada-navy mb-1">Phone Number *</label>
                 <Input
@@ -460,7 +459,7 @@ export default function CanadianChoiceAward() {
                   value={votingFormData.nominate}
                   onChange={(e) => handleInputChange("nominate", e.target.value)}
                   className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
-                  placeholder="Who do you want to vote"
+                  placeholder="Who do you want to nominate"
                 />
               </div>
 
