@@ -309,7 +309,7 @@ export default function CanadianChoiceAward() {
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div >
-              <h1 className="text-6xl sm:text-xl font-bold text-canada-red mb-4">
+              <h1 className="text-6xl sm:text-base font-bold text-canada-red mb-4">
                 NOMINATIONS FOR
                 <br />
                 <span className="text-8xl text-canada-navy">2026</span>
