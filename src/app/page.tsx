@@ -11,7 +11,9 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import { Star, Trophy, Users, Target, Award, Heart, Palette, Medal } from "lucide-react"
 import emailjs from "@emailjs/browser"
-import Image from "next/image" 
+import Image from "next/image"
+import AnchorLink from "react-anchor-link-smooth-scroll"
+
 
 // Set your target date here
 const targetDate = new Date("2025-11-21T00:00:00")
@@ -125,7 +127,7 @@ export default function CanadianChoiceAward() {
       "Best Traditional Performer",
       "Cultural Heritage Preservation Award",
     ],
-    " Leadership & Governance": [
+    "Leadership & Governance": [
       "African Trailblazer Award",
       "Political Leadership Excellence Award",
       "Pan-African Leadership Award",
@@ -167,15 +169,15 @@ export default function CanadianChoiceAward() {
 
     try {
       const templateParams = {
-        to_email: "admin@canadianchoiceaward.ca", // Replace with your admin email
+        to_email: "admin@canadianchoiceaward.ca", 
         from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
         from_email: votingFormData.email,
         phone: votingFormData.phone,
         category: selectedCategory,
-        nominee: votingFormData.nominee, // This now contains the selected sub-category
+        nominee: votingFormData.nominee,
         nominate: votingFormData.nominate,
         subject: `New Vote Submission - ${selectedCategory}`,
-        message: `Vote submitted for sub-category "${votingFormData.nominee}" in ${selectedCategory} category.`, // Updated message to reflect sub-category
+        message: `Vote submitted for sub-category "${votingFormData.nominee}" in ${selectedCategory} category.`,
       }
 
       await emailjs.send(
@@ -294,7 +296,9 @@ export default function CanadianChoiceAward() {
               <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
                 CONTACT
               </a>
-              <Button className="btn-primary font-semibold px-6">NOMINATE NOW</Button>
+              <AnchorLink href = "#category">
+                <Button className="btn-primary font-semibold px-6">NOMINATE NOW</Button>
+              </AnchorLink>
             </nav>
           </div>
         </div>
@@ -312,9 +316,9 @@ export default function CanadianChoiceAward() {
                 <br />
                 <span className="text-4xl text-canada-black">ARE NOW OPEN</span>
               </h1>
-              <Button className="btn-primary font-semibold px-8 py-3 text-lg mt-8">
-                NOMINATE NOW
-              </Button>
+              <AnchorLink href = "#category">
+                <Button className="btn-primary font-semibold px-6">NOMINATE NOW</Button>
+              </AnchorLink>
             </div>
             <div className="flex justify-center">
               <div className="relative">
@@ -333,7 +337,7 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Award Categories Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
+      <section className="pb-16 pt-40 px-4 sm:px-6 lg:px-8" id = "category" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-canada-navy mb-4">AWARD CATEGORIES</h2>
@@ -373,7 +377,7 @@ export default function CanadianChoiceAward() {
                         className="w-full btn-secondary"
                         onClick={() => handleVoteClick(category.title)}
                       >
-                        Vote in This Category
+                        Nominate in this category
                       </Button>
                     </div>
                   </CardContent>
@@ -387,7 +391,7 @@ export default function CanadianChoiceAward() {
       <Dialog open={isVotingFormOpen} onOpenChange={setIsVotingFormOpen}>
         <DialogContent className="max-w-md mx-auto bg-white/98 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-canada-navy text-center">Vote in Category</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-canada-navy text-center">Nominate in this category</DialogTitle>
             <p className="text-canada-red font-semibold text-center">{selectedCategory}</p>
           </DialogHeader>
 
@@ -396,8 +400,8 @@ export default function CanadianChoiceAward() {
               <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trophy className="w-8 h-8 text-canada-navy" />
               </div>
-              <h3 className="text-xl font-bold text-canada-red mb-2">Vote Submitted Successfully!</h3>
-              <p className="text-canada-black">Thank you for your vote. We wll be in touch soon.</p>
+              <h3 className="text-xl font-bold text-canada-red mb-2">Nomination Submitted Successfully!</h3>
+              <p className="text-canada-black">Thank you for your nomination. We wll be in touch soon.</p>
             </div>
           ) : (
             <form onSubmit={handleVotingSubmit} className="space-y-4">
@@ -512,33 +516,42 @@ export default function CanadianChoiceAward() {
       </Dialog>
 
       {/* Countdown */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8 bg-canada-navy">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-white mb-8">
-            NOMINATION
-            <br />
-            <span className="text-canada-gold">COUNTDOWN</span>
-          </h2>
-          <div className="flex justify-center space-x-4">
-            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-              <div className="text-3xl font-bold">{timeLeft.days}</div>
-              <div className="text-sm">DAYS</div>
-            </div>
-            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-              <div className="text-3xl font-bold">{timeLeft.hours}</div>
-              <div className="text-sm">HOURS</div>
-            </div>
-            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-              <div className="text-3xl font-bold">{timeLeft.minutes}</div>
-              <div className="text-sm">MINUTES</div>
-            </div>
-            <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-              <div className="text-3xl font-bold">{timeLeft.seconds}</div>
-              <div className="text-sm">SECONDS</div>
-            </div>
-          </div>
+<section className="py-16 px-4 sm:px-6 lg:px-8 bg-canada-navy">
+  <div className="max-w-4xl mx-auto text-center">
+    <h2 className="text-4xl font-bold text-white mb-8">
+      NOMINATION
+      <br />
+      <span className="text-canada-gold">COUNTDOWN</span>
+    </h2>
+
+    {timeLeft.days <= 0 &&
+    timeLeft.hours <= 0 &&
+    timeLeft.minutes <= 0 &&
+    timeLeft.seconds <= 0 ? (
+      <p className="text-3xl font-bold text-red-500">Nominations Closed</p>
+    ) : (
+      <div className="flex justify-center space-x-4">
+        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
+          <div className="text-3xl font-bold">{timeLeft.days}</div>
+          <div className="text-sm">DAYS</div>
         </div>
-      </section>
+        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
+          <div className="text-3xl font-bold">{timeLeft.hours}</div>
+          <div className="text-sm">HOURS</div>
+        </div>
+        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
+          <div className="text-3xl font-bold">{timeLeft.minutes}</div>
+          <div className="text-sm">MINUTES</div>
+        </div>
+        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
+          <div className="text-3xl font-bold">{timeLeft.seconds}</div>
+          <div className="text-sm">SECONDS</div>
+        </div>
+      </div>
+    )}
+  </div>
+</section>
+
 
       {/* Benefits Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
