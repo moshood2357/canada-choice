@@ -391,7 +391,7 @@ export default function CanadianChoiceAward() {
       <Dialog open={isVotingFormOpen} onOpenChange={setIsVotingFormOpen}>
         <DialogContent className="max-w-md mx-auto bg-white/98 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">
           <DialogHeader>
-            <DialogTitle className="text-2xl font-bold text-canada-navy text-center">Nominate in this category</DialogTitle>
+            <DialogTitle className="text-2xl font-bold text-canada-navy text-center">Nominate in  this category</DialogTitle>
             <p className="text-canada-red font-semibold text-center">{selectedCategory}</p>
           </DialogHeader>
 
@@ -412,7 +412,7 @@ export default function CanadianChoiceAward() {
                     required
                     value={votingFormData.firstName}
                     onChange={(e) => handleInputChange("firstName", e.target.value)}
-                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter first name"
                   />
                 </div>
@@ -422,7 +422,7 @@ export default function CanadianChoiceAward() {
                     required
                     value={votingFormData.lastName}
                     onChange={(e) => handleInputChange("lastName", e.target.value)}
-                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter last name"
                   />
                 </div>
@@ -435,19 +435,19 @@ export default function CanadianChoiceAward() {
                   required
                   value={votingFormData.email}
                   onChange={(e) => handleInputChange("email", e.target.value)}
-                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter email address"
                 />
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-canada-navy mb-1">Phone Number *</label>
+                <label className="block text-sm  font-medium text-canada-navy mb-1">Phone Number *</label>
                 <Input
                   type="tel"
                   required
                   value={votingFormData.phone}
                   onChange={(e) => handleInputChange("phone", e.target.value)}
-                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter phone number"
                 />
               </div>
@@ -459,13 +459,13 @@ export default function CanadianChoiceAward() {
                   required
                   value={votingFormData.nominate}
                   onChange={(e) => handleInputChange("nominate", e.target.value)}
-                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Who do you want to vote"
                 />
               </div>
 
               <div className="relative">
-                <label className="block text-sm font-medium text-canada-navy mb-1">Select Sub-Category *</label>
+                <label className="block text-sm text-black font-medium text-canada-navy mb-1">Select Sub-Category *</label>
                 <Select
                   required
                   value={votingFormData.nominee}
