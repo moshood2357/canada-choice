@@ -211,7 +211,7 @@ export default function CanadianChoiceAward() {
       <style jsx global>{`
         :root {
           --canada-red: #FA0101;
-          --canada-navy: #4d4fa5;
+          --canada-navy: #000246;
           --canada-black: #000000;
           --canada-gold: #efd984;
           --canada-gold-mid: #be9c43;
@@ -308,8 +308,8 @@ export default function CanadianChoiceAward() {
       <section className="relative pt-60 pb-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div>
-              <h1 className="text-6xl font-bold text-canada-red mb-4">
+            <div >
+              <h1 className="text-6xl sm:text-xl font-bold text-canada-red mb-4">
                 NOMINATIONS FOR
                 <br />
                 <span className="text-8xl text-canada-navy">2026</span>
