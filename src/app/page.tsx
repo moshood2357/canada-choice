@@ -16,7 +16,7 @@ import AnchorLink from "react-anchor-link-smooth-scroll"
 
 
 // Set your target date here
-const targetDate = new Date("2025-11-21T00:00:00")
+const targetDate = new Date("2025-11-20T00:00:00")
 
 export default function CanadianChoiceAward() {
   
@@ -192,8 +192,8 @@ export default function CanadianChoiceAward() {
         setVotingSubmitSuccess(false)
       }, 2000)
     } catch (error) {
-      console.error("[v0] Error sending voting email:", error)
-      alert("There was an error submitting your vote. Please try again.")
+      console.error("Error sending nomination email:", error)
+      alert("There was an error submitting your nomination. Please try again.")
     } finally {
       setIsVotingSubmitting(false)
     }
@@ -211,7 +211,7 @@ export default function CanadianChoiceAward() {
       <style jsx global>{`
         :root {
           --canada-red: #FA0101;
-          --canada-navy: #000246;
+          --canada-navy: #4d4fa5;
           --canada-black: #000000;
           --canada-gold: #efd984;
           --canada-gold-mid: #be9c43;
@@ -325,8 +325,8 @@ export default function CanadianChoiceAward() {
                 <Image
                             src= "/AWARDS.png"
                             alt= "award banner"
-                            width={500}  
-                            height={500}  
+                            width={350}  
+                            height={350}  
                             className="drop-shadow-2xl"
                        />
                 
@@ -780,7 +780,7 @@ export default function CanadianChoiceAward() {
 
           <div className="flex items-center justify-center mb-8">
              <Image
-                            src= "/imigrate.jpg"
+                            src= "/immigrants.png"
                             alt= "immigration at large company logo"
                             width={120}  
                             height={59}  
