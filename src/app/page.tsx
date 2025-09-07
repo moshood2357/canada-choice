@@ -569,10 +569,10 @@ export default function CanadianChoiceAward() {
         </DialogContent>
       </Dialog>
 
-      {/* Countdown */}
+{/* Countdown */}
 <section className="py-16 px-4 sm:px-6 lg:px-8 bg-canada-navy">
   <div className="max-w-4xl mx-auto text-center">
-    <h2 className="text-4xl font-bold text-white mb-8">
+    <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 leading-tight">
       NOMINATION
       <br />
       <span className="text-canada-gold">COUNTDOWN</span>
@@ -582,24 +582,26 @@ export default function CanadianChoiceAward() {
     timeLeft.hours <= 0 &&
     timeLeft.minutes <= 0 &&
     timeLeft.seconds <= 0 ? (
-      <p className="text-3xl font-bold text-red-500">Nominations Closed</p>
+      <p className="text-2xl sm:text-3xl font-bold text-red-500">
+        Nominations Closed
+      </p>
     ) : (
-      <div className="flex justify-center space-x-4">
-        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-          <div className="text-3xl font-bold">{timeLeft.days}</div>
-          <div className="text-sm">DAYS</div>
+      <div className="grid grid-cols-2 sm:flex sm:justify-center gap-4 sm:space-x-4">
+        <div className="bg-canada-red text-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col items-center">
+          <div className="text-2xl sm:text-3xl font-bold">{timeLeft.days}</div>
+          <div className="text-xs sm:text-sm">DAYS</div>
         </div>
-        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-          <div className="text-3xl font-bold">{timeLeft.hours}</div>
-          <div className="text-sm">HOURS</div>
+        <div className="bg-canada-red text-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col items-center">
+          <div className="text-2xl sm:text-3xl font-bold">{timeLeft.hours}</div>
+          <div className="text-xs sm:text-sm">HOURS</div>
         </div>
-        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-          <div className="text-3xl font-bold">{timeLeft.minutes}</div>
-          <div className="text-sm">MINUTES</div>
+        <div className="bg-canada-red text-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col items-center">
+          <div className="text-2xl sm:text-3xl font-bold">{timeLeft.minutes}</div>
+          <div className="text-xs sm:text-sm">MINUTES</div>
         </div>
-        <div className="bg-canada-red text-white p-6 rounded-lg min-w-[80px] shadow-lg">
-          <div className="text-3xl font-bold">{timeLeft.seconds}</div>
-          <div className="text-sm">SECONDS</div>
+        <div className="bg-canada-red text-white p-4 sm:p-6 rounded-lg shadow-lg flex flex-col items-center">
+          <div className="text-2xl sm:text-3xl font-bold">{timeLeft.seconds}</div>
+          <div className="text-xs sm:text-sm">SECONDS</div>
         </div>
       </div>
     )}
@@ -791,20 +793,36 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Newsletter Section */}
-      <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(135deg, #efd984, #be9c43)' }}>
-        <div className="max-w-4xl mx-auto text-center">
-          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-12 border-2 border-canada-gold shadow-xl">
-            <Trophy className="w-16 h-16 text-canada-red mx-auto mb-6" />
-            <h2 className="text-3xl font-bold text-canada-navy mb-4">SIGN UP FOR ALL THE LATEST UPDATES!</h2>
-            <div className="flex max-w-md mx-auto space-x-4">
-              <Input placeholder="EMAIL ADDRESS" className="flex-1 border-canada-gold focus:border-canada-red" />
-              <Button className="btn-primary font-semibold px-6">
-                BE THE FIRST TO KNOW!
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
+<section
+  className="py-16 px-4 sm:px-6 lg:px-8"
+  style={{ background: "linear-gradient(135deg, #efd984, #be9c43)" }}
+>
+  <div className="max-w-4xl mx-auto text-center">
+    <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border-2 border-canada-gold shadow-xl">
+      <Trophy className="w-12 sm:w-16 h-12 sm:h-16 text-canada-red mx-auto mb-6" />
+      <h2 className="text-2xl sm:text-3xl font-bold text-canada-navy mb-6">
+        SIGN UP FOR ALL THE LATEST UPDATES!
+      </h2>
+
+      {/* Responsive Form */}
+      <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+        <Input
+          type="email"
+          placeholder="EMAIL ADDRESS"
+          required
+          className="flex-1 border-canada-gold focus:border-canada-red"
+        />
+        <Button
+          type="submit"
+          className="btn-primary font-semibold px-6 w-full sm:w-auto"
+        >
+          BE THE FIRST TO KNOW!
+        </Button>
+      </form>
+    </div>
+  </div>
+</section>
+
 
       {/* Footer Trophy */}
       <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(to bottom, #be9c43, #a38235)' }}>
