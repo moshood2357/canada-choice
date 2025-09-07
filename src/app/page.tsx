@@ -272,37 +272,39 @@ export default function CanadianChoiceAward() {
       `}</style>
 
       {/* Header */}
-      <header className="fixed top-0 w-full bg-white shadow-md z-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+      <header className="fixed top-0 w-full bg-white shadow-md z-50 ">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-24">
         {/* Logo */}
-        <Link href="/" className="flex items-center space-x-2">
+        <Link href="/" className="flex justify-center items-center space-x-2">
           <Image
             src="/migrate.png"
             alt="Logo"
-            width={40}
-            height={40}
-            className="h-10 w-auto"
+            width={120}
+            height={59}
+            
           />
-          <span className="font-bold text-canada-navy text-lg">Canadian Choice Award</span>
+          <h3 className="font-bold text-canada-navy text-lg">Immigrant at large canada Award</h3>
         </Link>
 
         {/* Desktop Nav */}
         <nav className="hidden md:flex space-x-6 items-center">
-          <Link href="#about" className="hover:text-canada-red font-medium">
+          <Link href="#about" className="text-black hover:text-canada-red font-medium">
             About
           </Link>
-          <Link href="#category" className="hover:text-canada-red font-medium">
+          <Link href="#category" className="text-black hover:text-canada-red font-medium">
             Categories
           </Link>
-          <Link href="#voting" className="hover:text-canada-red font-medium">
+          <Link href="#voting" className="text-black hover:text-canada-red font-medium">
             Voting
           </Link>
-          <Link href="#contact" className="hover:text-canada-red font-medium">
+          <Link href="#contact" className="text-black hover:text-canada-red font-medium">
             Contact
           </Link>
-          <Button className="bg-canada-red hover:bg-red-700 text-white px-4 py-2 rounded-md">
-            Nominate Now
-          </Button>
+          <AnchorLink href="#category">
+              <Button className="btn-primary font-semibold px-6 w-full sm:w-auto">
+                NOMINATE NOW
+              </Button>
+          </AnchorLink>
         </nav>
 
         {/* Mobile Hamburger */}
@@ -316,7 +318,7 @@ export default function CanadianChoiceAward() {
 
       {/* Mobile Menu */}
       {isOpen && (
-        <div className="md:hidden bg-white border-t shadow-lg">
+        <div className="md:hidden bg-black border-t shadow-lg">
           <nav className="flex flex-col space-y-4 p-4">
             <Link
               href="#about"
@@ -346,9 +348,11 @@ export default function CanadianChoiceAward() {
             >
               Contact
             </Link>
-            <Button className="bg-canada-red hover:bg-red-700 text-white px-4 py-2 rounded-md">
-              Nominate Now
-            </Button>
+           <AnchorLink href="#category">
+              <Button className="btn-primary font-semibold px-6 w-full sm:w-auto">
+                NOMINATE NOW
+              </Button>
+            </AnchorLink>
           </nav>
         </div>
       )}
@@ -881,7 +885,7 @@ export default function CanadianChoiceAward() {
 
           <div className="text-center mt-8 pt-8 border-t border-canada-gold">
             <p className="text-sm opacity-80">
-              © 2024 immigrant at large canada Award. All Rights Reserved. Privacy Policy | Terms and Conditions
+              © 2025 immigrant at large canada Award. All Rights Reserved. Privacy Policy | Terms and Conditions
             </p>
           </div>
         </div>
