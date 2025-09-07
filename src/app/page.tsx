@@ -352,7 +352,7 @@ export default function CanadianChoiceAward() {
                 >
                   <CardContent className="p-0">
                     <div className="relative overflow-hidden rounded-t-lg">
-                      <img
+                      <Image
                         src={category.image || "/placeholder.svg"}
                         alt={category.title}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
@@ -395,7 +395,7 @@ export default function CanadianChoiceAward() {
                 <Trophy className="w-8 h-8 text-canada-navy" />
               </div>
               <h3 className="text-xl font-bold text-canada-red mb-2">Vote Submitted Successfully!</h3>
-              <p className="text-canada-black">Thank you for your vote. We'll be in touch soon.</p>
+              <p className="text-canada-black">Thank you for your vote. We wll be in touch soon.</p>
             </div>
           ) : (
             <form onSubmit={handleVotingSubmit} className="space-y-4">
@@ -607,7 +607,7 @@ export default function CanadianChoiceAward() {
             <span className="text-canada-red">CHOICE</span>
           </h2>
           <p className="text-canada-black mb-12 opacity-80">
-            Curious how your favorite business becomes a immigrant at large canada Award winner? Here's a look at the key
+            Curious how your favorite business becomes a immigrant at large canada Award winner? Here is a look at the key
             journey, from community nominations to the final celebration.
           </p>
 
@@ -702,7 +702,7 @@ export default function CanadianChoiceAward() {
 
             <AccordionItem value="item-5" className="bg-white/90 rounded-lg border border-canada-gold shadow-sm">
               <AccordionTrigger className="px-6 py-4 text-left font-semibold text-canada-navy hover:text-canada-red">
-                What if I don't have the exact category?
+                What if I do not have the exact category?
               </AccordionTrigger>
               <AccordionContent className="px-6 pb-4 text-canada-black opacity-80">
                 You can select the closest matching category or contact us for guidance on the best fit.
