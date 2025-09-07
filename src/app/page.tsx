@@ -13,6 +13,8 @@ import { Star, Trophy, Users, Target, Award, Heart, Palette, Medal } from "lucid
 import emailjs from "@emailjs/browser"
 import Image from "next/image"
 import AnchorLink from "react-anchor-link-smooth-scroll"
+import { Menu, X } from "lucide-react" 
+import Link from "next/link"
 
 
 // Set your target date here
@@ -206,6 +208,8 @@ export default function CanadianChoiceAward() {
     }))
   }
 
+   const [isOpen, setIsOpen] = useState(false)
+
   return (
     <div className="min-h-screen" style={{ background: 'linear-gradient(to bottom, #efd984, #be9c43)' }}>
       <style jsx global>{`
@@ -268,73 +272,124 @@ export default function CanadianChoiceAward() {
       `}</style>
 
       {/* Header */}
-      <header className="backdrop-blur-sm border-b fixed z-100 w-full border-canada-gold" style={{ backgroundColor: '#ffffff' }}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-32">
-            <div className="flex items-center space-x-2">
-               <Image
-                            src= "/migrate.png"
-                            alt= "immigration at large company logo"
-                            width={120}  
-                            height={59}  
-                            className=""
-                       />
-            </div>
-            <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
-                HOME
-              </a>
-              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
-                OUR PROCESS
-              </a>
-              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
-                ADVANTAGES
-              </a>
-              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
-                FAQ
-              </a>
-              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
-                CONTACT
-              </a>
-              <AnchorLink href = "#category">
-                <Button className="btn-primary font-semibold px-6">NOMINATE NOW</Button>
-              </AnchorLink>
-            </nav>
-          </div>
+      <header className="fixed top-0 w-full bg-white shadow-md z-50">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-16">
+        {/* Logo */}
+        <Link href="/" className="flex items-center space-x-2">
+          <Image
+            src="/migrate.png"
+            alt="Logo"
+            width={40}
+            height={40}
+            className="h-10 w-auto"
+          />
+          <span className="font-bold text-canada-navy text-lg">Canadian Choice Award</span>
+        </Link>
+
+        {/* Desktop Nav */}
+        <nav className="hidden md:flex space-x-6 items-center">
+          <Link href="#about" className="hover:text-canada-red font-medium">
+            About
+          </Link>
+          <Link href="#category" className="hover:text-canada-red font-medium">
+            Categories
+          </Link>
+          <Link href="#voting" className="hover:text-canada-red font-medium">
+            Voting
+          </Link>
+          <Link href="#contact" className="hover:text-canada-red font-medium">
+            Contact
+          </Link>
+          <Button className="bg-canada-red hover:bg-red-700 text-white px-4 py-2 rounded-md">
+            Nominate Now
+          </Button>
+        </nav>
+
+        {/* Mobile Hamburger */}
+        <button
+          className="md:hidden p-2 rounded-md text-canada-navy focus:outline-none"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {isOpen ? <X size={24} /> : <Menu size={24} />}
+        </button>
+      </div>
+
+      {/* Mobile Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t shadow-lg">
+          <nav className="flex flex-col space-y-4 p-4">
+            <Link
+              href="#about"
+              className="hover:text-canada-red font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              About
+            </Link>
+            <Link
+              href="#category"
+              className="hover:text-canada-red font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Categories
+            </Link>
+            <Link
+              href="#voting"
+              className="hover:text-canada-red font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Voting
+            </Link>
+            <Link
+              href="#contact"
+              className="hover:text-canada-red font-medium"
+              onClick={() => setIsOpen(false)}
+            >
+              Contact
+            </Link>
+            <Button className="bg-canada-red hover:bg-red-700 text-white px-4 py-2 rounded-md">
+              Nominate Now
+            </Button>
+          </nav>
         </div>
-      </header>
+      )}
+    </header>
 
       {/* Hero Section */}
-      <section className="relative pt-60 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div >
-              <h1 className="text-6xl sm:text-base font-bold text-canada-red mb-4">
-                NOMINATIONS FOR
-                <br />
-                <span className="text-8xl text-canada-navy">2026</span>
-                <br />
-                <span className="text-4xl text-canada-black">ARE NOW OPEN</span>
-              </h1>
-              <AnchorLink href = "#category">
-                <Button className="btn-primary font-semibold px-6">NOMINATE NOW</Button>
-              </AnchorLink>
-            </div>
-            <div className="flex justify-center">
-              <div className="relative">
-                <Image
-                            src= "/AWARDS.png"
-                            alt= "award banner"
-                            width={350}  
-                            height={350}  
-                            className="drop-shadow-2xl"
-                       />
-                
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+<section className="relative pt-40 sm:pt-48 md:pt-60 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8">
+  <div className="max-w-7xl mx-auto">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
+      {/* Left: Text */}
+      <div>
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-canada-red mb-4 leading-tight">
+          NOMINATIONS FOR
+          <br />
+          <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-canada-navy block">
+            2026
+          </span>
+          <span className="text-2xl sm:text-3xl md:text-4xl text-canada-black block mt-2">
+            ARE NOW OPEN
+          </span>
+        </h1>
+        <AnchorLink href="#category">
+          <Button className="btn-primary font-semibold px-6 w-full sm:w-auto">
+            NOMINATE NOW
+          </Button>
+        </AnchorLink>
+      </div>
+
+      {/* Right: Image */}
+      <div className="flex justify-center lg:justify-end">
+        <Image
+          src="/AWARDS.png"
+          alt="award banner"
+          width={350}
+          height={350}
+          className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+        />
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Award Categories Section */}
       <section className="pb-16 pt-40 px-4 sm:px-6 lg:px-8" id = "category" style={{ backgroundColor: 'rgba(255, 255, 255, 0.9)' }}>
