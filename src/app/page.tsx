@@ -266,7 +266,7 @@ export default function CanadianChoiceAward() {
       `}</style>
 
       {/* Header */}
-      <header className="backdrop-blur-sm border-b fixed z-100 w-full border-canada-gold" style={{ backgroundColor: '#000240' }}>
+      <header className="backdrop-blur-sm border-b fixed z-100 w-full border-canada-gold" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-32">
             <div className="flex items-center space-x-2">
@@ -279,19 +279,19 @@ export default function CanadianChoiceAward() {
                        />
             </div>
             <nav className="hidden md:flex items-center space-x-8">
-              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
                 HOME
               </a>
-              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
                 OUR PROCESS
               </a>
-              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
                 ADVANTAGES
               </a>
-              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
                 FAQ
               </a>
-              <a href="#" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <a href="#" className="text-black hover:text-canada-gold font-medium transition-colors">
                 CONTACT
               </a>
               <Button className="btn-primary font-semibold px-6">NOMINATE NOW</Button>
@@ -355,6 +355,8 @@ export default function CanadianChoiceAward() {
                       <Image
                         src={category.image || "/placeholder.svg"}
                         alt={category.title}
+                        width={400}
+                        height={200}
                         className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
@@ -766,7 +768,7 @@ export default function CanadianChoiceAward() {
 
           <div className="flex items-center justify-center mb-8">
              <Image
-                            src= "/migrate.png"
+                            src= "/imigrate.jpg"
                             alt= "immigration at large company logo"
                             width={120}  
                             height={59}  
