@@ -576,11 +576,13 @@ export default function CanadianChoiceAward() {
 {/* Countdown */}
 <section className="py-16 px-4 sm:px-6 lg:px-8 bg-canada-navy">
   <div className="max-w-4xl mx-auto text-center">
-    <h2 className="text-3xl sm:text-4xl font-bold text-white mb-8 leading-tight">
+    <h2 className="text-3xl sm:text-4xl font-bold text-white  leading-tight">
       NOMINATION
       <br />
       <span className="text-canada-gold">COUNTDOWN</span>
     </h2>
+    
+    <small className="text-canada-gold ">Nominations closes on November 20</small>  <br />  <br />
 
     {timeLeft.days <= 0 &&
     timeLeft.hours <= 0 &&
