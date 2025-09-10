@@ -464,64 +464,6 @@ export default function CanadianChoiceAward() {
             </div>
           ) : (
             <form onSubmit={handleVotingSubmit} className="space-y-4">
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-canada-navy mb-1">First Name *</label>
-                  <Input
-                    required
-                    value={votingFormData.firstName}
-                    onChange={(e) => handleInputChange("firstName", e.target.value)}
-                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
-                    placeholder="Enter first name"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-canada-navy mb-1">Last Name *</label>
-                  <Input
-                    required
-                    value={votingFormData.lastName}
-                    onChange={(e) => handleInputChange("lastName", e.target.value)}
-                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
-                    placeholder="Enter last name"
-                  />
-                </div>
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-canada-navy mb-1">Email Address *</label>
-                <Input
-                  type="email"
-                  required
-                  value={votingFormData.email}
-                  onChange={(e) => handleInputChange("email", e.target.value)}
-                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
-                  placeholder="Enter email address"
-                />
-              </div>
-              <div>
-                <label className="block text-sm  font-medium text-canada-navy mb-1">Phone Number *</label>
-                <Input
-                  type="tel"
-                  required
-                  value={votingFormData.phone}
-                  onChange={(e) => handleInputChange("phone", e.target.value)}
-                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
-                  placeholder="Enter phone number"
-                />
-              </div>
-
-              <div>
-                <label className="block text-sm font-medium text-canada-navy mb-1">Who do you want to nominate*</label>
-                <Input
-                
-                  required
-                  value={votingFormData.nominate}
-                  onChange={(e) => handleInputChange("nominate", e.target.value)}
-                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
-                  placeholder="Who do you want to nominate"
-                />
-              </div>
-
               <div className="relative">
                 <label className="block text-sm text-black font-medium text-canada-navy mb-1">Select Sub-Category *</label>
                 <Select
@@ -549,6 +491,65 @@ export default function CanadianChoiceAward() {
                   </SelectContent>
                 </Select>
               </div>
+              <div>
+                <label className="block text-sm font-medium text-canada-navy mb-1">Who do you want to nominate*</label>
+                <Input
+                
+                  required
+                  value={votingFormData.nominate}
+                  onChange={(e) => handleInputChange("nominate", e.target.value)}
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
+                  placeholder="Who do you want to nominate"
+                />
+              </div>
+                <div>
+                  <label className="block text-sm font-medium text-canada-navy mb-1">First Name *</label>
+                  <Input
+                    required
+                    value={votingFormData.firstName}
+                    onChange={(e) => handleInputChange("firstName", e.target.value)}
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
+                    placeholder="Enter first name"
+                  />
+                </div>
+                <div>
+                  <label className="block text-sm font-medium text-canada-navy mb-1">Last Name *</label>
+                  <Input
+                    required
+                    value={votingFormData.lastName}
+                    onChange={(e) => handleInputChange("lastName", e.target.value)}
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
+                    placeholder="Enter last name"
+                  />
+                </div>
+            
+
+              <div>
+                <label className="block text-sm font-medium text-canada-navy mb-1">Email Address *</label>
+                <Input
+                  type="email"
+                  required
+                  value={votingFormData.email}
+                  onChange={(e) => handleInputChange("email", e.target.value)}
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
+                  placeholder="Enter email address"
+                />
+              </div>
+              <div>
+                <label className="block text-sm  font-medium text-canada-navy mb-1">Phone Number *</label>
+                <Input
+                  type="tel"
+                  required
+                  value={votingFormData.phone}
+                  onChange={(e) => handleInputChange("phone", e.target.value)}
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
+                  placeholder="Enter phone number"
+                />
+              </div>
+
+              
+
+              
 
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
                 <Button
