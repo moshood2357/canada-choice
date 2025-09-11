@@ -736,6 +736,100 @@ export default function CanadianChoiceAward() {
         </div>
       </section>
 
+       {/* Call for Vendors Section */}
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-canada-navy relative overflow-hidden">
+        {/* Decorative Elements */}
+        <div className="absolute top-0 left-0 w-32 h-32 opacity-20">
+          <div className="w-full h-full bg-gradient-to-br from-canada-gold to-transparent transform rotate-45"></div>
+        </div>
+        <div className="absolute bottom-0 right-0 w-40 h-40 opacity-10">
+          <div className="w-full h-full bg-gradient-to-tl from-canada-gold to-transparent transform -rotate-45"></div>
+        </div>
+        
+        <div className="max-w-6xl mx-auto text-center relative z-10">
+
+          {/* Main Call for Vendors */}
+          <div className="mb-8">
+            <h1 className="text-7xl md:text-8xl font-black mb-4  text-canada-red drop-shadow-2xl">
+              CALL FOR
+            </h1>
+            <h2 className="text-6xl md:text-7xl font-black text-white drop-shadow-2xl mb-6">
+              VENDORS
+            </h2>
+            <p className="text-2xl font-bold text-canada-gold mb-8 tracking-wider">
+              SHOWCASE YOUR BUSINESS & BRAND
+            </p>
+          </div>
+
+           {/* Conference Header */}
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 mr-3 mb-8 inline-block border-2 border-canada-gold">
+            <h3 className="text-lg font-bold text-canada-navy mb-2">IMMIGRANtT AT LARGE CANADA AWARD</h3>
+            <div className="flex items-center justify-center space-x-4 text-canada-black">
+              <span className="text-2xl font-bold">NOVEMBER 21, 2025</span>
+              <span className="text-xl">|</span>
+              <div className="text-right">
+                <div className="font-semibold">BLUE LEGACY CONVENTION CENTRE,</div>
+                <div> 3750 N BOWESVILLE RD, OTTAWA, ON K1V 1B8</div>
+              </div>
+            </div>
+          </div>
+
+          {/* Limited Offer Badge */}
+          <div className="inline-flex items-center space-x-2 bg-canada-red text-white px-4 py-2 rounded-full mb-6 shadow-lg">
+            <Star className="w-5 h-5 fill-white" />
+            <span className="font-bold text-sm">LIMITED OFFER</span>
+          </div>
+
+          {/* Registration Information */}
+          <div className="bg-canada-gold text-canada-navy p-8 rounded-2xl shadow-2xl mb-8">
+            <h3 className="text-2xl font-bold mb-4">REGISTER AT</h3>
+            <div className="text-3xl font-black mb-6 break-all text-white">
+              <a href="#" className = "underline">www.immigrantatlargecanada.ca/become-an-exhibitor</a>
+            </div>
+            
+            {/* <div className="bg-canada-black text-canada-gold px-6 py-3 rounded-lg inline-block mb-4">
+              <span className="text-xl font-bold">info@blackimmigrantsthrivecoalition.ca</span>
+            </div> */}
+            
+            <div className="text-lg font-semibold text-canada-gold">
+              <span className="text-canada-red">Call/whatsapp:</span> +1(613)501-8351
+            </div>
+          </div>
+
+          {/* Call to Action Buttons */}
+          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+            <Link href = "/become-an-exhibitor">
+              <Button className="btn-primary font-bold px-8 py-4 text-lg shadow-lg cursor-pointer">
+                  BECOME A VENDOR
+              </Button>
+            </Link>
+            <Button className="btn-secondary font-bold px-8 py-4 text-lg shadow-lg">
+              LEARN MORE
+            </Button>
+          </div>
+
+          {/* Sponsor Logos Placeholder */}
+          {/* <div className="border-t border-canada-gold pt-8">
+            <p className="text-canada-gold text-sm mb-4 opacity-80">PROUDLY SUPPORTED BY</p>
+            <div className="flex flex-wrap justify-center items-center gap-6 opacity-60">
+              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-xs text-white font-bold">SPONSOR</span>
+              </div>
+              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-xs text-white font-bold">SPONSOR</span>
+              </div>
+              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-xs text-white font-bold">SPONSOR</span>
+              </div>
+              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+                <span className="text-xs text-white font-bold">SPONSOR</span>
+              </div>
+            </div>
+          </div> */}
+        </div>
+      </section>
+
+
       {/* FAQ Section */}
       <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(255, 255, 255, 0.95)' }}>
         <div className="max-w-4xl mx-auto">
