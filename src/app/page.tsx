@@ -763,7 +763,7 @@ export default function CanadianChoiceAward() {
 
            {/* Conference Header */}
           <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 mr-3 mb-8 inline-block border-2 border-canada-gold">
-            <h3 className="text-lg font-bold text-canada-navy mb-2">IMMIGRANtT AT LARGE CANADA AWARD</h3>
+            <h3 className="text-lg font-bold text-canada-navy mb-2">IMMIGRANT AT LARGE CANADA AWARD</h3>
             <div className="flex items-center justify-center space-x-4 text-canada-black">
               <span className="text-2xl font-bold">NOVEMBER 21, 2025</span>
               <span className="text-xl">|</span>
@@ -787,9 +787,9 @@ export default function CanadianChoiceAward() {
               <a href="#" className = "underline">www.immigrantatlargecanada.ca/become-an-exhibitor</a>
             </div>
             
-            {/* <div className="bg-canada-black text-canada-gold px-6 py-3 rounded-lg inline-block mb-4">
-              <span className="text-xl font-bold">info@blackimmigrantsthrivecoalition.ca</span>
-            </div> */}
+            <div className="bg-canada-black text-canada-gold px-6 py-3 rounded-lg inline-block mb-4">
+              <span className="text-xl font-bold">info@immigrantlargecanada.ca</span>
+            </div>
             
             <div className="text-lg font-semibold text-canada-gold">
               <span className="text-canada-red">Call/whatsapp:</span> +1(613)501-8351
@@ -803,9 +803,9 @@ export default function CanadianChoiceAward() {
                   BECOME A VENDOR
               </Button>
             </Link>
-            <Button className="btn-secondary font-bold px-8 py-4 text-lg shadow-lg">
+            {/* <Button className="btn-secondary font-bold px-8 py-4 text-lg shadow-lg">
               LEARN MORE
-            </Button>
+            </Button> */}
           </div>
 
           {/* Sponsor Logos Placeholder */}
