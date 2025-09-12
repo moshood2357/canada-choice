@@ -29,7 +29,7 @@ import Link from "next/link"
 
 export default function BecomeAnExhibitor(){
   const [isApplicationFormOpen, setIsApplicationFormOpen] = useState(false)
-//   const [selectedPackage, setSelectedPackage] = useState("")
+ const [selectedPackage, setSelectedPackage] = useState("")
   const [applicationFormData, setApplicationFormData] = useState({
     companyName: "",
     contactPerson: "",
@@ -166,7 +166,7 @@ export default function BecomeAnExhibitor(){
   }
 
   const handlePackageSelect = (packageName: string) => {
-    // setSelectedPackage(packageName)
+    setSelectedPackage(packageName)
     setApplicationFormData((prev) => ({
       ...prev,
       packageType: packageName,
@@ -261,12 +261,14 @@ export default function BecomeAnExhibitor(){
               <Link href="#contact" className="text-black hover:text-canada-gold font-medium transition-colors">
                 CONTACT
               </Link>
-              <Button 
+              <Link href="#packages">
+                <Button 
                 className="btn-primary font-semibold px-6 cursor-pointer"
-                onClick={() => setIsApplicationFormOpen(true)}
-              >
-                APPLY NOW
-              </Button>
+                // onClick={() => setIsApplicationFormOpen(true)}
+                >
+                  APPLY NOW
+                </Button>
+              </Link>
             </nav>
           </div>
         </div>
@@ -323,17 +325,22 @@ export default function BecomeAnExhibitor(){
 
           {/* Call to Action Buttons */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button 
-              className="btn-primary font-bold px-8 py-4 text-lg shadow-lg cursor-pointer"
-              onClick={() => setIsApplicationFormOpen(true)}
-            >
-              APPLY NOW
-            </Button>
+           
             <Button className="btn-secondary font-bold px-8 py-4 text-lg shadow-lg">
               <a href="#packages">VIEW PACKAGES</a>
             </Button>
-          </div>
 
+            <Link href = "#packages">
+               <Button 
+              className="btn-primary font-bold px-8 py-4 text-lg shadow-lg cursor-pointer"
+              // onClick={() => setIsApplicationFormOpen(true)}
+            >
+              APPLY NOW
+            </Button>
+          </Link>
+
+          </div>
+          
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
@@ -480,7 +487,7 @@ export default function BecomeAnExhibitor(){
         <DialogContent className="max-w-2xl mx-auto bg-white/98 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-canada-navy text-center">
-              Exhibitor Application 
+              Exhibitor Application {selectedPackage && ` - ${selectedPackage}`}
             </DialogTitle>
             <p className="text-canada-red font-semibold text-center">
               Afro-Caribbean Thrive Conference 2025

@@ -787,10 +787,10 @@ export default function CanadianChoiceAward() {
               <a href="#" className = "underline">www.immigrantatlargecanada.ca/become-an-exhibitor</a>
             </div>
             
-            <div className="bg-canada-black text-canada-gold px-6 py-3 rounded-lg inline-block mb-4">
+            {/* <div className="bg-canada-black text-canada-gold px-6 py-3 rounded-lg inline-block mb-4">
               <span className="text-xl font-bold">info@immigrantlargecanada.ca</span>
             </div>
-            
+             */}
             <div className="text-lg font-semibold text-canada-gold">
               <span className="text-canada-red">Call/whatsapp:</span> +1(613)501-8351
             </div>
