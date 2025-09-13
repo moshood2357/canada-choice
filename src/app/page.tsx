@@ -70,25 +70,25 @@ export default function CanadianChoiceAward() {
     {
       title: "Community & Social Impact",
       icon: Users,
-      image: "/team.jpeg",
+      image: "/impact.png",
       description: "Recognizing leaders who make a positive impact in their communities",
     },
     {
       title: "Business & Innovation",
       icon: Target,
-      image: "/team.jpeg",
+      image: "/innovation.png",
       description: "Celebrating innovative African entrepreneurs driving business success",
     },
     {
       title: "Arts & Culture",
       icon: Palette,
-      image: "/team.jpeg",
+      image: "/culture.png",
       description: "Honoring outstanding contributions to arts and cultural preservation",
     },
     {
       title: "Leadership & Governance",
       icon: Award,
-      image: "/team.jpeg",
+      image: "/governance.png",
       description: "Recognizing exceptional achievements by young African Canadians",
     },
     {
@@ -100,7 +100,7 @@ export default function CanadianChoiceAward() {
     {
       title: "Special Recognition",
       icon: Heart,
-      image: "/team.jpeg",
+      image: "/recognition.png",
       description: "Honoring those who dedicate their lives to helping others",
     },
     
@@ -284,7 +284,7 @@ export default function CanadianChoiceAward() {
             height={59}
             
           />
-          <h4 className="font-bold text-canada-navy text-center text-xs pt-3">LEADERSHIP CONFERENCE AND AFRICAN GALA NIG</h4>
+          <h4 className="font-bold text-canada-navy text-center text-xs pt-3">LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT</h4>
         </Link>
 
         {/* Desktop Nav */}
@@ -421,7 +421,7 @@ export default function CanadianChoiceAward() {
                         alt={category.title}
                         width={400}
                         height={200}
-                        className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
+                        className="w-full h-48 object-center group-hover:scale-105 transition-transform duration-300"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                       <div className="absolute top-4 right-4 w-12 h-12 rounded-full flex items-center justify-center gradient-gold">
@@ -576,7 +576,7 @@ export default function CanadianChoiceAward() {
       </Dialog>
 
 {/* Countdown */}
-<section className="py-16 px-4 sm:px-6 lg:px-8 bg-canada-navy">
+<section className="py-16 px-4 sm:px-6 lg:px-8 bg-black">
   <div className="max-w-4xl mx-auto text-center">
     <h2 className="text-3xl sm:text-4xl font-bold text-white  leading-tight">
       NOMINATION
@@ -738,7 +738,7 @@ export default function CanadianChoiceAward() {
       </section>
 
        {/* Call for Vendors Section */}
-      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-canada-navy relative overflow-hidden">
+      <section className="py-20 px-4 sm:px-6 lg:px-8 bg-black relative overflow-hidden">
         {/* Decorative Elements */}
         <div className="absolute top-0 left-0 w-32 h-32 opacity-20">
           <div className="w-full h-full bg-gradient-to-br from-canada-gold to-transparent transform rotate-45"></div>
@@ -895,7 +895,7 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Newsletter Section */}
-<section
+{/* <section
   className="py-16 px-4 sm:px-6 lg:px-8"
   style={{ background: "linear-gradient(135deg, #efd984, #be9c43)" }}
 >
@@ -906,7 +906,7 @@ export default function CanadianChoiceAward() {
         SIGN UP FOR ALL THE LATEST UPDATES!
       </h2>
 
-      {/* Responsive Form */}
+      
       <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
         <Input
           type="email"
@@ -923,7 +923,7 @@ export default function CanadianChoiceAward() {
       </form>
     </div>
   </div>
-</section>
+</section> */}
 
 
       {/* Footer Trophy */}
@@ -947,7 +947,7 @@ export default function CanadianChoiceAward() {
       </section>
 
       {/* Footer */}
-      <footer className="bg-canada-navy text-white py-12">
+      <footer className="bg-black text-white py-12">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <h3 className="font-semibold mb-4 text-canada-gold">Home</h3>

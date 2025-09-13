@@ -522,12 +522,12 @@ export default function BecomeAnExhibitor(){
             <form onSubmit={handleApplicationSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm text-black font-medium text-canada-navy mb-1">Company Name *</label>
+                  <label className="block text-sm font-medium text-canada-navy mb-1">Company Name *</label>
                   <Input
                     required
                     value={applicationFormData.companyName}
                     onChange={(e) => handleInputChange("companyName", e.target.value)}
-                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter company name"
                   />
                 </div>
