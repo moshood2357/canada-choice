@@ -606,9 +606,9 @@ export default function BecomeAnExhibitor(){
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
                     
-                    <SelectItem value="Standard Booth">Individual Sponsor — $300+</SelectItem>
-                    <SelectItem value="Premium Booth">Supporter Sponsor — $500+</SelectItem>
-                    <SelectItem value="Platinum Sponsor">Community Sponsor — $1,000+</SelectItem>
+                    <SelectItem value="Individual Booth">Individual Sponsor — $300+</SelectItem>
+                    <SelectItem value="Supporter Booth">Supporter Sponsor — $500+</SelectItem>
+                    <SelectItem value="Community Sponsor">Community Sponsor — $1,000+</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
