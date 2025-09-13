@@ -171,7 +171,7 @@ export default function CanadianChoiceAward() {
 
     try {
       const templateParams = {
-        to_email: "admin@canadianchoiceaward.ca", 
+        to_email: "info@immigrantatlargecanada.ca", 
         from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
         from_email: votingFormData.email,
         phone: votingFormData.phone,
@@ -183,9 +183,10 @@ export default function CanadianChoiceAward() {
       }
 
       await emailjs.send(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_VOTING_TEMPLATE_ID", // Replace with your EmailJS template ID for voting
+        "service_r7wr5br", 
+        "template_lrxdkli",
         templateParams,
+        "wglabsWakJL1JDUyr"
       )
 
       setVotingSubmitSuccess(true)
@@ -275,7 +276,7 @@ export default function CanadianChoiceAward() {
       <header className="fixed top-0 w-full bg-white shadow-md z-50 ">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex justify-between items-center h-24">
         {/* Logo */}
-        <Link href="/" className="flex justify-center items-center space-x-2">
+        <Link href="/" className="flex flex-col justify-center items-center space-x-2">
           <Image
             src="/migrate.png"
             alt="Logo"
@@ -283,7 +284,7 @@ export default function CanadianChoiceAward() {
             height={59}
             
           />
-          <h3 className="font-bold text-canada-navy text-lg">Immigrant at large canada Award</h3>
+          <h4 className="font-bold text-canada-navy text-center text-xs pt-3">LEADERSHIP CONFERENCE AND AFRICAN GALA NIG</h4>
         </Link>
 
         {/* Desktop Nav */}
@@ -623,7 +624,7 @@ export default function CanadianChoiceAward() {
             BENEFITS OF BECOMING AN OFFICIAL NOMINEE
           </h2>
           <p className="text-canada-black mb-12 text-center max-w-4xl mx-auto opacity-80">
-            Nominating a business for Canadian Choice Award is a win-win for customers and businesses. Customers have a
+            Nominating a business for LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT  is a win-win for customers and businesses. Customers have a
             say about the businesses and businesses get recognized for their outstanding service, standing out from
             competitors.
           </p>
@@ -680,12 +681,12 @@ export default function CanadianChoiceAward() {
       <section className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: 'rgba(239, 217, 132, 0.3)' }}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-canada-navy mb-4">
-            STEPS TO BECOMING IMMIGRANT AT LARGE
+            STEPS TO BECOMING GALA NIGHT
             <br />
-            <span className="text-canada-red">CHOICE</span>
+            <span className="text-canada-red">AWARDEE</span>
           </h2>
           <p className="text-canada-black mb-12 opacity-80">
-            Curious how your favorite business becomes a immigrant at large canada Award winner? Here is a look at the key
+            Curious how your favorite nominee becomes a Gala night Award winner? Here is a look at the key
             journey, from community nominations to the final celebration.
           </p>
 
@@ -763,7 +764,7 @@ export default function CanadianChoiceAward() {
 
            {/* Conference Header */}
           <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6 mr-3 mb-8 inline-block border-2 border-canada-gold">
-            <h3 className="text-lg font-bold text-canada-navy mb-2">IMMIGRANT AT LARGE CANADA AWARD</h3>
+            <h3 className="text-lg font-bold text-canada-navy mb-2">LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT</h3>
             <div className="flex items-center justify-center space-x-4 text-canada-black">
               <span className="text-2xl font-bold">NOVEMBER 21, 2025</span>
               <span className="text-xl">|</span>
@@ -784,7 +785,7 @@ export default function CanadianChoiceAward() {
           <div className="bg-canada-gold text-canada-navy p-8 rounded-2xl shadow-2xl mb-8">
             <h3 className="text-2xl font-bold mb-4">REGISTER AT</h3>
             <div className="text-3xl font-black mb-6 break-all text-white">
-              <a href="#" className = "underline">www.immigrantatlargecanada.ca/become-an-exhibitor</a>
+              <Link href="/become-an-exhibitor" className = "underline">www.immigrantatlargecanada.ca/become-an-exhibitor</Link>
             </div>
             
             {/* <div className="bg-canada-black text-canada-gold px-6 py-3 rounded-lg inline-block mb-4">
@@ -982,7 +983,7 @@ export default function CanadianChoiceAward() {
 
           <div className="text-center mt-8 pt-8 border-t border-canada-gold">
             <p className="text-sm opacity-80">
-              © 2025 immigrant at large canada Award. All Rights Reserved. Privacy Policy | Terms and Conditions
+              © 2025 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT. All Rights Reserved. Privacy Policy | Terms and Conditions
             </p>
           </div>
         </div>

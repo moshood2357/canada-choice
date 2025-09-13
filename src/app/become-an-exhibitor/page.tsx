@@ -46,8 +46,8 @@ export default function BecomeAnExhibitor(){
 
   const exhibitorPackages = [
     {
-      name: "Standard Booth",
-      price: "$500",
+      name: "Individual Sponsor",
+      price: "$300+",
       features: [
         "10x10 booth space",
         "Table and 2 chairs",
@@ -58,8 +58,8 @@ export default function BecomeAnExhibitor(){
       popular: false
     },
     {
-      name: "Premium Booth",
-      price: "$750",
+      name: "Supporter Sponsor",
+      price: "$500+",
       features: [
         "10x10 booth space",
         "Premium table setup",
@@ -72,8 +72,8 @@ export default function BecomeAnExhibitor(){
       popular: true
     },
     {
-      name: "Platinum Sponsor",
-      price: "$1,200",
+      name: "Community Sponsor",
+      price: "$1,000+",
       features: [
         "12x12 booth space",
         "Premium setup with backdrop",
@@ -122,41 +122,55 @@ export default function BecomeAnExhibitor(){
   ]
 
   const handleApplicationSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  e.preventDefault()
+  setIsSubmitting(true)
 
-    try {
-      const templateParams = {
-        to_email: "info@blackimmigrantsthrivecoalition.ca",
-        from_name: applicationFormData.contactPerson,
-        company_name: applicationFormData.companyName,
-        from_email: applicationFormData.email,
-        phone: applicationFormData.phone,
-        website: applicationFormData.website,
-        business_type: applicationFormData.businessType,
-        package_type: applicationFormData.packageType,
-        special_requests: applicationFormData.specialRequests,
-        subject: `Exhibitor Application - ${applicationFormData.companyName}`,
-      }
-
-      await emailjs.send(
-        "YOUR_SERVICE_ID",
-        "YOUR_EXHIBITOR_TEMPLATE_ID",
-        templateParams,
-      )
-
-      setSubmitSuccess(true)
-      setTimeout(() => {
-        setIsApplicationFormOpen(false)
-        setSubmitSuccess(false)
-      }, 3000)
-    } catch (error) {
-      console.error("Error sending application:", error)
-      alert("There was an error submitting your application. Please try again.")
-    } finally {
-      setIsSubmitting(false)
+  try {
+    const templateParams = {
+      companyName: applicationFormData.companyName,
+      contactPerson: applicationFormData.contactPerson,
+      email: applicationFormData.email,
+      phone: applicationFormData.phone,
+      website: applicationFormData.website,
+      businessType: applicationFormData.businessType,
+      packageType: applicationFormData.packageType,
+      specialRequests: applicationFormData.specialRequests,
     }
+
+    await emailjs.send(
+      "service_2u97134",
+      "template_1tni21u",
+      templateParams,
+      "wglabsWakJL1JDUyr"
+    )
+
+    setSubmitSuccess(true)
+
+    // ✅ reset form after success
+    setApplicationFormData({
+      companyName: "",
+      contactPerson: "",
+      email: "",
+      phone: "",
+      website: "",
+      businessType: "",
+      packageType: "",
+      specialRequests: "",
+    })
+    setSelectedPackage("")
+
+    setTimeout(() => {
+      setIsApplicationFormOpen(false)
+      setSubmitSuccess(false)
+    }, 3000)
+  } catch (error) {
+    console.error("Error sending application:", error)
+    alert("There was an error submitting your application. Please try again.")
+  } finally {
+    setIsSubmitting(false)
   }
+}
+
 
   const handleInputChange = (field: string, value: string) => {
     setApplicationFormData((prev) => ({
@@ -238,16 +252,18 @@ export default function BecomeAnExhibitor(){
       {/* Header */}
       <header className="backdrop-blur-sm border-b fixed z-50 w-full border-canada-gold" style={{ backgroundColor: '#ffffff' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            <Link href="/" className="flex items-center space-x-2">
-              <Image
-                src="/migrate.png"
-                alt="immigration at large company logo"
-                width={120}
-                height={59}
-                className=""
-              />
-            </Link>
+          <div className="flex items-center justify-between h-24">
+             {/* Logo */}
+              <Link href="/" className="flex flex-col justify-center items-center space-x-2">
+                <Image
+                  src="/migrate.png"
+                  alt="Logo"
+                  width={120}
+                  height={59}
+                  
+                />
+                <h4 className="font-bold text-canada-navy text-center text-xs pt-3">LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT</h4>
+              </Link>
             <nav className="hidden md:flex items-center space-x-8">
               <Link href="/" className="text-white hover:text-canada-gold font-medium transition-colors">
                 HOME
@@ -319,7 +335,7 @@ export default function BecomeAnExhibitor(){
               EXHIBITOR
             </h2>
             <p className="text-2xl font-bold text-canada-gold mb-8 tracking-wider">
-              SHOWCASE YOUR BUSINESS TO 500+ ATTENDEES
+              SHOWCASE YOUR BUSINESS TO 600+ ATTENDEES
             </p>
           </div>
 
@@ -344,7 +360,7 @@ export default function BecomeAnExhibitor(){
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
-              <div className="text-3xl font-bold text-canada-gold mb-2">500+</div>
+              <div className="text-3xl font-bold text-canada-gold mb-2">600+</div>
               <div className="text-white">Expected Attendees</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
@@ -365,7 +381,7 @@ export default function BecomeAnExhibitor(){
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-canada-navy mb-4">WHY EXHIBIT WITH US?</h2>
             <p className="text-xl text-canada-black max-w-3xl mx-auto opacity-80">
-              Join the premier Afro-Caribbean business conference and connect with a thriving community of entrepreneurs, professionals, and decision-makers.
+              Join the premier LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT and connect with a thriving community of entrepreneurs, professionals, and decision-makers.
             </p>
           </div>
 
@@ -490,7 +506,7 @@ export default function BecomeAnExhibitor(){
               Exhibitor Application {selectedPackage && ` - ${selectedPackage}`}
             </DialogTitle>
             <p className="text-canada-red font-semibold text-center">
-              Afro-Caribbean Thrive Conference 2025
+              LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT 2025
             </p>
           </DialogHeader>
 
@@ -506,7 +522,7 @@ export default function BecomeAnExhibitor(){
             <form onSubmit={handleApplicationSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-canada-navy mb-1">Company Name *</label>
+                  <label className="block text-sm text-black font-medium text-canada-navy mb-1">Company Name *</label>
                   <Input
                     required
                     value={applicationFormData.companyName}
@@ -521,7 +537,7 @@ export default function BecomeAnExhibitor(){
                     required
                     value={applicationFormData.contactPerson}
                     onChange={(e) => handleInputChange("contactPerson", e.target.value)}
-                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter contact person"
                   />
                 </div>
@@ -535,7 +551,7 @@ export default function BecomeAnExhibitor(){
                     required
                     value={applicationFormData.email}
                     onChange={(e) => handleInputChange("email", e.target.value)}
-                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter email address"
                   />
                 </div>
@@ -546,7 +562,7 @@ export default function BecomeAnExhibitor(){
                     required
                     value={applicationFormData.phone}
                     onChange={(e) => handleInputChange("phone", e.target.value)}
-                    className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                    className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter phone number"
                   />
                 </div>
@@ -555,10 +571,10 @@ export default function BecomeAnExhibitor(){
               <div>
                 <label className="block text-sm font-medium text-canada-navy mb-1">Website</label>
                 <Input
-                  type="url"
+                  // type="url"
                   value={applicationFormData.website}
                   onChange={(e) => handleInputChange("website", e.target.value)}
-                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter website URL"
                 />
               </div>
@@ -570,7 +586,7 @@ export default function BecomeAnExhibitor(){
                   value={applicationFormData.businessType}
                   onValueChange={(value) => handleInputChange("businessType", value)}
                 >
-                  <SelectTrigger className="w-full border-canada-gold focus:border-canada-red bg-white">
+                  <SelectTrigger className="w-full text-black border-canada-gold focus:border-canada-red bg-white">
                     <SelectValue placeholder="Select business type" />
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
@@ -594,13 +610,14 @@ export default function BecomeAnExhibitor(){
                   value={applicationFormData.packageType}
                   onValueChange={(value) => handleInputChange("packageType", value)}
                 >
-                  <SelectTrigger className="w-full border-canada-gold focus:border-canada-red bg-white">
+                  <SelectTrigger className="w-full text-black border-canada-gold focus:border-canada-red bg-white">
                     <SelectValue placeholder="Select package" />
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
-                    <SelectItem value="Standard Booth">Standard Booth - $500</SelectItem>
-                    <SelectItem value="Premium Booth">Premium Booth - $750</SelectItem>
-                    <SelectItem value="Platinum Sponsor">Platinum Sponsor - $1,200</SelectItem>
+                    
+                    <SelectItem value="Standard Booth">Individual Sponsor — $300+</SelectItem>
+                    <SelectItem value="Premium Booth">Supporter Sponsor — $500+</SelectItem>
+                    <SelectItem value="Platinum Sponsor">Community Sponsor — $1,000+</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -610,7 +627,7 @@ export default function BecomeAnExhibitor(){
                 <Input
                   value={applicationFormData.specialRequests}
                   onChange={(e) => handleInputChange("specialRequests", e.target.value)}
-                  className="border-canada-gold focus:border-canada-red focus:ring-canada-red"
+                  className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Any special requirements or requests"
                 />
               </div>
@@ -627,7 +644,7 @@ export default function BecomeAnExhibitor(){
                 </Button>
                 <Button
                   type="submit"
-                  className="flex-1 btn-primary font-semibold"
+                  className="flex-1 btn-primary font-semibold cursor-pointer"
                   disabled={isSubmitting}
                 >
                   {isSubmitting ? "Submitting..." : "Submit Application"}
@@ -675,7 +692,7 @@ export default function BecomeAnExhibitor(){
 
           <div className="text-center mt-8 pt-8 border-t border-canada-gold">
             <p className="text-sm opacity-80">
-              © 2025 Immigrant at large canada. All Rights Reserved. Privacy Policy | Terms and Conditions
+              © 2025 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT. All Rights Reserved. Privacy Policy | Terms and Conditions
             </p>
           </div>
         </div>
