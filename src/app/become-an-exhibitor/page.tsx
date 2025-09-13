@@ -49,11 +49,9 @@ export default function BecomeAnExhibitor(){
       name: "Individual Sponsor",
       price: "$300+",
       features: [
-        "10x10 booth space",
-        "Table and 2 chairs",
-        "Basic signage",
-        "Conference materials",
-        "Networking opportunities"
+        "Recognition during our program and website",
+        "Opportunity to distribute flyer",
+        "1 complimentary general admission ticket",
       ],
       popular: false
     },
@@ -61,13 +59,10 @@ export default function BecomeAnExhibitor(){
       name: "Supporter Sponsor",
       price: "$500+",
       features: [
-        "10x10 booth space",
-        "Premium table setup",
-        "Professional signage",
-        "Conference materials",
-        "Priority placement",
-        "Social media promotion",
-        "Networking reception access"
+        "Recognition on program and website as “Supporter Sponsor”",
+        "Mention during sponsor acknowledgment segment",
+        "Opportunity to share flyers or branded handouts",
+        "2 complimentary general admission tickets",
       ],
       popular: true
     },
@@ -75,14 +70,10 @@ export default function BecomeAnExhibitor(){
       name: "Community Sponsor",
       price: "$1,000+",
       features: [
-        "12x12 booth space",
-        "Premium setup with backdrop",
-        "Logo on conference materials",
-        "Speaking opportunity",
-        "VIP networking access",
-        "Social media spotlight",
-        "Conference program ad",
-        "Welcome reception sponsor"
+        "Name listed as sponsor in program and website",
+        "Recognition in sponsor slideshow and verbal mention",
+        "Opportunity to distribute promotional materials or have a stand at venue",
+        "3 complimentary general admission tickets"
       ],
       popular: false
     }
