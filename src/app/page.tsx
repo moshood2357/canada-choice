@@ -472,14 +472,7 @@ export default function CanadianChoiceAward() {
                       <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
                       {isArtsAndCulture && (
                         <>
-                          <div className="absolute top-4 left-4">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" className="text-yellow-400">
-                              <path
-                                d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"
-                                fill="currentColor"
-                              />
-                            </svg>
-                          </div>
+                          
                     {/* Golden confetti overlay for Arts & Culture */}
                           <div className="absolute inset-0 pointer-events-none">
                             <div className="absolute top-2 right-8 w-1 h-2 bg-yellow-400 rotate-45 opacity-80"></div>
@@ -516,7 +509,7 @@ export default function CanadianChoiceAward() {
       </section>
 
       <Dialog open={isVotingFormOpen} onOpenChange={setIsVotingFormOpen}>
-        <DialogContent className="max-w-md mx-auto bg-white/98 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">
+        <DialogContent className="max-w-md mx-auto bg-white/98 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">c
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-canada-navy text-center">
               Nominate in this category
