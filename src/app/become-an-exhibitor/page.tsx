@@ -191,6 +191,7 @@ export default function BecomeAnExhibitor(){
           --canada-gold-dark: #a38235;
         }
         
+        
         .btn-primary {
           background: linear-gradient(135deg, #FA0101, #d40000);
           border: none;
