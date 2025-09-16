@@ -10,7 +10,7 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Canadian Choice Award",
+  title: "LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT",
   description: "Nominate your favorite Canadian business for the 2026 awards.",
   icons: {
     icon: "/favicon.ico",

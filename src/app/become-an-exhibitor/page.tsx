@@ -35,8 +35,9 @@ export default function BecomeAnExhibitor() {
     phone: "",
     website: "",
     businessType: "",
-    packageType: "",
+    packageType: "",                 
     specialRequests: "",
+    referenceId: generateReferenceId(),
   })
 
   const [isSubmitting, setIsSubmitting] = useState(false)
@@ -45,7 +46,7 @@ export default function BecomeAnExhibitor() {
   const exhibitorPackages = [
     {
       name: "Individual Sponsor",
-      price: "$300+",
+      price: "$300",
       features: [
         "Recognition during our program and website",
         "Opportunity to distribute flyer",
@@ -55,7 +56,7 @@ export default function BecomeAnExhibitor() {
     },
     {
       name: "Supporter Sponsor",
-      price: "$500+",
+      price: "$500",
       features: [
         "Recognition on program and website as “Supporter Sponsor”",
         "Mention during sponsor acknowledgment segment",
@@ -66,7 +67,7 @@ export default function BecomeAnExhibitor() {
     },
     {
       name: "Community Sponsor",
-      price: "$1,000+",
+      price: "$1,000",
       features: [
         "Name listed as sponsor in program and website",
         "Recognition in sponsor slideshow and verbal mention",
@@ -125,6 +126,8 @@ export default function BecomeAnExhibitor() {
         businessType: applicationFormData.businessType,
         packageType: applicationFormData.packageType,
         specialRequests: applicationFormData.specialRequests,
+        referenceId: applicationFormData.referenceId, 
+
       }
 
       await emailjs.send("service_2u97134", "template_1tni21u", templateParams, "wglabsWakJL1JDUyr")
@@ -141,13 +144,15 @@ export default function BecomeAnExhibitor() {
         businessType: "",
         packageType: "",
         specialRequests: "",
+        referenceId: generateReferenceId(), 
       })
       setSelectedPackage("")
+      
 
-      setTimeout(() => {
-        setIsApplicationFormOpen(false)
-        setSubmitSuccess(false)
-      }, 3000)
+      // setTimeout(() => {
+      //   setIsApplicationFormOpen(false)
+      //   setSubmitSuccess(false)
+      // }, 3000)
     } catch (error) {
       console.error("Error sending application:", error)
       alert("There was an error submitting your application. Please try again.")
@@ -171,6 +176,10 @@ export default function BecomeAnExhibitor() {
     }))
     setIsApplicationFormOpen(true)
   }
+
+    function generateReferenceId() {
+  return "EXH-" + Math.random().toString(36).substr(2, 8).toUpperCase()
+}
 
   return (
     <div
@@ -221,7 +230,7 @@ export default function BecomeAnExhibitor() {
         .btn-primary-dark {
           background: linear-gradient(135deg, #efd984, #be9c43);
           border: none;
-          color: #ffffff;
+          color: #000000;
           transition: all 0.3s ease;
           font-weight: 600;
         }
@@ -301,7 +310,7 @@ export default function BecomeAnExhibitor() {
               </Link>
               <Link href="#packages">
                 <Button
-                  className="btn-primary-dark font-semibold px-6 cursor-pointer"
+                  className="btn-primary-dark text-black font-semibold px-6 cursor-pointer"
                   // onClick={() => setIsApplicationFormOpen(true)}
                 >
                   APPLY NOW
@@ -459,6 +468,20 @@ export default function BecomeAnExhibitor() {
         </div>
       </section>
 
+         {/* Newsletter Section */}
+       <section
+  className="py-16 px-4 sm:px-6 lg:px-8"
+  style={{ background: "linear-gradient(135deg, #efd984, #be9c43)" }}
+>
+  <div className="max-w-4xl mx-auto text-center">
+    <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border-2 border-canada-gold shadow-xl text-black">
+      TO BUY A TICKET AS AN ATTENDEE OR PAY FOR SPONSORSHIP VISIT<span> <a rel="noopener noreferrer"
+      className="underline text-blue-500" href = "https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator" target="_blank">EVENTBRITE</a></span> HERE
+    </div>
+  </div>
+</section> 
+
+
       {/* Contact Information Section */}
       <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }}>
         <div className="max-w-4xl mx-auto text-center">
@@ -487,12 +510,14 @@ export default function BecomeAnExhibitor() {
             </div>
           </div>
 
-          <Button
+          <Link href = "#packages">
+              <Button
             className="btn-primary-dark font-bold px-8 py-4 text-lg shadow-lg cursor-pointer"
-            onClick={() => setIsApplicationFormOpen(true)}
+            // onClick={() => setIsApplicationFormOpen(true)}
           >
             APPLY TO EXHIBIT NOW
           </Button>
+          </Link>
         </div>
       </section>
 
@@ -603,7 +628,7 @@ export default function BecomeAnExhibitor() {
                 </Select>
               </div>
 
-              <div>
+              <div> 
                 <label className="block text-sm font-medium text-canada-gold mb-1">Preferred Package *</label>
                 <Select
                   required
@@ -614,12 +639,27 @@ export default function BecomeAnExhibitor() {
                     <SelectValue placeholder="Select package" />
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
-                    <SelectItem value="Individual Sponsor">Individual Sponsor — $300+</SelectItem>
-                    <SelectItem value="Supporter Sponsor">Supporter Sponsor — $500+</SelectItem>
-                    <SelectItem value="Community Sponsor">Community Sponsor — $1,000+</SelectItem>
+                    <SelectItem value="Individual Sponsor">Individual Sponsor — $300</SelectItem>
+                    <SelectItem value="Supporter Sponsor">Supporter Sponsor — $500</SelectItem>
+                    <SelectItem value="Community Sponsor">Community Sponsor — $1,000</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
+                
+              <div className="space-y-2">
+                  <label className="text-sm font-medium text-canada-gold">Reference ID *</label>
+                  <Input
+                    required
+                    type="text"
+                    name="referenceId"
+                    value={applicationFormData.referenceId}
+                    readOnly
+                    className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red cursor-not-allowed"
+                  />
+                  <p className="text-xs text-canada-gold">
+                    Please keep this ID safe. Use it as your payment reference on Eventbrite.
+                  </p>
+                </div>
 
               <div>
                 <label className="block text-sm font-medium text-canada-gold mb-1">Special Requests</label>
@@ -636,7 +676,7 @@ export default function BecomeAnExhibitor() {
                   type="button"
                   variant="outline"
                   onClick={() => setIsApplicationFormOpen(false)}
-                  className="flex-1 border-canada-gold text-white hover:bg-canada-gold hover:text-black"
+                  className="flex-1 border-canada-gold text-black hover:bg-canada-gold hover:text-black"
                   disabled={isSubmitting}
                 >
                   Cancel
@@ -696,9 +736,11 @@ export default function BecomeAnExhibitor() {
 
           <div className="text-center mt-8 pt-8 border-t border-canada-gold">
             <p className="text-sm opacity-80">
-              © 2025 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT. All Rights Reserved. Privacy Policy | Terms and
+              © 2025 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT. All Rights Reserved.  Privacy Policy | Terms and
               Conditions
             </p>
+            <span>Developed by <a rel="noopener noreferrer"
+      className="underline text-blue-500" href = "https://r2systemsolution.co.uk" target="_blank">R2 system solution Ltd.</a></span>
           </div>
         </div>
       </footer>

@@ -180,11 +180,26 @@ export default function CanadianChoiceAward() {
 
       await emailjs.send("service_r7wr5br", "template_lrxdkli", templateParams, "wglabsWakJL1JDUyr")
 
+      
+    // // ✅ 2. Send Confirmation to User
+    // await emailjs.send(
+    //   "service_r7wr5br",
+    //   "template_vote_confirm", // new user template
+    //   {
+    //     from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
+    //     from_email: votingFormData.email,
+    //     category: selectedCategory,
+    //     nominee: votingFormData.nominee,
+    //   },
+    //   "wglabsWakJL1JDUyr"
+    // )
+
+
       setVotingSubmitSuccess(true)
-      setTimeout(() => {
-        setIsVotingFormOpen(false)
-        setVotingSubmitSuccess(false)
-      }, 2000)
+      // setTimeout(() => {
+      //   setIsVotingFormOpen(false)
+      //   setVotingSubmitSuccess(false)
+      // }, 2000)
     } catch (error) {
       console.error("Error sending nomination email:", error)
       alert("There was an error submitting your nomination. Please try again.")
@@ -388,7 +403,7 @@ export default function CanadianChoiceAward() {
                 Contact
               </Link>
               <AnchorLink href="#category">
-                <Button className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg">
+                <Button className="bg-canada-gold hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg">
                   NOMINATE NOW
                 </Button>
               </AnchorLink>
@@ -398,7 +413,7 @@ export default function CanadianChoiceAward() {
       </header>
 
       {/* Hero Section */}
-      <section className="relative pt-40 sm:pt-48 md:pt-60 pb-16 sm:pb-20 px-4 sm:px-6 lg:px-8 bg-black-gold-metallic">
+      <section className="relative pt-40 sm:pt-48 md:pt-60 pb-9 sm:pb-20 px-4 sm:px-8 lg:px-25 bg-black-gold-metallic">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center text-center lg:text-left">
             {/* Left: Text */}
@@ -439,7 +454,7 @@ export default function CanadianChoiceAward() {
 
       {/* Award Categories Section */}
       <section
-        className="pb-16 pt-40 px-4 sm:px-6 lg:px-8"
+        className="pb-16 pt-20 px-4 sm:px-6 lg:px-8"
         id="category"
         style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
       >
@@ -507,6 +522,19 @@ export default function CanadianChoiceAward() {
           </div>
         </div>
       </section>
+
+        {/* BUY A TICKET Section */}
+       <section
+  className="py-16 px-4 sm:px-6 lg:px-8"
+  style={{ background: "linear-gradient(135deg, #efd984, #be9c43)" }}
+>
+  <div className="max-w-4xl mx-auto text-center">
+    <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border-2 border-canada-gold shadow-xl text-black">
+      TO BUY A TICKET AS AN ATTENDEE OR PAY FOR SPONSORSHIP VISIT<span> <a rel="noopener noreferrer"
+      className="underline text-blue-500" href = "https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator" target="_blank">EVENTBRITE</a></span> HERE
+    </div>
+  </div>
+</section> 
 
       <Dialog open={isVotingFormOpen} onOpenChange={setIsVotingFormOpen}>
         <DialogContent className="max-w-md mx-auto bg-white/98 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">c
@@ -932,36 +960,7 @@ export default function CanadianChoiceAward() {
         </div>
       </section>
 
-      {/* Newsletter Section */}
-      {/* <section
-  className="py-16 px-4 sm:px-6 lg:px-8"
-  style={{ background: "linear-gradient(135deg, #efd984, #be9c43)" }}
->
-  <div className="max-w-4xl mx-auto text-center">
-    <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border-2 border-canada-gold shadow-xl">
-      <Trophy className="w-12 sm:w-16 h-12 sm:h-16 text-canada-red mx-auto mb-6" />
-      <h2 className="text-2xl sm:text-3xl font-bold text-canada-navy mb-6">
-        SIGN UP FOR ALL THE LATEST UPDATES!
-      </h2>
-
-      
-      <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
-        <Input
-          type="email"
-          placeholder="EMAIL ADDRESS"
-          required
-          className="flex-1 border-canada-gold focus:border-canada-red"
-        />
-        <Button
-          type="submit"
-          className="btn-primary font-semibold px-6 w-full sm:w-auto"
-        >
-          BE THE FIRST TO KNOW!
-        </Button>
-      </form>
-    </div>
-  </div>
-</section> */}
+    
 
       {/* Footer Trophy */}
       <section
@@ -1021,6 +1020,8 @@ export default function CanadianChoiceAward() {
               © 2025 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT. All Rights Reserved. Privacy Policy | Terms and
               Conditions
             </p>
+            <span>Developed by <a rel="noopener noreferrer"
+      className="underline text-blue-500" href = "https://r2systemsolution.co.uk" target="_blank">R2 system solution Ltd.</a></span>
           </div>
         </div>
       </footer>
