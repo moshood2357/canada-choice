@@ -181,18 +181,18 @@ export default function CanadianChoiceAward() {
       await emailjs.send("service_r7wr5br", "template_lrxdkli", templateParams, "wglabsWakJL1JDUyr")
 
       
-    // // ✅ 2. Send Confirmation to User
-    // await emailjs.send(
-    //   "service_r7wr5br",
-    //   "template_vote_confirm", // new user template
-    //   {
-    //     from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
-    //     from_email: votingFormData.email,
-    //     category: selectedCategory,
-    //     nominee: votingFormData.nominee,
-    //   },
-    //   "wglabsWakJL1JDUyr"
-    // )
+    //  Send Confirmation to User
+    await emailjs.send(
+      "service_r7wr5br",
+      "template_85ve8uw", 
+      {
+        from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
+        from_email: votingFormData.email,
+        category: selectedCategory,
+        nominee: votingFormData.nominee,
+      },
+      "wglabsWakJL1JDUyr"
+    )
 
 
       setVotingSubmitSuccess(true)
@@ -424,7 +424,7 @@ export default function CanadianChoiceAward() {
                   NOMINATIONS FOR
                   <br />
                   <span className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl text-yellow-400 block drop-shadow-2xl">
-                    2026
+                    2025
                   </span>
                   <span className="text-2xl sm:text-3xl md:text-4xl text-white block mt-2 drop-shadow-2xl">
                     ARE NOW OPEN
@@ -984,7 +984,7 @@ export default function CanadianChoiceAward() {
           </div>
 
           <div className="flex items-center justify-center mb-8">
-            <Image src="/immigrants.png" alt="immigration at large company logo" width={120} height={59} className="" />
+            <Image src="/canada.png" alt="immigration at large company logo" width={120} height={59} className="" />
           </div>
 
           <div className="grid md:grid-cols-5 gap-8 text-center md:text-left">

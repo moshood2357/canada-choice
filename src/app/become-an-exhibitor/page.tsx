@@ -46,7 +46,7 @@ export default function BecomeAnExhibitor() {
   const exhibitorPackages = [
     {
       name: "Individual Sponsor",
-      price: "$300",
+      price: "CA$300",
       features: [
         "Recognition during our program and website",
         "Opportunity to distribute flyer",
@@ -56,7 +56,7 @@ export default function BecomeAnExhibitor() {
     },
     {
       name: "Supporter Sponsor",
-      price: "$500",
+      price: "CA$500",
       features: [
         "Recognition on program and website as “Supporter Sponsor”",
         "Mention during sponsor acknowledgment segment",
@@ -67,7 +67,7 @@ export default function BecomeAnExhibitor() {
     },
     {
       name: "Community Sponsor",
-      price: "$1,000",
+      price: "CA$1,000",
       features: [
         "Name listed as sponsor in program and website",
         "Recognition in sponsor slideshow and verbal mention",
@@ -132,6 +132,22 @@ export default function BecomeAnExhibitor() {
 
       await emailjs.send("service_2u97134", "template_1tni21u", templateParams, "wglabsWakJL1JDUyr")
 
+
+
+       //Auto-reply to Applicant
+    await emailjs.send(
+      "service_2u97134",
+      "template_tvydolg", // Auto-reply template ID
+      {
+        to_name: applicationFormData.contactPerson,
+        to_email: applicationFormData.email,
+        packageType: applicationFormData.packageType,
+        referenceId: applicationFormData.referenceId, 
+
+      },
+      "wglabsWakJL1JDUyr"
+    )
+
       setSubmitSuccess(true)
 
       // ✅ reset form after success
@@ -178,8 +194,8 @@ export default function BecomeAnExhibitor() {
   }
 
     function generateReferenceId() {
-  return "EXH-" + Math.random().toString(36).substr(2, 8).toUpperCase()
-}
+  return "EXH-" + crypto.randomUUID().slice(0, 8).toUpperCase()
+ }
 
   return (
     <div
@@ -284,28 +300,28 @@ export default function BecomeAnExhibitor() {
       {/* Header */}
       <header
         className="backdrop-blur-sm border-b fixed z-50 w-full border-canada-gold"
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.9)" }}
+        style={{ backgroundColor: "#fff" }}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-24">
             {/* Logo */}
             <Link href="/" className="flex flex-col justify-center items-center space-x-2">
               <Image src="/migrate.png" alt="Logo" width={120} height={59} />
-              <h4 className="font-bold text-canada-gold text-center text-xs pt-3">
+              <h4 className="font-bold text-black text-center text-xs pt-3">
                 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT
               </h4>
             </Link>
             <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <Link href="/" className="text-black hover:text-canada-gold font-medium transition-colors">
                 HOME
               </Link>
-              <Link href="#packages" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <Link href="#packages" className="text-black hover:text-canada-gold font-medium transition-colors">
                 PACKAGES
               </Link>
-              <Link href="#benefits" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <Link href="#benefits" className="text-black hover:text-canada-gold font-medium transition-colors">
                 BENEFITS
               </Link>
-              <Link href="#contact" className="text-white hover:text-canada-gold font-medium transition-colors">
+              <Link href="#contact" className="text-black hover:text-canada-gold font-medium transition-colors">
                 CONTACT
               </Link>
               <Link href="#packages">
@@ -522,7 +538,28 @@ export default function BecomeAnExhibitor() {
       </section>
 
       {/* Application Form Dialog */}
-      <Dialog open={isApplicationFormOpen} onOpenChange={setIsApplicationFormOpen}>
+      <Dialog
+  open={isApplicationFormOpen}
+  onOpenChange={(open) => {
+    setIsApplicationFormOpen(open);
+    if (!open) {
+      // Reset success state when dialog closesn
+      setSubmitSuccess(false);
+      // (Optional) also reset form if you want it cleared out:
+      setApplicationFormData({
+        companyName: "",
+        contactPerson: "",
+        email: "",
+        phone: "",
+        website: "",
+        businessType: "",
+        packageType: "",
+        referenceId: generateReferenceId(), // regenerate if needed
+        specialRequests: "",
+      });
+    }
+  }}
+>
         <DialogContent className="max-w-2xl mx-auto bg-black/95 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-white text-center">
@@ -616,7 +653,7 @@ export default function BecomeAnExhibitor() {
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
                     <SelectItem value="retail">Retail</SelectItem>
-                    <SelectItem value="services">Professional Services</SelectItem>
+                    <SelectItem value="Professional services">Professional Services</SelectItem>
                     <SelectItem value="technology">Technology</SelectItem>
                     <SelectItem value="food-beverage">Food & Beverage</SelectItem>
                     <SelectItem value="health-wellness">Health & Wellness</SelectItem>
@@ -634,14 +671,16 @@ export default function BecomeAnExhibitor() {
                   required
                   value={applicationFormData.packageType}
                   onValueChange={(value) => handleInputChange("packageType", value)}
+                  disabled={false}
+
                 >
                   <SelectTrigger className="w-full text-white border-canada-gold focus:border-canada-red bg-black/50">
                     <SelectValue placeholder="Select package" />
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
-                    <SelectItem value="Individual Sponsor">Individual Sponsor — $300</SelectItem>
-                    <SelectItem value="Supporter Sponsor">Supporter Sponsor — $500</SelectItem>
-                    <SelectItem value="Community Sponsor">Community Sponsor — $1,000</SelectItem>
+                    <SelectItem value="Individual Sponsor">Individual Sponsor — CA$300</SelectItem>
+                    <SelectItem value="Supporter Sponsor">Supporter Sponsor — CA$500</SelectItem>
+                    <SelectItem value="Community Sponsor">Community Sponsor — CA$1,000</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -699,7 +738,7 @@ export default function BecomeAnExhibitor() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <Link href="/" className="flex items-center justify-center mb-8">
-              <Image src="/migrate.png" alt="immigration at large company logo" width={120} height={59} className="" />
+              <Image src="/canada.png" alt="immigration at large company logo" width={120} height={59} className="" />
             </Link>
           </div>
 
