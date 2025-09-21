@@ -342,14 +342,11 @@ export default function CanadianChoiceAward() {
 
           {/* Desktop Nav */}
           <nav className="hidden md:flex space-x-6 items-center">
-            <Link href="#about" className="text-black hover:text-canada-gold font-medium transition-colors">
+            <Link href="/about-us" className="text-black hover:text-canada-gold font-medium transition-colors">
               About
             </Link>
             <Link href="#category" className="text-black hover:text-canada-gold font-medium transition-colors">
               Categories
-            </Link>
-            <Link href="#voting" className="text-black hover:text-canada-gold font-medium transition-colors">
-              Voting
             </Link>
             <Link href="#contact" className="text-black hover:text-canada-gold font-medium transition-colors">
               Contact
@@ -375,7 +372,7 @@ export default function CanadianChoiceAward() {
           <div className="md:hidden bg-black/95 backdrop-blur-md border-t border-yellow-500/20 shadow-lg">
             <nav className="flex flex-col space-y-4 p-4">
               <Link
-                href="#about"
+                href="/about-us"
                 className="text-white hover:text-canada-gold font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
@@ -388,13 +385,7 @@ export default function CanadianChoiceAward() {
               >
                 Categories
               </Link>
-              <Link
-                href="#voting"
-                className="text-white hover:text-canada-gold font-medium transition-colors"
-                onClick={() => setIsOpen(false)}
-              >
-                Voting
-              </Link>
+              
               <Link
                 href="#contact"
                 className="text-white hover:text-canada-gold font-medium transition-colors"
