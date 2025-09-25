@@ -162,6 +162,13 @@ export default function CanadianChoiceAward() {
   }
 const handleVotingSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
+
+  // Custom validation for nominee 
+  if (!votingFormData.nominee) {
+    alert("Please select a sub-category before submitting.");
+    return;
+  }
+
   setIsVotingSubmitting(true);
 
   try {
