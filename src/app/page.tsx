@@ -160,31 +160,48 @@ export default function CanadianChoiceAward() {
     })
     setVotingSubmitSuccess(false)
   }
+const handleVotingSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  setIsVotingSubmitting(true);
 
-  const handleVotingSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsVotingSubmitting(true)
+  try {
+    // Retrieve existing votes from localStorage (or initialize as empty object)
+    const storedVotes = JSON.parse(localStorage.getItem("votes") || "{}");
 
-    try {
-      const templateParams = {
-        to_email: "info@immigrantatlargecanada.ca",
-        from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
-        from_email: votingFormData.email,
-        phone: votingFormData.phone,
-        category: selectedCategory,
-        nominee: votingFormData.nominee,
-        nominate: votingFormData.nominate,
-        subject: `New Vote Submission - ${selectedCategory}`,
-        message: `Vote submitted for sub-category "${votingFormData.nominee}" in ${selectedCategory} category.`,
-      }
+    // Check if this email has already voted in the selected category
+    if (storedVotes[selectedCategory]?.includes(votingFormData.email)) {
+      alert(
+        `This email has already been used to nominate in the "${selectedCategory}" category. You can still use this email to nominate in other categories.`
+      );
+      setIsVotingSubmitting(false);
+      return;
+    }
 
-      await emailjs.send("service_r7wr5br", "template_lrxdkli", templateParams, "wglabsWakJL1JDUyr")
+    // Build email params
+    const templateParams = {
+      to_email: "info@immigrantatlargecanada.ca",
+      from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
+      from_email: votingFormData.email,
+      phone: votingFormData.phone,
+      category: selectedCategory,
+      nominee: votingFormData.nominee,
+      nominate: votingFormData.nominate,
+      subject: `New Vote Submission - ${selectedCategory}`,
+      message: `Vote submitted for sub-category "${votingFormData.nominee}" in ${selectedCategory} category.`,
+    };
 
-      
-    //  Send Confirmation to User
+    // Send to admin
     await emailjs.send(
       "service_r7wr5br",
-      "template_85ve8uw", 
+      "template_lrxdkli",
+      templateParams,
+      "wglabsWakJL1JDUyr"
+    );
+
+    // Send confirmation to user
+    await emailjs.send(
+      "service_r7wr5br",
+      "template_85ve8uw",
       {
         from_name: `${votingFormData.firstName} ${votingFormData.lastName}`,
         from_email: votingFormData.email,
@@ -192,21 +209,24 @@ export default function CanadianChoiceAward() {
         nominee: votingFormData.nominee,
       },
       "wglabsWakJL1JDUyr"
-    )
+    );
 
-
-      setVotingSubmitSuccess(true)
-      // setTimeout(() => {
-      //   setIsVotingFormOpen(false)
-      //   setVotingSubmitSuccess(false)
-      // }, 2000)
-    } catch (error) {
-      console.error("Error sending nomination email:", error)
-      alert("There was an error submitting your nomination. Please try again.")
-    } finally {
-      setIsVotingSubmitting(false)
+    // ✅ Save this vote in localStorage under the correct category
+    if (!storedVotes[selectedCategory]) {
+      storedVotes[selectedCategory] = [];
     }
+    storedVotes[selectedCategory].push(votingFormData.email);
+    localStorage.setItem("votes", JSON.stringify(storedVotes));
+
+    setVotingSubmitSuccess(true);
+  } catch (error) {
+    console.error("Error sending nomination email:", error);
+    alert("There was an error submitting your nomination. Please try again.");
+  } finally {
+    setIsVotingSubmitting(false);
   }
+};
+
 
   const handleInputChange = (field: string, value: string) => {
     setVotingFormData((prev) => ({
