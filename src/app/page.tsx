@@ -62,6 +62,7 @@ export default function CanadianChoiceAward() {
 
   const [isVotingSubmitting, setIsVotingSubmitting] = useState(false)
   const [votingSubmitSuccess, setVotingSubmitSuccess] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const categories = [
     {
@@ -160,14 +161,43 @@ export default function CanadianChoiceAward() {
     })
     setVotingSubmitSuccess(false)
   }
+
+
+  // ✅ Validation function
+  const validateForm = () => {
+    const newErrors: Record<string, string> = {};
+
+    if (!votingFormData.nominee) {
+      newErrors.nominee = "Please select a sub-category.";
+    }
+    if (!votingFormData.nominate.trim()) {
+      newErrors.nominate = "Please enter who you want to nominate.";
+    }
+    if (!votingFormData.firstName.trim()) {
+      newErrors.firstName = "First name is required.";
+    }
+    if (!votingFormData.lastName.trim()) {
+      newErrors.lastName = "Last name is required.";
+    }
+    if (!votingFormData.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(votingFormData.email)) {
+      newErrors.email = "Enter a valid email address.";
+    }
+    if (!votingFormData.phone.trim()) {
+      newErrors.phone = "Phone number is required.";
+    } else if (!/^[0-9+\-\s]{7,15}$/.test(votingFormData.phone)) {
+      newErrors.phone = "Enter a valid phone number.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
 const handleVotingSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
 
-  // Custom validation for nominee 
-  if (!votingFormData.nominee) {
-    alert("Please select a sub-category before submitting.");
-    return;
-  }
+  if (!validateForm()) return;
 
   setIsVotingSubmitting(true);
 
@@ -601,6 +631,9 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
                     ))}
                   </SelectContent>
                 </Select>
+                {errors.nominee && (
+                  <p className="text-red-500 text-sm mt-1">{errors.nominee}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-canada-navy mb-1">Who do you want to nominate*</label>
@@ -611,6 +644,9 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
                   className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Who do you want to nominate"
                 />
+                {errors.nominate && (
+                  <p className="text-red-500 text-sm mt-1">{errors.nominate}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-canada-navy mb-1">First Name *</label>
@@ -621,6 +657,9 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
                   className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter first name"
                 />
+                {errors.firstName && (
+                  <p className="text-red-500 text-sm mt-1">{errors.firstName}</p>
+                )}
               </div>
               <div>
                 <label className="block text-sm font-medium text-canada-navy mb-1">Last Name *</label>
@@ -631,6 +670,9 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
                   className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter last name"
                 />
+                {errors.lastName && (
+                    <p className="text-red-500 text-sm mt-1">{errors.lastName}</p>
+                  )}
               </div>
 
               <div>
@@ -643,7 +685,12 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
                   className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter email address"
                 />
+                {errors.email && (
+                  <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                )}
+                
               </div>
+              
               <div>
                 <label className="block text-sm  font-medium text-canada-navy mb-1">Phone Number *</label>
                 <Input
@@ -654,6 +701,9 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
                   className="border-canada-gold text-black focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter phone number"
                 />
+                {errors.phone && (
+          <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+        )}
               </div>
 
               <div className="flex flex-col sm:flex-row gap-3 pt-4">
@@ -859,9 +909,9 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
           </div>
 
           {/* Limited Offer Badge */}
-          <div className="inline-flex items-center space-x-2 bg-canada-gold text-black px-4 py-2 rounded-full mb-6 shadow-lg">
+          <div className="bg-canada-red inline-flex items-center space-x-2 text-white px-4 py-2 rounded-full mb-6 shadow-lg">
             <Star className="w-5 h-5 fill-white" />
-            <span className="font-bold text-sm">LIMITED OFFER</span>
+            <span className="font-bold   text-sm">LIMITED OFFER</span>
           </div>
 
           {/* Registration Information */}

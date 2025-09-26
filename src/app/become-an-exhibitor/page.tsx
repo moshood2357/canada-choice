@@ -42,6 +42,7 @@ export default function BecomeAnExhibitor() {
 
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitSuccess, setSubmitSuccess] = useState(false)
+  const [errors, setErrors] = useState<Record<string, string>>({})
 
   const exhibitorPackages = [
     {
@@ -113,69 +114,101 @@ export default function BecomeAnExhibitor() {
   ]
 
   const handleApplicationSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsSubmitting(true)
+  e.preventDefault()
+  setIsSubmitting(true)
 
-    try {
-      const templateParams = {
-        companyName: applicationFormData.companyName,
-        contactPerson: applicationFormData.contactPerson,
-        email: applicationFormData.email,
-        phone: applicationFormData.phone,
-        website: applicationFormData.website,
-        businessType: applicationFormData.businessType,
-        packageType: applicationFormData.packageType,
-        specialRequests: applicationFormData.specialRequests,
-        referenceId: applicationFormData.referenceId, 
+  // ✅ Validation logic
+  const newErrors: Record<string, string> = {}
 
-      }
+  if (!applicationFormData.companyName.trim()) {
+    newErrors.companyName = "Company name is required"
+  }
+  if (!applicationFormData.contactPerson.trim()) {
+    newErrors.contactPerson = "Contact person is required"
+  }
+  if (!applicationFormData.email.trim()) {
+    newErrors.email = "Email address is required"
+  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicationFormData.email)) {
+    newErrors.email = "Invalid email format"
+  }
+  if (!applicationFormData.phone.trim()) {
+    newErrors.phone = "Phone number is required"
+  } else if (!/^\+?[0-9\s-]{7,15}$/.test(applicationFormData.phone)) {
+    newErrors.phone = "Invalid phone number"
+  }
+  if (!applicationFormData.businessType) {
+    newErrors.businessType = "Please select a business type"
+  }
+  if (!applicationFormData.packageType) {
+    newErrors.packageType = "Please select a package"
+  }
+  if (!applicationFormData.website.trim()) {
+  newErrors.website = "Website is required"
+} else if (!/^https?:\/\/[^\s]+$/.test(applicationFormData.website)) {
+  newErrors.website = "Please enter a valid URL (e.g., https://example.com)"
+}
 
-      await emailjs.send("service_2u97134", "template_1tni21u", templateParams, "wglabsWakJL1JDUyr")
 
 
+  // If validation fails, stop submission
+  if (Object.keys(newErrors).length > 0) {
+    setErrors(newErrors)
+    setIsSubmitting(false)
+    return
+  }
 
-       //Auto-reply to Applicant
+  setErrors({}) // clear errors if valid
+
+  try {
+    const templateParams = {
+      companyName: applicationFormData.companyName,
+      contactPerson: applicationFormData.contactPerson,
+      email: applicationFormData.email,
+      phone: applicationFormData.phone,
+      website: applicationFormData.website,
+      businessType: applicationFormData.businessType,
+      packageType: applicationFormData.packageType,
+      specialRequests: applicationFormData.specialRequests,
+      referenceId: applicationFormData.referenceId,
+    }
+
+    await emailjs.send("service_2u97134", "template_1tni21u", templateParams, "wglabsWakJL1JDUyr")
+
+    // Auto-reply to Applicant
     await emailjs.send(
       "service_2u97134",
-      "template_tvydolg", // Auto-reply template ID
+      "template_tvydolg",
       {
         to_name: applicationFormData.contactPerson,
         to_email: applicationFormData.email,
         packageType: applicationFormData.packageType,
-        referenceId: applicationFormData.referenceId, 
-
+        referenceId: applicationFormData.referenceId,
       },
       "wglabsWakJL1JDUyr"
     )
 
-      setSubmitSuccess(true)
+    setSubmitSuccess(true)
 
-      // ✅ reset form after success
-      setApplicationFormData({
-        companyName: "",
-        contactPerson: "",
-        email: "",
-        phone: "",
-        website: "",
-        businessType: "",
-        packageType: "",
-        specialRequests: "",
-        referenceId: generateReferenceId(), 
-      })
-      setSelectedPackage("")
-      
-
-      // setTimeout(() => {
-      //   setIsApplicationFormOpen(false)
-      //   setSubmitSuccess(false)
-      // }, 3000)
-    } catch (error) {
-      console.error("Error sending application:", error)
-      alert("There was an error submitting your application. Please try again.")
-    } finally {
-      setIsSubmitting(false)
-    }
+    // ✅ reset form after success
+    setApplicationFormData({
+      companyName: "",
+      contactPerson: "",
+      email: "",
+      phone: "",
+      website: "",
+      businessType: "",
+      packageType: "",
+      specialRequests: "",
+      referenceId: generateReferenceId(),
+    })
+    setSelectedPackage("")
+  } catch (error) {
+    console.error("Error sending application:", error)
+    alert("There was an error submitting your application. Please try again.")
+  } finally {
+    setIsSubmitting(false)
   }
+}
 
   const handleInputChange = (field: string, value: string) => {
     setApplicationFormData((prev) => ({
@@ -353,7 +386,7 @@ export default function BecomeAnExhibitor() {
           {/* Limited Offer Badge */}
           <div className="inline-flex items-center space-x-2 bg-canada-red text-white px-4 py-2 rounded-full mt-9 mb-6 shadow-lg">
             <Star className="w-5 h-5 fill-white" />
-            <span className="font-bold text-sm">LIMITED SPACES AVAILABLE</span>
+            <span className="font-bold bg-canada-red text-sm">LIMITED SPACES AVAILABLE</span>
           </div>
 
           {/* Main Hero Content */}
@@ -592,6 +625,9 @@ export default function BecomeAnExhibitor() {
                     className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter company name"
                   />
+                  {errors.companyName && (
+                      <p className="text-red-500 text-sm mt-1">{errors.companyName}</p>
+                    )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-canada-gold mb-1">Contact Person *</label>
@@ -602,6 +638,9 @@ export default function BecomeAnExhibitor() {
                     className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter contact person"
                   />
+                  {errors.contactPerson && (
+                      <p className="text-red-500 text-sm mt-1">{errors.contactPerson}</p>
+                    )}
                 </div>
               </div>
 
@@ -616,6 +655,9 @@ export default function BecomeAnExhibitor() {
                     className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter email address"
                   />
+                  {errors.email && (
+                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                    )}
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-canada-gold mb-1">Phone Number *</label>
@@ -627,6 +669,9 @@ export default function BecomeAnExhibitor() {
                     className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter phone number"
                   />
+                  {errors.phone && (
+                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                    )}
                 </div>
               </div>
 
@@ -639,6 +684,9 @@ export default function BecomeAnExhibitor() {
                   className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter website URL"
                 />
+                  {errors.website && (
+                      <p className="text-red-500 text-sm mt-1">{errors.website}</p>
+                    )}
               </div>
 
               <div>
@@ -663,6 +711,9 @@ export default function BecomeAnExhibitor() {
                     <SelectItem value="other">Other</SelectItem>
                   </SelectContent>
                 </Select>
+                {errors.businessType && (
+                    <p className="text-red-500 text-sm mt-1">{errors.businessType}</p>
+                  )}
               </div>
 
               <div> 
@@ -683,6 +734,9 @@ export default function BecomeAnExhibitor() {
                     <SelectItem value="Community Sponsor">Community Sponsor — CA$1,000</SelectItem>
                   </SelectContent>
                 </Select>
+                  {errors.packageType && (
+                      <p className="text-red-500 text-sm mt-1">{errors.packageType}</p>
+                    )}
               </div>
                 
               <div className="space-y-2">
