@@ -9,6 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
 import {
   Star,
+  Menu,
   Trophy,
   Users,
   Phone,
@@ -20,6 +21,7 @@ import {
   Network,
   Megaphone,
   Gift,
+  X
 } from "lucide-react"
 import emailjs from "@emailjs/browser"
 import Image from "next/image"
@@ -28,6 +30,8 @@ import Link from "next/link"
 export default function BecomeAnExhibitor() {
   const [isApplicationFormOpen, setIsApplicationFormOpen] = useState(false)
   const [selectedPackage, setSelectedPackage] = useState("")
+
+   const [isOpen, setIsOpen] = useState(false);
   const [applicationFormData, setApplicationFormData] = useState({
     companyName: "",
     contactPerson: "",
@@ -331,44 +335,91 @@ export default function BecomeAnExhibitor() {
       `}</style>
 
       {/* Header */}
-      <header
-        className="backdrop-blur-sm border-b fixed z-50 w-full border-canada-gold"
-        style={{ backgroundColor: "#fff" }}
-      >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-24">
-            {/* Logo */}
-            <Link href="/" className="flex flex-col justify-center items-center space-x-2">
-              <Image src="/migrate.png" alt="Logo" width={120} height={59} />
-              <h4 className="font-bold text-black text-center text-xs pt-3">
-                LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT
-              </h4>
+     <header className="backdrop-blur-sm border-b fixed z-50 w-full border-canada-gold bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-20 sm:h-24">
+          {/* Logo */}
+          <Link href="/" className="flex flex-col items-center">
+            <Image src="/migrate.png" alt="Logo" width={120} height={59} priority />
+            <h4 className="font-bold text-black text-center text-xs pt-2">
+              LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT
+            </h4>
+          </Link>
+
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
+            <Link href="/" className="text-black hover:text-blue-600 font-medium transition-colors">
+              HOME
             </Link>
-            <nav className="hidden md:flex items-center space-x-8">
-              <Link href="/" className="text-black hover:text-canada-gold font-medium transition-colors">
-                HOME
-              </Link>
-              <Link href="#packages" className="text-black hover:text-canada-gold font-medium transition-colors">
-                PACKAGES
-              </Link>
-              <Link href="#benefits" className="text-black hover:text-canada-gold font-medium transition-colors">
-                BENEFITS
-              </Link>
-              <Link href="#contact" className="text-black hover:text-canada-gold font-medium transition-colors">
-                CONTACT
-              </Link>
-              <Link href="#packages">
-                <Button
-                  className="btn-primary-dark text-black font-semibold px-6 cursor-pointer"
-                  // onClick={() => setIsApplicationFormOpen(true)}
-                >
-                  APPLY NOW
-                </Button>
-              </Link>
-            </nav>
+            <Link href="#packages" className="text-black hover:text-blue-600 font-medium transition-colors">
+              PACKAGES
+            </Link>
+            <Link href="#benefits" className="text-black hover:text-blue-600 font-medium transition-colors">
+              BENEFITS
+            </Link>
+            <Link href="#contact" className="text-black hover:text-blue-600 font-medium transition-colors">
+              CONTACT
+            </Link>
+            <Link href="#packages">
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition">
+                APPLY NOW
+              </Button>
+            </Link>
+          </nav>
+
+          {/* Mobile Hamburger */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsOpen(!isOpen)}
+              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            >
+              {isOpen ? <X size={28} /> : <Menu size={28} />}
+            </button>
           </div>
         </div>
-      </header>
+      </div>
+
+      {/* Mobile Dropdown Menu */}
+      {isOpen && (
+        <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
+          <nav className="flex flex-col space-y-4 px-6 py-6" aria-label="Mobile navigation">
+            <Link
+              href="/"
+              className="text-black hover:text-blue-600 font-medium transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              HOME
+            </Link>
+            <Link
+              href="#packages"
+              className="text-black hover:text-blue-600 font-medium transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              PACKAGES
+            </Link>
+            <Link
+              href="#benefits"
+              className="text-black hover:text-blue-600 font-medium transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              BENEFITS
+            </Link>
+            <Link
+              href="#contact"
+              className="text-black hover:text-blue-600 font-medium transition-colors"
+              onClick={() => setIsOpen(false)}
+            >
+              CONTACT
+            </Link>
+            <Link href="#packages" onClick={() => setIsOpen(false)}>
+              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition w-full">
+                APPLY NOW
+              </Button>
+            </Link>
+          </nav>
+        </div>
+      )}
+    </header>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">

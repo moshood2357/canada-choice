@@ -1,42 +1,26 @@
 
 
 import React from 'react';
-import { Phone, Mail, Users, Target, Heart, ArrowRight } from 'lucide-react'; 
+import { Users, Target, Heart, ArrowRight } from 'lucide-react'; 
 
 import Image from "next/image"
 // import Link from "next/link"
 
 import Header from "../../components/header";
+import Footer from "../../components/Footer";
+import Hero from "../../components/Hero";
 import CardCarousel from "../../components/CardCarousel";
 import PartnersCarousel from "../../components/PartnersCarousel";
 
 
-function App() {
+function About() {
  
  
   return (
     <div className="min-h-screen bg-white">
       
        <Header />
-      {/* Hero Section */}
-      <div className="relative h-85 bg-gradient-to-r from-gray-800 to-gray-600 mt-16">
-        <div 
-          className="absolute inset-0 bg-top bg-cover bg-black/80 bg-blend-overlay"
-          style={{
-            backgroundImage: "url('/people.jpg')",
-            // backgroundColor: 'rgba(0,0,0,0.5)',
-          }}
-        ></div>
-        {/* <div className="absolute inset-0 bg-black bg-opacity-50"></div> */}
-        <div className="relative z-10 flex items-center justify-center h-full">
-          <div className="text-center">
-            <h1 className="text-5xl md:text-6xl font-bold text-white mb-4 animate-fade-in-up">
-              About Us
-            </h1>
-            <div className="w-24 h-1 bg-blue-500 mx-auto animate-fade-in-up delay-200"></div>
-          </div>
-        </div>
-      </div>
+       <Hero  />
 
       {/* Who We Are Section */}
       <div className="py-20 bg-gray-50">
@@ -154,63 +138,11 @@ function App() {
       </div>
       </div>
     
-      
+      <Footer />
 
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
-            <div className="lg:col-span-2">
-              <div className="flex items-center mb-6">
-                <Image src="/canada.png" alt="immigration at large company logo" width={120} height={59} className="" />
-              </div>
-              <h3 className="text-2xl font-bold mb-4">Reach Out to</h3>
-              <p className="text-gray-300 mb-6 max-w-md">
-                We are here to help. Contact us for more information about our programs, to get involved, or to share your feedback.
-              </p>
-              
-              <div className="space-y-4">
-                <div className="flex items-center">
-                  <Phone className="h-5 w-5 text-blue-500 mr-3" />
-                  <span className="text-gray-300">438-622-8333</span>
-                </div>
-                <div className="flex items-center">
-                  <Mail className="h-5 w-5 text-blue-500 mr-3" />
-                  <span className="text-gray-300">info@immigrantatlarge.ca</span>
-                </div>
-              </div>
-            </div>
-            
-            <div>
-              <h4 className="text-lg font-semibold mb-6">Quick Links</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">Home</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">About Us</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">Services</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">Contact Us</a></li>
-              </ul>
-            </div>
-            
-            <div>
-              <h4 className="text-lg font-semibold mb-6">Programs</h4>
-              <ul className="space-y-3">
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">Youth Hangout</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">Cultural Exchange</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">Community Support</a></li>
-                <li><a href="#" className="text-gray-300 hover:text-white transition-colors duration-200">Advocacy</a></li>
-              </ul>
-            </div>
-          </div>
-          
-          <div className="border-t border-gray-700 mt-12 pt-8 text-center">
-            <p className="text-gray-400">
-              Copyright © 2025 Immigrant At Large Canada. All rights reserved.
-            </p>
-          </div>
-        </div>
-      </footer>
+     
     </div>
   );
 }
 
-export default App;
+export default About;

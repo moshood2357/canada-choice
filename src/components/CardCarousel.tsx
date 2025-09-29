@@ -27,52 +27,52 @@ export default function CardCarousel() {
     >
       {/* --- Slide 1 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
 
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
       
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
       
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
       
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
       
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
       
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
       
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
       
       {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
      
      {/* --- Slide 2 --- */}
       <SwiperSlide>
-        <Image src="/business.jpg" alt="Logo" width={400} height={400} />
+        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
       </SwiperSlide>
 
     </Swiper>
