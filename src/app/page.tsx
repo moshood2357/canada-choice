@@ -87,8 +87,11 @@ function HeroSection(){
   }, [])
 
   const handleMouseEnter = () => {
+
     if (intervalRef.current) {
       clearInterval(intervalRef.current)
+
+      
     }
   }
 
@@ -105,6 +108,9 @@ function HeroSection(){
     nextSlide()
     startAutoPlay()
   }
+
+
+  
 
     return(
         <div className = "p-0">
