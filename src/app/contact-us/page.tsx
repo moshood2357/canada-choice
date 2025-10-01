@@ -45,10 +45,10 @@ export default function Contact() {
                 src="/present.jpg"
                 alt="Contact"
                 width={610}
-                height={900}
-                className="rounded-md"
+                height={920}
+                className="rounded-t"
               />
-              <div className="absolute bottom-0 left-0 right-0 bg-[#0b2345] text-white p-6 rounded-b-md">
+              <div className="relative bottom-0 left-0 right-0 bg-[#0b2345] text-white p-6 rounded-b-md">
                 <h3 className="text-lg font-semibold">Reach Out to Immigrant at Large Canada</h3>
                 <p className="mt-2">
                   <strong>Phone:</strong> 438-622-8333
@@ -65,9 +65,9 @@ export default function Contact() {
 
           {/* Right Side (Form) */}
           <div>
-            <h2 className="text-2xl font-bold mb-2">We’re Here to Help!</h2>
+            <h2 className="text-2xl font-bold mb-2">We are Here to Help!</h2>
             <p className="mb-6 text-gray-600">
-              We’re here to help. Contact us for more information about our programs,
+              We are here to help. Contact us for more information about our programs,
               to get involved, or to share your feedback.
             </p>
             <form className="space-y-4">
