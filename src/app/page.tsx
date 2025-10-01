@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import Footer from "../components/Footer"
 import Header from "../components/header"
 import {TestimonialCarousel} from "../components/testimonial-carousel"
+import Link from "next/link"
 
 import { useState, useEffect, useRef } from "react"
 
@@ -20,36 +21,47 @@ function HeroSection(){
       title: "Settlement Support Program",
       description:
         "Ensures that immigrants or newcomers to Canada can access the essential resources they need to build stable, empowered lives.",
+      link:"/settlement"
     },
     {
       icon: Briefcase,
       title: "Career & Entrepreneurship Programs",
       description:
         "Empowers immigrants with the skills, tools, and networks they need to build successful careers or start their own businesses in Canada.",
+      link:"/career"
+    
     },
     {
       icon: GraduationCap,
       title: "Education & Skills Development",
       description:
         "Our Education & Skills Development programs are designed to empower immigrants and newcomers with the knowledge and competencies needed to thrive in Canadian society and the workforce.",
+      link:"/education"
+         
     },
     {
       icon: Scale,
       title: "Advocacy & Policy Engagement",
       description:
         "Our Advocacy & Policy Engagement initiatives aim to amplify immigrant voices in policy discussions, ensuring that the lived experiences of immigrants are heard and that policies that shape their lives.",
+      link:"/advocacy"
+      
     },
     {
       icon: Heart,
       title: "Community Engagement & Networking",
       description:
         "Our Community Engagement & Networking initiatives focus on meaningful connections, celebrate their cultures, and foster a sense of belonging.",
+        link:"/community"
+        
     },
     {
       icon: UserCheck,
       title: "Health & Wellness Programs",
       description:
         "Our Health & Wellness Programs are dedicated to supporting the physical, mental, and emotional well-being of immigrants and newcomers.",
+      link: "/wellness"
+         
     },
   ]
 
@@ -379,16 +391,24 @@ function HeroSection(){
           {services.map((service, index) => {
             const IconComponent = service.icon
             return (
-              <Card key={index} className="bg-gray-800 border-gray-700 text-white">
-                <CardContent className="p-8 text-center">
-                  <div className="bg-blue-600 w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-6">
-                    <IconComponent className="w-8 h-8 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold mb-4 text-balance">{service.title}</h3>
-                  <p className="text-gray-300 mb-8 leading-relaxed">{service.description}</p>
-                  <Button className="bg-blue-600 hover:bg-blue-700 text-white">LEARN MORE</Button>
-                </CardContent>
-              </Card>
+              <Card
+  key={index}
+  className="bg-gray-800 border border-gray-700 text-white transition-transform transform hover:scale-105 hover:shadow-lg"
+>
+  <CardContent className="p-8 text-center">
+    <div className="bg-blue-600 w-16 h-16 rounded-lg flex items-center justify-center mx-auto mb-6 shadow-md">
+      <IconComponent className="w-8 h-8 text-white" />
+    </div>
+    <h3 className="text-xl font-bold mb-4 text-balance">{service.title}</h3>
+    <p className="text-gray-300 mb-8 leading-relaxed">{service.description}</p>
+
+    <Link href={service.link} className="bg-blue-600 hover:bg-blue-700 text-white cursor-pointer px-6 py-2 rounded-lg shadow-md transition-colors">
+
+        LEARN MORE
+      
+    </Link>
+  </CardContent>
+</Card>
             )
           })}
         </div>

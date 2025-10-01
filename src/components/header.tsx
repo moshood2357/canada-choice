@@ -36,7 +36,7 @@ function Header() {
               </Link>
               <Link
                 href="/about-us"
-                className="text-blue-600 px-3 py-2 text-sm font-medium border-b-2 border-blue-600"
+                className=" text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium "
               >
                 ABOUT US
               </Link>
