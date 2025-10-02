@@ -145,7 +145,7 @@ function Header() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-white border-t">
+          <div className="md:hidden bg-white border-t z-40">
             <div className="px-2 pt-2 pb-3 space-y-1">
               <Link
                 href="/"
@@ -171,7 +171,7 @@ function Header() {
                   SERVICES <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 {isMobileServicesOpen && (
-                  <div className="mt-2 w-full bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                  <div className=" flex flex-col space-y-2 pl-4 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
                       <Link
                         href="/advocacy"
