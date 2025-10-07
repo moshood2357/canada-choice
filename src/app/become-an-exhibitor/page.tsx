@@ -1,12 +1,23 @@
-"use client"
+"use client";
 
-import type React from "react"
-import { useState } from "react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Card, CardContent } from "@/components/ui/card"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import type React from "react";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import {
   Star,
   Menu,
@@ -21,17 +32,17 @@ import {
   Network,
   Megaphone,
   Gift,
-  X
-} from "lucide-react"
-import emailjs from "@emailjs/browser"
-import Image from "next/image"
-import Link from "next/link"
+  X,
+} from "lucide-react";
+import emailjs from "@emailjs/browser";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function BecomeAnExhibitor() {
-  const [isApplicationFormOpen, setIsApplicationFormOpen] = useState(false)
-  const [selectedPackage, setSelectedPackage] = useState("")
+  const [isApplicationFormOpen, setIsApplicationFormOpen] = useState(false);
+  const [selectedPackage, setSelectedPackage] = useState("");
 
-   const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [applicationFormData, setApplicationFormData] = useState({
     companyName: "",
     contactPerson: "",
@@ -39,14 +50,14 @@ export default function BecomeAnExhibitor() {
     phone: "",
     website: "",
     businessType: "",
-    packageType: "",                 
+    packageType: "",
     specialRequests: "",
     referenceId: generateReferenceId(),
-  })
+  });
 
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitSuccess, setSubmitSuccess] = useState(false)
-  const [errors, setErrors] = useState<Record<string, string>>({})
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [errors, setErrors] = useState<Record<string, string>>({});
 
   const exhibitorPackages = [
     {
@@ -81,18 +92,20 @@ export default function BecomeAnExhibitor() {
       ],
       popular: false,
     },
-  ]
+  ];
 
   const benefits = [
     {
       icon: Users,
       title: "Direct Access to Community",
-      description: "Connect with over 500 Afro-Caribbean professionals, entrepreneurs, and community leaders",
+      description:
+        "Connect with over 500 Afro-Caribbean professionals, entrepreneurs, and community leaders",
     },
     {
       icon: TrendingUp,
       title: "Business Growth Opportunities",
-      description: "Showcase your products/services to a targeted audience actively seeking business solutions",
+      description:
+        "Showcase your products/services to a targeted audience actively seeking business solutions",
     },
     {
       icon: Network,
@@ -103,142 +116,152 @@ export default function BecomeAnExhibitor() {
     {
       icon: Megaphone,
       title: "Brand Visibility",
-      description: "Increase brand awareness through conference marketing, social media, and on-site promotion",
+      description:
+        "Increase brand awareness through conference marketing, social media, and on-site promotion",
     },
     {
       icon: Handshake,
       title: "Partnership Opportunities",
-      description: "Explore joint ventures, supplier relationships, and strategic business partnerships",
+      description:
+        "Explore joint ventures, supplier relationships, and strategic business partnerships",
     },
     {
       icon: Gift,
       title: "Lead Generation",
-      description: "Generate qualified leads and expand your customer base within the community",
+      description:
+        "Generate qualified leads and expand your customer base within the community",
     },
-  ]
+  ];
 
   const handleApplicationSubmit = async (e: React.FormEvent) => {
-  e.preventDefault()
-  setIsSubmitting(true)
+    e.preventDefault();
+    setIsSubmitting(true);
 
-  // ✅ Validation logic
-  const newErrors: Record<string, string> = {}
+    // ✅ Validation logic
+    const newErrors: Record<string, string> = {};
 
-  if (!applicationFormData.companyName.trim()) {
-    newErrors.companyName = "Company name is required"
-  }
-  if (!applicationFormData.contactPerson.trim()) {
-    newErrors.contactPerson = "Contact person is required"
-  }
-  if (!applicationFormData.email.trim()) {
-    newErrors.email = "Email address is required"
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicationFormData.email)) {
-    newErrors.email = "Invalid email format"
-  }
-  if (!applicationFormData.phone.trim()) {
-    newErrors.phone = "Phone number is required"
-  } else if (!/^\+?[0-9\s-]{7,15}$/.test(applicationFormData.phone)) {
-    newErrors.phone = "Invalid phone number"
-  }
-  if (!applicationFormData.businessType) {
-    newErrors.businessType = "Please select a business type"
-  }
-  if (!applicationFormData.packageType) {
-    newErrors.packageType = "Please select a package"
-  }
-  if (!applicationFormData.website.trim()) {
-  newErrors.website = "Website is required"
-} else if (!/^https?:\/\/[^\s]+$/.test(applicationFormData.website)) {
-  newErrors.website = "Please enter a valid URL (e.g., https://example.com)"
-}
-
-
-
-  // If validation fails, stop submission
-  if (Object.keys(newErrors).length > 0) {
-    setErrors(newErrors)
-    setIsSubmitting(false)
-    return
-  }
-
-  setErrors({}) // clear errors if valid
-
-  try {
-    const templateParams = {
-      companyName: applicationFormData.companyName,
-      contactPerson: applicationFormData.contactPerson,
-      email: applicationFormData.email,
-      phone: applicationFormData.phone,
-      website: applicationFormData.website,
-      businessType: applicationFormData.businessType,
-      packageType: applicationFormData.packageType,
-      specialRequests: applicationFormData.specialRequests,
-      referenceId: applicationFormData.referenceId,
+    if (!applicationFormData.companyName.trim()) {
+      newErrors.companyName = "Company name is required";
+    }
+    if (!applicationFormData.contactPerson.trim()) {
+      newErrors.contactPerson = "Contact person is required";
+    }
+    if (!applicationFormData.email.trim()) {
+      newErrors.email = "Email address is required";
+    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(applicationFormData.email)) {
+      newErrors.email = "Invalid email format";
+    }
+    if (!applicationFormData.phone.trim()) {
+      newErrors.phone = "Phone number is required";
+    } else if (!/^\+?[0-9\s-]{7,15}$/.test(applicationFormData.phone)) {
+      newErrors.phone = "Invalid phone number";
+    }
+    if (!applicationFormData.businessType) {
+      newErrors.businessType = "Please select a business type";
+    }
+    if (!applicationFormData.packageType) {
+      newErrors.packageType = "Please select a package";
+    }
+    if (!applicationFormData.website.trim()) {
+      newErrors.website = "Website is required";
+    } else if (!/^https?:\/\/[^\s]+$/.test(applicationFormData.website)) {
+      newErrors.website =
+        "Please enter a valid URL (e.g., https://example.com)";
     }
 
-    await emailjs.send("service_2u97134", "template_1tni21u", templateParams, "wglabsWakJL1JDUyr")
+    // If validation fails, stop submission
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      setIsSubmitting(false);
+      return;
+    }
 
-    // Auto-reply to Applicant
-    await emailjs.send(
-      "service_2u97134",
-      "template_tvydolg",
-      {
-        to_name: applicationFormData.contactPerson,
-        to_email: applicationFormData.email,
+    setErrors({}); // clear errors if valid
+
+    try {
+      const templateParams = {
+        companyName: applicationFormData.companyName,
+        contactPerson: applicationFormData.contactPerson,
+        email: applicationFormData.email,
+        phone: applicationFormData.phone,
+        website: applicationFormData.website,
+        businessType: applicationFormData.businessType,
         packageType: applicationFormData.packageType,
+        specialRequests: applicationFormData.specialRequests,
         referenceId: applicationFormData.referenceId,
-      },
-      "wglabsWakJL1JDUyr"
-    )
+      };
 
-    setSubmitSuccess(true)
+      await emailjs.send(
+        "service_2u97134",
+        "template_1tni21u",
+        templateParams,
+        "wglabsWakJL1JDUyr"
+      );
 
-    // ✅ reset form after success
-    setApplicationFormData({
-      companyName: "",
-      contactPerson: "",
-      email: "",
-      phone: "",
-      website: "",
-      businessType: "",
-      packageType: "",
-      specialRequests: "",
-      referenceId: generateReferenceId(),
-    })
-    setSelectedPackage("")
-  } catch (error) {
-    console.error("Error sending application:", error)
-    alert("There was an error submitting your application. Please try again.")
-  } finally {
-    setIsSubmitting(false)
-  }
-}
+      // Auto-reply to Applicant
+      await emailjs.send(
+        "service_2u97134",
+        "template_tvydolg",
+        {
+          to_name: applicationFormData.contactPerson,
+          to_email: applicationFormData.email,
+          packageType: applicationFormData.packageType,
+          referenceId: applicationFormData.referenceId,
+        },
+        "wglabsWakJL1JDUyr"
+      );
+
+      setSubmitSuccess(true);
+
+      // ✅ reset form after success
+      setApplicationFormData({
+        companyName: "",
+        contactPerson: "",
+        email: "",
+        phone: "",
+        website: "",
+        businessType: "",
+        packageType: "",
+        specialRequests: "",
+        referenceId: generateReferenceId(),
+      });
+      setSelectedPackage("");
+    } catch (error) {
+      console.error("Error sending application:", error);
+      alert(
+        "There was an error submitting your application. Please try again."
+      );
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setApplicationFormData((prev) => ({
       ...prev,
       [field]: value,
-    }))
-  }
+    }));
+  };
 
   const handlePackageSelect = (packageName: string) => {
-    setSelectedPackage(packageName)
+    setSelectedPackage(packageName);
     setApplicationFormData((prev) => ({
       ...prev,
       packageType: packageName,
-    }))
-    setIsApplicationFormOpen(true)
-  }
+    }));
+    setIsApplicationFormOpen(true);
+  };
 
-    function generateReferenceId() {
-  return "EXH-" + crypto.randomUUID().slice(0, 8).toUpperCase()
- }
+  function generateReferenceId() {
+    return "EXH-" + crypto.randomUUID().slice(0, 8).toUpperCase();
+  }
 
   return (
     <div
       className="min-h-screen"
       style={{
-        background: "linear-gradient(135deg, #000000 0%, #1a1a1a 40%, #2a2a2a 70%, rgba(239, 217, 132, 0.15) 100%)",
+        background:
+          "linear-gradient(135deg, #000000 0%, #1a1a1a 40%, #2a2a2a 70%, rgba(239, 217, 132, 0.15) 100%)",
       }}
     >
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
@@ -256,14 +279,14 @@ export default function BecomeAnExhibitor() {
 
       <style jsx global>{`
         :root {
-          --canada-red: #FA0101;
+          --canada-red: #fa0101;
           --canada-navy: #000246;
           --canada-black: #000000;
           --canada-gold: #efd984;
           --canada-gold-mid: #be9c43;
           --canada-gold-dark: #a38235;
         }
-        
+
         .btn-primary {
           background: linear-gradient(135deg, #efd984, #be9c43);
           border: none;
@@ -271,14 +294,14 @@ export default function BecomeAnExhibitor() {
           transition: all 0.3s ease;
           font-weight: 600;
         }
-        
+
         .btn-primary:hover {
           background: linear-gradient(135deg, #be9c43, #a38235);
           color: white;
           transform: translateY(-1px);
           box-shadow: 0 4px 12px rgba(239, 217, 132, 0.3);
         }
-        
+
         /* Updated button styling with white text for better contrast on dark backgrounds */
         .btn-primary-dark {
           background: linear-gradient(135deg, #efd984, #be9c43);
@@ -287,139 +310,179 @@ export default function BecomeAnExhibitor() {
           transition: all 0.3s ease;
           font-weight: 600;
         }
-        
+
         .btn-primary-dark:hover {
           background: linear-gradient(135deg, #be9c43, #a38235);
           color: white;
           transform: translateY(-1px);
           box-shadow: 0 4px 12px rgba(239, 217, 132, 0.3);
         }
-        
+
         .btn-secondary {
           background: linear-gradient(135deg, #efd984, #be9c43);
           border: 1px solid #a38235;
           color: #000000;
           transition: all 0.3s ease;
         }
-        
+
         .btn-secondary:hover {
           background: linear-gradient(135deg, #be9c43, #a38235);
           color: white;
         }
-        
+
         .card-hover {
           transition: all 0.3s ease;
           border: 2px solid #efd984;
           background: rgba(0, 0, 0, 0.8);
           backdrop-filter: blur(10px);
         }
-        
+
         .card-hover:hover {
           transform: translateY(-4px);
           box-shadow: 0 8px 25px rgba(239, 217, 132, 0.3);
           border-color: #be9c43;
         }
-        
+
         .gradient-gold {
           background: linear-gradient(135deg, #efd984, #be9c43, #a38235);
         }
-        
-        .text-canada-red { color: #FA0101; }
-        .text-canada-navy { color: #000246; }
-        .text-canada-black { color: #000000; }
-        .text-canada-gold { color: #efd984; }
-        .bg-canada-navy { background-color: #000246; }
-        .bg-canada-red { background-color: #FA0101; }
-        .border-canada-gold { border-color: #efd984; }
-        .bg-canada-gold { background-color: #efd984; }
+
+        .text-canada-red {
+          color: #fa0101;
+        }
+        .text-canada-navy {
+          color: #000246;
+        }
+        .text-canada-black {
+          color: #000000;
+        }
+        .text-canada-gold {
+          color: #efd984;
+        }
+        .bg-canada-navy {
+          background-color: #000246;
+        }
+        .bg-canada-red {
+          background-color: #fa0101;
+        }
+        .border-canada-gold {
+          border-color: #efd984;
+        }
+        .bg-canada-gold {
+          background-color: #efd984;
+        }
       `}</style>
 
       {/* Header */}
-     <header className="backdrop-blur-sm border-b fixed z-50 w-full border-canada-gold bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20 sm:h-24">
-          {/* Logo */}
-          <Link href="/" className="flex flex-col items-center">
-            <Image src="/migrate.png" alt="Logo" width={120} height={59} priority />
-            <h4 className="font-bold text-black text-center text-xs pt-2">
-              LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT
-            </h4>
-          </Link>
+      <header className="backdrop-blur-sm border-b fixed z-50 w-full border-canada-gold bg-white">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-20 sm:h-24">
+            {/* Logo */}
+            <Link href="/" className="flex flex-col items-center">
+              <Image
+                src="/migrate.png"
+                alt="Logo"
+                width={120}
+                height={59}
+                priority
+              />
+              <h4 className="font-bold text-black text-center text-xs pt-2">
+                LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT
+              </h4>
+            </Link>
 
-          {/* Desktop Menu */}
-          <nav className="hidden md:flex items-center space-x-8" aria-label="Main navigation">
-            <Link href="/" className="text-black hover:text-blue-600 font-medium transition-colors">
-              HOME
-            </Link>
-            <Link href="#packages" className="text-black hover:text-blue-600 font-medium transition-colors">
-              PACKAGES
-            </Link>
-            <Link href="#benefits" className="text-black hover:text-blue-600 font-medium transition-colors">
-              BENEFITS
-            </Link>
-            <Link href="#contact" className="text-black hover:text-blue-600 font-medium transition-colors">
-              CONTACT
-            </Link>
-            <Link href="#packages">
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition">
-                APPLY NOW
-              </Button>
-            </Link>
-          </nav>
-
-          {/* Mobile Hamburger */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+            {/* Desktop Menu */}
+            <nav
+              className="hidden md:flex items-center space-x-8"
+              aria-label="Main navigation"
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </button>
+              <Link
+                href="/"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+              >
+                HOME
+              </Link>
+              <Link
+                href="#packages"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+              >
+                PACKAGES
+              </Link>
+              <Link
+                href="#benefits"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+              >
+                BENEFITS
+              </Link>
+              <Link
+                href="#contact"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+              >
+                CONTACT
+              </Link>
+              <Link href="#packages">
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition">
+                  APPLY NOW
+                </Button>
+              </Link>
+            </nav>
+
+            {/* Mobile Hamburger */}
+            <div className="md:hidden">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
+              >
+                {isOpen ? <X size={28} /> : <Menu size={28} />}
+              </button>
+            </div>
           </div>
         </div>
-      </div>
 
-      {/* Mobile Dropdown Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
-          <nav className="flex flex-col space-y-4 px-6 py-6" aria-label="Mobile navigation">
-            <Link
-              href="/"
-              className="text-black hover:text-blue-600 font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
+        {/* Mobile Dropdown Menu */}
+        {isOpen && (
+          <div className="md:hidden bg-white border-t border-gray-200 shadow-md">
+            <nav
+              className="flex flex-col space-y-4 px-6 py-6"
+              aria-label="Mobile navigation"
             >
-              HOME
-            </Link>
-            <Link
-              href="#packages"
-              className="text-black hover:text-blue-600 font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              PACKAGES
-            </Link>
-            <Link
-              href="#benefits"
-              className="text-black hover:text-blue-600 font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              BENEFITS
-            </Link>
-            <Link
-              href="#contact"
-              className="text-black hover:text-blue-600 font-medium transition-colors"
-              onClick={() => setIsOpen(false)}
-            >
-              CONTACT
-            </Link>
-            <Link href="#packages" onClick={() => setIsOpen(false)}>
-              <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition w-full">
-                APPLY NOW
-              </Button>
-            </Link>
-          </nav>
-        </div>
-      )}
-    </header>
+              <Link
+                href="/"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                HOME
+              </Link>
+              <Link
+                href="#packages"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                PACKAGES
+              </Link>
+              <Link
+                href="#benefits"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                BENEFITS
+              </Link>
+              <Link
+                href="#contact"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                CONTACT
+              </Link>
+              <Link href="#packages" onClick={() => setIsOpen(false)}>
+                <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition w-full">
+                  APPLY NOW
+                </Button>
+              </Link>
+            </nav>
+          </div>
+        )}
+      </header>
 
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8 overflow-hidden">
@@ -437,7 +500,9 @@ export default function BecomeAnExhibitor() {
           {/* Limited Offer Badge */}
           <div className="inline-flex items-center space-x-2 bg-canada-red text-white px-4 py-2 rounded-full mt-9 mb-6 shadow-lg">
             <Star className="w-5 h-5 fill-white" />
-            <span className="font-bold bg-canada-red text-sm">LIMITED SPACES AVAILABLE</span>
+            <span className="font-bold bg-canada-red text-sm">
+              LIMITED SPACES AVAILABLE
+            </span>
           </div>
 
           {/* Main Hero Content */}
@@ -445,7 +510,9 @@ export default function BecomeAnExhibitor() {
             <h1 className="text-6xl md:text-7xl font-black mb-4 bg-gradient-to-r from-canada-gold via-yellow-400 to-canada-gold bg-clip-text text-transparent drop-shadow-2xl">
               BECOME AN
             </h1>
-            <h2 className="text-5xl md:text-6xl font-black text-white drop-shadow-2xl mb-6">EXHIBITOR</h2>
+            <h2 className="text-5xl md:text-6xl font-black text-white drop-shadow-2xl mb-6">
+              EXHIBITOR
+            </h2>
             <p className="text-2xl font-bold text-canada-gold mb-8 tracking-wider">
               SHOWCASE YOUR BUSINESS TO 600+ ATTENDEES
             </p>
@@ -470,15 +537,21 @@ export default function BecomeAnExhibitor() {
           {/* Quick Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
-              <div className="text-3xl font-bold text-canada-gold mb-2">600+</div>
+              <div className="text-3xl font-bold text-canada-gold mb-2">
+                600+
+              </div>
               <div className="text-white">Expected Attendees</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
-              <div className="text-3xl font-bold text-canada-gold mb-2">50+</div>
+              <div className="text-3xl font-bold text-canada-gold mb-2">
+                50+
+              </div>
               <div className="text-white">Exhibitor Spaces</div>
             </div>
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
-              <div className="text-3xl font-bold text-canada-gold mb-2">8 Hours</div>
+              <div className="text-3xl font-bold text-canada-gold mb-2">
+                8 Hours
+              </div>
               <div className="text-white">Networking Time</div>
             </div>
           </div>
@@ -489,50 +562,71 @@ export default function BecomeAnExhibitor() {
       <section
         id="benefits"
         className="py-16 px-4 sm:px-6 lg:px-8"
-        style={{ backgroundColor: "rgba(0, 0, 0, 0.7)", backdropFilter: "blur(10px)" }}
+        style={{
+          backgroundColor: "rgba(0, 0, 0, 0.7)",
+          backdropFilter: "blur(10px)",
+        }}
       >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">WHY EXHIBIT WITH US?</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">
+              WHY EXHIBIT WITH US?
+            </h2>
             <p className="text-xl text-canada-gold max-w-3xl mx-auto opacity-80">
-              Join the premier LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT and connect with a thriving community of
-              entrepreneurs, professionals, and decision-makers.
+              Join the premier LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT and
+              connect with a thriving community of entrepreneurs, professionals,
+              and decision-makers.
             </p>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {benefits.map((benefit, index) => {
-              const IconComponent = benefit.icon
+              const IconComponent = benefit.icon;
               return (
                 <Card key={index} className="card-hover">
                   <CardContent className="p-6 text-center">
                     <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4 shadow-lg">
                       <IconComponent className="w-8 h-8 text-canada-navy" />
                     </div>
-                    <h3 className="text-xl font-bold text-white mb-3">{benefit.title}</h3>
-                    <p className="text-canada-gold text-sm opacity-80">{benefit.description}</p>
+                    <h3 className="text-xl font-bold text-white mb-3">
+                      {benefit.title}
+                    </h3>
+                    <p className="text-canada-gold text-sm opacity-80">
+                      {benefit.description}
+                    </p>
                   </CardContent>
                 </Card>
-              )
+              );
             })}
           </div>
         </div>
       </section>
 
       {/* Exhibitor Packages Section */}
-      <section id="packages" className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}>
+      <section
+        id="packages"
+        className="py-16 px-4 sm:px-6 lg:px-8"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.8)" }}
+      >
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-white mb-4">EXHIBITOR PACKAGES</h2>
+            <h2 className="text-4xl font-bold text-white mb-4">
+              EXHIBITOR PACKAGES
+            </h2>
             <p className="text-xl text-canada-gold max-w-3xl mx-auto opacity-80">
-              Choose the package that best fits your business needs and budget. All packages include access to our
-              vibrant community of attendees.
+              Choose the package that best fits your business needs and budget.
+              All packages include access to our vibrant community of attendees.
             </p>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8">
             {exhibitorPackages.map((pkg, index) => (
-              <Card key={index} className={`card-hover relative ${pkg.popular ? "ring-2 ring-canada-red" : ""}`}>
+              <Card
+                key={index}
+                className={`card-hover relative ${
+                  pkg.popular ? "ring-2 ring-canada-red" : ""
+                }`}
+              >
                 {pkg.popular && (
                   <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
                     <div className="bg-canada-red text-white px-4 py-2 rounded-full text-sm font-bold">
@@ -542,21 +636,32 @@ export default function BecomeAnExhibitor() {
                 )}
                 <CardContent className="p-6">
                   <div className="text-center mb-6">
-                    <h3 className="text-2xl font-bold text-white mb-2">{pkg.name}</h3>
-                    <div className="text-4xl font-bold text-canada-gold mb-4">{pkg.price}</div>
+                    <h3 className="text-2xl font-bold text-white mb-2">
+                      {pkg.name}
+                    </h3>
+                    <div className="text-4xl font-bold text-canada-gold mb-4">
+                      {pkg.price}
+                    </div>
                   </div>
 
                   <ul className="space-y-3 mb-6">
                     {pkg.features.map((feature, featureIndex) => (
-                      <li key={featureIndex} className="flex items-start space-x-3">
+                      <li
+                        key={featureIndex}
+                        className="flex items-start space-x-3"
+                      >
                         <CheckCircle className="w-5 h-5 text-green-400 flex-shrink-0 mt-0.5" />
-                        <span className="text-canada-gold text-sm">{feature}</span>
+                        <span className="text-canada-gold text-sm">
+                          {feature}
+                        </span>
                       </li>
                     ))}
                   </ul>
 
                   <Button
-                    className={`w-full font-semibold cursor-pointer ${pkg.popular ? "btn-primary-dark" : "btn-secondary"}`}
+                    className={`w-full font-semibold cursor-pointer ${
+                      pkg.popular ? "btn-primary-dark" : "btn-secondary"
+                    }`}
                     onClick={() => handlePackageSelect(pkg.name)}
                   >
                     SELECT {pkg.name.toUpperCase()}
@@ -568,39 +673,58 @@ export default function BecomeAnExhibitor() {
         </div>
       </section>
 
-         {/* Newsletter Section */}
-       <section
-  className="py-16 px-4 sm:px-6 lg:px-8"
-  style={{ background: "linear-gradient(135deg, #efd984, #be9c43)" }}
->
-  <div className="max-w-4xl mx-auto text-center">
-    <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border-2 border-canada-gold shadow-xl text-black">
-      TO BUY A TICKET AS AN ATTENDEE OR PAY FOR SPONSORSHIP VISIT<span> <a rel="noopener noreferrer"
-      className="underline text-blue-500" href = "https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator" target="_blank">EVENTBRITE</a></span> HERE
-    </div>
-  </div>
-</section> 
-
+      {/* Newsletter Section */}
+      <section
+        className="py-16 px-4 sm:px-6 lg:px-8"
+        style={{ background: "linear-gradient(135deg, #efd984, #be9c43)" }}
+      >
+        <div className="max-w-4xl mx-auto text-center">
+          <div className="bg-white/95 backdrop-blur-sm rounded-2xl p-8 sm:p-12 border-2 border-canada-gold shadow-xl text-black">
+            TO BUY A TICKET AS AN ATTENDEE OR PAY FOR SPONSORSHIP VISIT
+            <span>
+              {" "}
+              <a
+                rel="noopener noreferrer"
+                className="underline text-blue-500"
+                href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
+                target="_blank"
+              >
+                EVENTBRITE
+              </a>
+            </span>{" "}
+            HERE
+          </div>
+        </div>
+      </section>
 
       {/* Contact Information Section */}
-      <section id="contact" className="py-16 px-4 sm:px-6 lg:px-8" style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }}>
+      <section
+        id="contact"
+        className="py-16 px-4 sm:px-6 lg:px-8"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.95)" }}
+      >
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl font-bold text-white mb-8">GET IN TOUCH</h2>
           <p className="text-canada-gold text-xl mb-12">
-            Have questions about exhibiting? Our team is here to help you make the most of this opportunity.
+            Have questions about exhibiting? Our team is here to help you make
+            the most of this opportunity.
           </p>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
               <Globe className="w-8 h-8 text-canada-gold mx-auto mb-4" />
               <h3 className="text-white font-bold mb-2">Website</h3>
-              <p className="text-canada-gold text-sm break-all">www.immigrantatlargecanada.ca/become-an-exhibitor</p>
+              <p className="text-canada-gold text-sm break-all">
+                www.immigrantatlargecanada.ca/become-an-exhibitor
+              </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
               <Mail className="w-8 h-8 text-canada-gold mx-auto mb-4" />
               <h3 className="text-white font-bold mb-2">Email</h3>
-              <p className="text-canada-gold text-sm">info@immigrantatlargecanada.ca</p>
+              <p className="text-canada-gold text-sm">
+                info@immigrantatlargecanada.ca
+              </p>
             </div>
 
             <div className="bg-white/10 backdrop-blur-sm rounded-lg p-6 border border-canada-gold">
@@ -610,40 +734,40 @@ export default function BecomeAnExhibitor() {
             </div>
           </div>
 
-          <Link href = "#packages">
-              <Button
-            className="btn-primary-dark font-bold px-8 py-4 text-lg shadow-lg cursor-pointer"
-            // onClick={() => setIsApplicationFormOpen(true)}
-          >
-            APPLY TO EXHIBIT NOW
-          </Button>
+          <Link href="#packages">
+            <Button
+              className="btn-primary-dark font-bold px-8 py-4 text-lg shadow-lg cursor-pointer"
+              // onClick={() => setIsApplicationFormOpen(true)}
+            >
+              APPLY TO EXHIBIT NOW
+            </Button>
           </Link>
         </div>
       </section>
 
       {/* Application Form Dialog */}
       <Dialog
-  open={isApplicationFormOpen}
-  onOpenChange={(open) => {
-    setIsApplicationFormOpen(open);
-    if (!open) {
-      // Reset success state when dialog closesn
-      setSubmitSuccess(false);
-      // (Optional) also reset form if you want it cleared out:
-      setApplicationFormData({
-        companyName: "",
-        contactPerson: "",
-        email: "",
-        phone: "",
-        website: "",
-        businessType: "",
-        packageType: "",
-        referenceId: generateReferenceId(), // regenerate if needed
-        specialRequests: "",
-      });
-    }
-  }}
->
+        open={isApplicationFormOpen}
+        onOpenChange={(open) => {
+          setIsApplicationFormOpen(open);
+          if (!open) {
+            // Reset success state when dialog closesn
+            setSubmitSuccess(false);
+            // (Optional) also reset form if you want it cleared out:
+            setApplicationFormData({
+              companyName: "",
+              contactPerson: "",
+              email: "",
+              phone: "",
+              website: "",
+              businessType: "",
+              packageType: "",
+              referenceId: generateReferenceId(), // regenerate if needed
+              specialRequests: "",
+            });
+          }
+        }}
+      >
         <DialogContent className="max-w-2xl mx-auto bg-black/95 backdrop-blur-sm border-canada-gold max-h-[90vh] overflow-y-auto">
           <DialogHeader>
             <DialogTitle className="text-2xl font-bold text-white text-center">
@@ -659,45 +783,62 @@ export default function BecomeAnExhibitor() {
               <div className="w-16 h-16 gradient-gold rounded-full flex items-center justify-center mx-auto mb-4">
                 <Trophy className="w-8 h-8 text-canada-navy" />
               </div>
-              <h3 className="text-xl font-bold text-canada-gold mb-2">Application Submitted Successfully!</h3>
+              <h3 className="text-xl font-bold text-canada-gold mb-2">
+                Application Submitted Successfully!
+              </h3>
               <p className="text-white">
-                Thank you for your interest. We will review your application and get back to you within 48 hours.
+                Thank you for your interest. We will review your application and
+                get back to you within 48 hours.
               </p>
             </div>
           ) : (
             <form onSubmit={handleApplicationSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-canada-gold mb-1">Company Name *</label>
+                  <label className="block text-sm font-medium text-canada-gold mb-1">
+                    Company Name *
+                  </label>
                   <Input
                     required
                     value={applicationFormData.companyName}
-                    onChange={(e) => handleInputChange("companyName", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("companyName", e.target.value)
+                    }
                     className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter company name"
                   />
                   {errors.companyName && (
-                      <p className="text-red-500 text-sm mt-1">{errors.companyName}</p>
-                    )}
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.companyName}
+                    </p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-canada-gold mb-1">Contact Person *</label>
+                  <label className="block text-sm font-medium text-canada-gold mb-1">
+                    Contact Person *
+                  </label>
                   <Input
                     required
                     value={applicationFormData.contactPerson}
-                    onChange={(e) => handleInputChange("contactPerson", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("contactPerson", e.target.value)
+                    }
                     className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                     placeholder="Enter contact person"
                   />
                   {errors.contactPerson && (
-                      <p className="text-red-500 text-sm mt-1">{errors.contactPerson}</p>
-                    )}
+                    <p className="text-red-500 text-sm mt-1">
+                      {errors.contactPerson}
+                    </p>
+                  )}
                 </div>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-sm font-medium text-canada-gold mb-1">Email Address *</label>
+                  <label className="block text-sm font-medium text-canada-gold mb-1">
+                    Email Address *
+                  </label>
                   <Input
                     type="email"
                     required
@@ -707,11 +848,13 @@ export default function BecomeAnExhibitor() {
                     placeholder="Enter email address"
                   />
                   {errors.email && (
-                      <p className="text-red-500 text-sm mt-1">{errors.email}</p>
-                    )}
+                    <p className="text-red-500 text-sm mt-1">{errors.email}</p>
+                  )}
                 </div>
                 <div>
-                  <label className="block text-sm font-medium text-canada-gold mb-1">Phone Number *</label>
+                  <label className="block text-sm font-medium text-canada-gold mb-1">
+                    Phone Number *
+                  </label>
                   <Input
                     type="tel"
                     required
@@ -721,13 +864,15 @@ export default function BecomeAnExhibitor() {
                     placeholder="Enter phone number"
                   />
                   {errors.phone && (
-                      <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
-                    )}
+                    <p className="text-red-500 text-sm mt-1">{errors.phone}</p>
+                  )}
                 </div>
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-canada-gold mb-1">Website</label>
+                <label className="block text-sm font-medium text-canada-gold mb-1">
+                  Website
+                </label>
                 <Input
                   // type="url"
                   value={applicationFormData.website}
@@ -735,27 +880,37 @@ export default function BecomeAnExhibitor() {
                   className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                   placeholder="Enter website URL"
                 />
-                  {errors.website && (
-                      <p className="text-red-500 text-sm mt-1">{errors.website}</p>
-                    )}
+                {errors.website && (
+                  <p className="text-red-500 text-sm mt-1">{errors.website}</p>
+                )}
               </div>
 
               <div>
-                <label className="block text-sm font-medium text-canada-gold mb-1">Business Type *</label>
+                <label className="block text-sm font-medium text-canada-gold mb-1">
+                  Business Type *
+                </label>
                 <Select
                   required
                   value={applicationFormData.businessType}
-                  onValueChange={(value) => handleInputChange("businessType", value)}
+                  onValueChange={(value) =>
+                    handleInputChange("businessType", value)
+                  }
                 >
                   <SelectTrigger className="w-full text-white border-canada-gold focus:border-canada-red bg-black/50">
                     <SelectValue placeholder="Select business type" />
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
                     <SelectItem value="retail">Retail</SelectItem>
-                    <SelectItem value="Professional services">Professional Services</SelectItem>
+                    <SelectItem value="Professional services">
+                      Professional Services
+                    </SelectItem>
                     <SelectItem value="technology">Technology</SelectItem>
-                    <SelectItem value="food-beverage">Food & Beverage</SelectItem>
-                    <SelectItem value="health-wellness">Health & Wellness</SelectItem>
+                    <SelectItem value="food-beverage">
+                      Food & Beverage
+                    </SelectItem>
+                    <SelectItem value="health-wellness">
+                      Health & Wellness
+                    </SelectItem>
                     <SelectItem value="education">Education</SelectItem>
                     <SelectItem value="finance">Finance</SelectItem>
                     <SelectItem value="non-profit">Non-Profit</SelectItem>
@@ -763,53 +918,73 @@ export default function BecomeAnExhibitor() {
                   </SelectContent>
                 </Select>
                 {errors.businessType && (
-                    <p className="text-red-500 text-sm mt-1">{errors.businessType}</p>
-                  )}
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.businessType}
+                  </p>
+                )}
               </div>
 
-              <div> 
-                <label className="block text-sm font-medium text-canada-gold mb-1">Preferred Package *</label>
+              <div>
+                <label className="block text-sm font-medium text-canada-gold mb-1">
+                  Preferred Package *
+                </label>
                 <Select
                   required
                   value={applicationFormData.packageType}
-                  onValueChange={(value) => handleInputChange("packageType", value)}
+                  onValueChange={(value) =>
+                    handleInputChange("packageType", value)
+                  }
                   disabled={false}
-
                 >
                   <SelectTrigger className="w-full text-white border-canada-gold focus:border-canada-red bg-black/50">
                     <SelectValue placeholder="Select package" />
                   </SelectTrigger>
                   <SelectContent className="bg-black border-canada-gold shadow-lg max-h-[200px] overflow-y-auto z-[9999]">
-                    <SelectItem value="Individual Sponsor">Individual Sponsor — CA$300</SelectItem>
-                    <SelectItem value="Supporter Sponsor">Supporter Sponsor — CA$500</SelectItem>
-                    <SelectItem value="Community Sponsor">Community Sponsor — CA$1,000</SelectItem>
+                    <SelectItem value="Individual Sponsor">
+                      Individual Sponsor — CA$300
+                    </SelectItem>
+                    <SelectItem value="Supporter Sponsor">
+                      Supporter Sponsor — CA$500
+                    </SelectItem>
+                    <SelectItem value="Community Sponsor">
+                      Community Sponsor — CA$1,000
+                    </SelectItem>
                   </SelectContent>
                 </Select>
-                  {errors.packageType && (
-                      <p className="text-red-500 text-sm mt-1">{errors.packageType}</p>
-                    )}
-              </div>
-                
-              <div className="space-y-2">
-                  <label className="text-sm font-medium text-canada-gold">Reference ID *</label>
-                  <Input
-                    required
-                    type="text"
-                    name="referenceId"
-                    value={applicationFormData.referenceId}
-                    readOnly
-                    className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red cursor-not-allowed"
-                  />
-                  <p className="text-xs text-canada-gold">
-                    Please keep this ID safe. Use it as your payment reference on Eventbrite.
+                {errors.packageType && (
+                  <p className="text-red-500 text-sm mt-1">
+                    {errors.packageType}
                   </p>
-                </div>
+                )}
+              </div>
+
+              <div className="space-y-2">
+                <label className="text-sm font-medium text-canada-gold">
+                  Reference ID *
+                </label>
+                <Input
+                  required
+                  type="text"
+                  name="referenceId"
+                  value={applicationFormData.referenceId}
+                  readOnly
+                  className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red cursor-not-allowed"
+                />
+                <p className="text-xs text-canada-gold">
+                  Please keep this ID safe. Use it as your payment reference on
+                  Eventbrite.
+                </p>
+              </div>
 
               <div>
-                <label className="block text-sm font-medium text-canada-gold mb-1">Special Requests</label>
+                <label className="block text-sm font-medium text-canada-gold mb-1">
+                  Special Requests
+                </label>
                 <Input
                   value={applicationFormData.specialRequests}
-                  onChange={(e) => handleInputChange("specialRequests", e.target.value)}
+                  onChange={(e) =>
+                    handleInputChange("specialRequests", e.target.value)
+                  }
                   className="border-canada-gold text-white bg-black/50 focus:border-canada-red focus:ring-canada-red"
                   placeholder="Any special requirements or requests"
                 />
@@ -839,11 +1014,20 @@ export default function BecomeAnExhibitor() {
       </Dialog>
 
       {/* Footer */}
-      <footer className="text-white py-12" style={{ backgroundColor: "rgba(0, 0, 0, 0.98)" }}>
+      <footer
+        className="text-white py-12"
+        style={{ backgroundColor: "rgba(0, 0, 0, 0.98)" }}
+      >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-8">
             <Link href="/" className="flex items-center justify-center mb-8">
-              <Image src="/canada.png" alt="immigration at large company logo" width={120} height={59} className="" />
+              <Image
+                src="/canada.png"
+                alt="immigration at large company logo"
+                width={120}
+                height={59}
+                className=""
+              />
             </Link>
           </div>
 
@@ -880,14 +1064,23 @@ export default function BecomeAnExhibitor() {
 
           <div className="text-center mt-8 pt-8 border-t border-canada-gold">
             <p className="text-sm opacity-80">
-              © 2025 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT. All Rights Reserved.  Privacy Policy | Terms and
-              Conditions
+              © 2025 LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT. All Rights
+              Reserved. Privacy Policy | Terms and Conditions
             </p>
-            <span>Developed by <a rel="noopener noreferrer"
-      className="underline text-blue-500" href = "https://r2systemsolution.co.uk" target="_blank">R2 system solution Ltd.</a></span>
+            <span>
+              Developed by{" "}
+              <a
+                rel="noopener noreferrer"
+                className="underline text-blue-500"
+                href="https://r2systemsolution.co.uk"
+                target="_blank"
+              >
+                R2 system solution Ltd.
+              </a>
+            </span>
           </div>
         </div>
       </footer>
     </div>
-  )
+  );
 }
