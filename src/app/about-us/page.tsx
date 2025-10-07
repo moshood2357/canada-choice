@@ -325,19 +325,19 @@ function About() {
 
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <a
-              href="#"
+              href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
               className="group bg-yellow-600 hover:bg-yellow-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center"
             >
               <Users className="mr-2 h-6 w-6" />
-              SPONSOR NOW
+              BE A SPONSOR
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
             </a>
             <a
-              href="#"
+              href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
               className="group bg-green-600 hover:bg-green-700 text-white px-8 py-4 rounded-full text-lg font-semibold transition-all duration-300 transform hover:scale-105 hover:shadow-lg flex items-center justify-center"
             >
               <Heart className="mr-2 h-6 w-6" />
-              PARTICIPATE
+              BUY A TICKET
               <ArrowRight className="ml-2 h-5 w-5 group-hover:translate-x-1 transition-transform duration-200" />
             </a>
           </div>
