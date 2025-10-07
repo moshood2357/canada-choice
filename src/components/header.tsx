@@ -1,14 +1,15 @@
 "use client";
 
-import { X, ChevronDown, Menu } from "lucide-react";
+import { X,  Menu } from "lucide-react";
+// ChevronDown,
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
-  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  // const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
+  // const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
 
   
   
@@ -42,20 +43,20 @@ function Header() {
               </Link>
 
               {/* Desktop Dropdown */}
-              <div
+              {/* <div
                 className="relative"
                 onMouseEnter={() => setIsDesktopServicesOpen(true)}
                 onMouseLeave={() => setIsDesktopServicesOpen(false)}
-              >
-                <button
+              > */}
+                {/* <button
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
                   onClick={() =>
                     setIsDesktopServicesOpen(!isDesktopServicesOpen)
                   }
                 >
                   SERVICES <ChevronDown className="ml-1 h-4 w-4" />
-                </button>
-                {isDesktopServicesOpen && (
+                </button> */}
+                {/* {isDesktopServicesOpen && (
                   <div className="absolute top-full left-0  w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
                       <Link
@@ -96,15 +97,15 @@ function Header() {
                       </Link>
                     </div>
                   </div>
-                )}
-              </div>
+                )} */}
+              {/* </div> */}
 
-              <Link
+              {/* <Link
                 href="/nomination"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium "
               >
                 NOMINATION
-              </Link>
+              </Link> */}
 
               <Link
                 href="/become-an-exhibitor"
@@ -113,18 +114,18 @@ function Header() {
                 BECOME A VENDOR
               </Link>
 
-              <Link
+              {/* <Link
                 href="/contact-us"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
               >
                 CONTACT US
-              </Link>
-              <a
+              </Link> */}
+              {/* <a
                 href="tel:438-622-8333"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 transform hover:scale-105"
               >
                 438-622-8333
-              </a>
+              </a> */}
             </div>
 
             {/* Mobile Hamburger */}
@@ -161,7 +162,7 @@ function Header() {
               </Link>
 
               {/* Mobile Dropdown */}
-              <div className="relative">
+              {/* <div className="relative">
                 <button
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
                   onClick={() =>
@@ -212,21 +213,21 @@ function Header() {
                     </div>
                   </div>
                 )}
-              </div>
+              </div> */}
 
-              <Link
+              {/* <Link
                 href="/nomination"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium"
               >
                 NOMINATION
-              </Link>
+              </Link> */}
               <Link
                 href="/become-an-exhibitor"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium"
               >
                 BECOME A VENDOR
               </Link>
-              <Link
+              {/* <Link
                 href="/contact-us"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600"
               >
@@ -237,7 +238,7 @@ function Header() {
                 className="block px-3 py-2 text-blue-600 font-medium"
               >
                 438-622-8333
-              </a>
+              </a> */}
             </div>
           </div>
         )}
