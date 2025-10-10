@@ -420,9 +420,9 @@ export default function BecomeAnExhibitor() {
               >
                 CONTACT
               </Link>
-              <Link href="#packages">
+              <Link href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator">
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition">
-                  APPLY NOW
+                  BUT TICKET
                 </Button>
               </Link>
             </nav>
@@ -474,9 +474,12 @@ export default function BecomeAnExhibitor() {
               >
                 CONTACT
               </Link>
-              <Link href="#packages" onClick={() => setIsOpen(false)}>
+              <Link
+                href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
+                onClick={() => setIsOpen(false)}
+              >
                 <Button className="bg-blue-600 hover:bg-blue-700 text-white font-semibold px-6 py-2 rounded-lg transition w-full">
-                  APPLY NOW
+                  BUY TICKET
                 </Button>
               </Link>
             </nav>
@@ -1041,7 +1044,10 @@ export default function BecomeAnExhibitor() {
               </Link>
             </div>
             <div>
-              <Link href = '/about-us' className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
+              <Link
+                href="/about-us"
+                className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors"
+              >
                 About
               </Link>
             </div>
@@ -1051,12 +1057,18 @@ export default function BecomeAnExhibitor() {
               </Link>
             </div> */}
             <div>
-              <Link href = '/become-an-exhibitor' className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
+              <Link
+                href="/become-an-exhibitor"
+                className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors"
+              >
                 Exhibitors
               </Link>
             </div>
             <div>
-              <Link href = '#contact' className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
+              <Link
+                href="#contact"
+                className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors"
+              >
                 Contact
               </Link>
             </div>
