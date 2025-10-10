@@ -524,12 +524,12 @@ export default function BecomeAnExhibitor() {
               <a href="#packages">VIEW PACKAGES</a>
             </Button>
 
-            <Link href="#packages">
+            <Link href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator">
               <Button
                 className="btn-primary-dark font-bold px-8 py-4 text-lg shadow-lg cursor-pointer"
                 // onClick={() => setIsApplicationFormOpen(true)}
               >
-                APPLY NOW
+                BUY TICKET
               </Button>
             </Link>
           </div>
@@ -1041,24 +1041,24 @@ export default function BecomeAnExhibitor() {
               </Link>
             </div>
             <div>
-              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
+              <Link href = '/about-us' className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
                 About
-              </h4>
+              </Link>
             </div>
-            <div>
-              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
+            {/* <div>
+              <Link href = '' className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
                 Conference
-              </h4>
-            </div>
+              </Link>
+            </div> */}
             <div>
-              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
+              <Link href = '/become-an-exhibitor' className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
                 Exhibitors
-              </h4>
+              </Link>
             </div>
             <div>
-              <h4 className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
+              <Link href = '#contact' className="font-semibold mb-2 text-canada-gold hover:text-white cursor-pointer transition-colors">
                 Contact
-              </h4>
+              </Link>
             </div>
           </div>
 

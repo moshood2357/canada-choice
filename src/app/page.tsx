@@ -477,7 +477,7 @@ import { Menu, X } from "lucide-react";
 import Link from "next/link";
 
 // Set your target date here
-const targetDate = new Date("2025-11-20T00:00:00");
+const targetDate = new Date("2025-11-19T00:00:00");
 
 export default function CanadianChoiceAward() {
   const [timeLeft, setTimeLeft] = useState({
@@ -908,12 +908,12 @@ export default function CanadianChoiceAward() {
             >
               BECOME A VENDOR
             </Link>
-            <Link
+            {/* <Link
               href="/contact-us"
               className="text-black hover:text-blue-600 font-medium transition-colors"
             >
               CONTACT
-            </Link>
+            </Link> */}
             <AnchorLink href="#category">
               <Button className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg">
                 NOMINATE NOW
@@ -957,13 +957,13 @@ export default function CanadianChoiceAward() {
                 BECOME A VENDOR
               </Link>
 
-              <Link
+              {/* <Link
                 href="#contact"
                 className="text-white hover:text-canada-gold font-medium transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 CONTACT
-              </Link>
+              </Link> */}
               <AnchorLink href="#category">
                 <Button className="bg-canada-gold hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg">
                   NOMINATE NOW
@@ -1301,7 +1301,7 @@ export default function CanadianChoiceAward() {
             <span className="text-canada-gold">COUNTDOWN</span>
           </h2>
           <small className="text-canada-gold ">
-            Nominations closes on November 20
+            Nominations closes on November 19
           </small>{" "}
           <br /> <br />
           {timeLeft.days <= 0 &&
@@ -1524,7 +1524,7 @@ export default function CanadianChoiceAward() {
               LEADERSHIP CONFERENCE AND AFRICAN GALA NIGHT
             </h3>
             <div className="flex items-center justify-center space-x-4 text-canada-black">
-              <span className="text-2xl font-bold">NOVEMBER 21, 2025</span>
+              <span className="text-2xl font-bold">NOVEMBER 20&amp;22, 2025</span>
               <span className="text-xl">|</span>
               <div className="text-right">
                 <div className="font-semibold">
