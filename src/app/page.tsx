@@ -1592,34 +1592,34 @@ export default function CanadianChoiceAward() {
               PROUDLY SUPPORTED BY
             </p>
             <div className="flex flex-wrap justify-center items-center gap-6 opacity-60">
-              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+              <div className=" rounded-lg flex items-center justify-center">
                 <Image
                   src="/oasis.jpg"
                   alt="award banner"
-                  width={200}
-                  height={200}
-                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                  width={100}
+                  height={100}
+                  className="drop-shadow-2xl"
                 />
               </div>
-              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+              <div className=" bg-white/20 rounded-lg flex items-center justify-center">
                 <Image
                   src="/plan.jpg"
                   alt="award banner"
-                  width={120}
-                  height={59}
-                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                  width={100}
+                  height={100}
+                  className="drop-shadow-2xl"
                 />
               </div>
-              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+              <div className=" rounded-lg flex items-center justify-center">
                 <Image
                   src="/youth.jpg"
                   alt="award banner"
                   width={120}
                   height={59}
-                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                  className="drop-shadow-2xl "
                 />
               </div>
-              <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
+              <div className=" bg-white/20 rounded-lg flex items-center justify-center">
                 <Image
                   src="/hyundai.jpg"
                   alt="award banner"
