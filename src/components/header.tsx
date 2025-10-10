@@ -48,7 +48,7 @@ function Header() {
                 onMouseEnter={() => setIsDesktopServicesOpen(true)}
                 onMouseLeave={() => setIsDesktopServicesOpen(false)}
               > */}
-                {/* <button
+              {/* <button
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
                   onClick={() =>
                     setIsDesktopServicesOpen(!isDesktopServicesOpen)
@@ -56,7 +56,7 @@ function Header() {
                 >
                   SERVICES <ChevronDown className="ml-1 h-4 w-4" />
                 </button> */}
-                {/* {isDesktopServicesOpen && (
+              {/* {isDesktopServicesOpen && (
                   <div className="absolute top-full left-0  w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
                       <Link
@@ -112,6 +112,12 @@ function Header() {
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium "
               >
                 BECOME A VENDOR
+              </Link>
+              <Link
+                href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+              >
+                BUY TICKET
               </Link>
 
               {/* <Link
@@ -227,6 +233,13 @@ function Header() {
               >
                 BECOME A VENDOR
               </Link>
+              <Link
+                href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
+                className="text-black hover:text-blue-600 font-medium transition-colors"
+              >
+                BUY TICKET
+              </Link>
+
               {/* <Link
                 href="/contact-us"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600"

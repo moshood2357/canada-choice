@@ -1587,23 +1587,49 @@ export default function CanadianChoiceAward() {
           </div>
 
           {/* Sponsor Logos Placeholder */}
-          {/* <div className="border-t border-canada-gold pt-8">
-            <p className="text-canada-gold text-sm mb-4 opacity-80">PROUDLY SUPPORTED BY</p>
+          <div className="border-t border-canada-gold pt-8">
+            <p className="text-canada-gold text-sm mb-4 opacity-80">
+              PROUDLY SUPPORTED BY
+            </p>
             <div className="flex flex-wrap justify-center items-center gap-6 opacity-60">
               <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
-                <span className="text-xs text-white font-bold">SPONSOR</span>
+                <Image
+                  src="/oasis.jpg"
+                  alt="award banner"
+                  width={200}
+                  height={200}
+                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                />
               </div>
               <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
-                <span className="text-xs text-white font-bold">SPONSOR</span>
+                <Image
+                  src="/plan.jpg"
+                  alt="award banner"
+                  width={120}
+                  height={59}
+                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                />
               </div>
               <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
-                <span className="text-xs text-white font-bold">SPONSOR</span>
+                <Image
+                  src="/youth.jpg"
+                  alt="award banner"
+                  width={120}
+                  height={59}
+                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                />
               </div>
               <div className="w-16 h-16 bg-white/20 rounded-lg flex items-center justify-center">
-                <span className="text-xs text-white font-bold">SPONSOR</span>
+                <Image
+                  src="/hyundai.jpg"
+                  alt="award banner"
+                  width={120}
+                  height={59}
+                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                />
               </div>
             </div>
-          </div> */}
+          </div>
         </div>
       </section>
 
