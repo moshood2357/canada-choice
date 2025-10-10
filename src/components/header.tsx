@@ -115,7 +115,7 @@ function Header() {
               </Link>
               <Link
                 href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
-                className="text-black hover:text-blue-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
                 BUY TICKET
               </Link>
@@ -235,7 +235,7 @@ function Header() {
               </Link>
               <Link
                 href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
-                className="text-black hover:text-blue-600 font-medium transition-colors"
+                className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
               >
                 BUY TICKET
               </Link>

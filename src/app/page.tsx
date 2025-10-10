@@ -964,7 +964,7 @@ export default function CanadianChoiceAward() {
               </Link>
               <Link
                 href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
-                className="text-black hover:text-blue-600 font-medium transition-colors"
+                className="text-white hover:text-blue-600 font-medium transition-colors"
               >
                 BUY TICKET
               </Link>
