@@ -1628,6 +1628,15 @@ export default function CanadianChoiceAward() {
                   className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
                 />
               </div>
+              <div className=" rounded-lg flex items-center justify-center">
+                <Image
+                  src="/TD.png"
+                  alt="award banner"
+                  width={120}
+                  height={59}
+                  className="drop-shadow-2xl w-48 sm:w-64 md:w-80 lg:w-[350px] h-auto"
+                />
+              </div>
             </div>
           </div>
         </div>
