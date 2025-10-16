@@ -1004,11 +1004,19 @@ export default function CanadianChoiceAward() {
                     ARE NOW OPEN
                   </span>
                 </h1>
-                <AnchorLink href="#category">
-                  <Button className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg">
-                    NOMINATE NOW
-                  </Button>
-                </AnchorLink>
+                <div className="flex flex-col sm:flex-row gap-4">
+                  <AnchorLink href="#category">
+                    <Button className="border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white font-semibold px-6 w-full sm:w-auto shadow-lg transition cursor-pointer">
+                      NOMINATE NOW
+                    </Button>
+                  </AnchorLink>
+
+                  <Link href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator">
+                    <Button className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg transition cursor-pointer">
+                      BUY TICKET
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
 
