@@ -1,80 +1,57 @@
 "use client";
 
 import { Swiper, SwiperSlide } from "swiper/react";
-import {Pagination, Autoplay } from "swiper/modules";
+import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
 
-import Image from "next/image"
+import Image from "next/image";
 
 export default function CardCarousel() {
+  const images = [
+    "/legacy2.jpg",
+    "/hangout.jpg",
+    "/legacy2.jpg",
+    "/legacy2.jpg",
+    "/hangout.jpg",
+    "/legacy2.jpg",
+    "/hangout.jpg",
+    "/hangout.jpg",
+    "/hangout.jpg",
+    "/hangout.jpg",
+  ];
+
   return (
     <Swiper
-      modules={[ Pagination, Autoplay]}
+      modules={[Pagination, Autoplay]}
       spaceBetween={30}
       slidesPerView={1}
-      navigation
       pagination={{ clickable: true }}
       autoplay={{
-        delay: 3000, // auto-slide every 3s
+        delay: 3000,
         disableOnInteraction: false,
       }}
-      grabCursor={true} 
-      loop={true} // infinite loop
+      loop={true}
+      grabCursor={true}
       breakpoints={{
-        768: { slidesPerView: 2 }, // 2 cards on md screens
-        1024: { slidesPerView: 3 }, // 3 cards on lg screens
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
       }}
       className="w-full"
     >
-      {/* --- Slide 1 --- */}
-      <SwiperSlide>
-        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-      
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-      
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-      
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-      
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/legacy.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-      
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-      
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-      
-      {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-     
-     {/* --- Slide 2 --- */}
-      <SwiperSlide>
-        <Image src="/hangout.jpg" alt="Logo" width={400} height={400} />
-      </SwiperSlide>
-
+      {images.map((src, i) => (
+        <SwiperSlide key={i}>
+          <div className="flex items-center justify-center bg-gray-100 rounded-xl p-4 h-72 sm:h-80 md:h-96 overflow-hidden">
+            <Image
+              src={src}
+              alt={`Slide ${i + 1}`}
+              width={500}
+              height={500}
+              className="w-full h-full object-cover rounded-lg"
+            />
+          </div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

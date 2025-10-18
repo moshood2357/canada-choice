@@ -9,23 +9,22 @@ const testimonials = [
   {
     id: 1,
     content:
-      "Working in a new country with new children was overwhelming. I was not sure where to start. The Settlement Support Program provided the personalized services we desperately needed. They helped us find safe, affordable housing and guided us through the complex process of enrolling our children in school. The staff was patient and understanding, and they made us feel like we were not alone in this journey.",
-    author: "Settlement Support Program Client",
+      "Arriving in a new country with two children was overwhelming. We didn't know where to start. The 'Settlement Support Program' provided the personalized services we desperately needed. They helped us find safe, affordable housing and guided us through the rental application process. The team also assisted us with enrolling our kids in school and navigating the provincial healthcare plan. Immigrant at Large Canada didn't just give us resources; they gave us a sense of stability and community from day one.",
+    author: "The Garcia family",
   },
   {
     id: 2,
     content:
-       "Working in a new country with new children was overwhelming. I was not sure where to start. The Settlement Support Program provided the personalized services we desperately needed. They helped us find safe, affordable housing and guided us through the complex process of enrolling our children in school. The staff was patient and understanding, and they made us feel like we were not alone in this journey.",
-    author: "Immigrant at Large Canada Client",
+      "As an engineer, I struggled for months to have my international credentials recognized. I felt stuck. The 'Career & Entrepreneurship Program' was a game-changer. The guidance on credential assessment was invaluable , and the one-on-one mentorship with a professional in my field gave me the confidence and specific job search strategies I needed. The workshops on Canadian-style resume writing and workplace culture were incredibly practical. Thanks to their support, I am now working in my field and can finally build my future in Canada.",
+    author: "Fatima - Program Participant",
   },
-  {
-    id: 3,
-    content:
-      "The support I received from Immigrant at Large Canada did not just get me a career; they gave me a sense of purpose and community from day one.",
-    author: "Settlement Support Program Client",
-  },
-  
-]
+  // {
+  //   id: 3,
+  //   content:
+  //     "The support I received from Immigrant at Large Canada did not just get me a career; they gave me a sense of purpose and community from day one.",
+  //   author: "Settlement Support Program Client",
+  // },
+];
 
 export function TestimonialCarousel() {
   return (

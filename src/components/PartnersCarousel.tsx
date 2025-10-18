@@ -9,15 +9,17 @@ import Image from "next/image";
 
 export default function PartnersCarousel() {
   const partners = [
-    { name: "Refugee Action AIDS", logo: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Youth Action Now", logo: "https://images.pexels.com/photos/3184292/pexels-photo-3184292.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
-    { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
+    { name: "Oasis of Love Homes Inc", logo: "/oasis.jpg" },
+    { name: "Social Planning Council of Ottawa", logo: "/plan.jpg" },
+    { name: "Myers Barrhaven HYUNDAI", logo: "/hyundai.jpg" },
+    { name: "TD Bank", logo: "/TD.png" },
+    { name: "Youth Action now", logo: "/youth.jpg" },
+    
+    // { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
+    // { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
+    // { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
+    // { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
+    // { name: "Social Planning Council", logo: "https://images.pexels.com/photos/3184293/pexels-photo-3184293.jpeg?auto=compress&cs=tinysrgb&w=400" },
   ];
   
   return (
@@ -41,13 +43,13 @@ export default function PartnersCarousel() {
         <SwiperSlide key={index}>
           <div className="flex items-center justify-center p-8 bg-gray-50 rounded-2xl hover:shadow-lg transition-shadow duration-300">
             <div className="text-center">
-              <div className="w-24 h-24 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
+              <div className="w-48 h-48 bg-gray-200 rounded-full mx-auto mb-4 overflow-hidden">
                 <Image
                   src={partner.logo}
                   alt={partner.name}
-                  width={500}
-                  height={350}
-                  className="w-full h-full object-cover"
+                  width={600}
+                  height={650}
+                  className="w-full h-full object-contain"
                 />
               </div>
               <p className="text-lg font-semibold text-gray-800">{partner.name}</p>

@@ -1,15 +1,16 @@
 "use client";
 
-import { X,  Menu } from "lucide-react";
-// ChevronDown,
+import { X, Menu, ChevronDown } from "lucide-react";
 import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
 function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  // const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
-  // const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
+  const [isDesktopServiceOpen, setIsDesktopServiceOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const [isMobileServiceOpen, setIsMobileServiceOpen] = useState(false);
 
   
   
@@ -43,20 +44,20 @@ function Header() {
               </Link>
 
               {/* Desktop Dropdown */}
-              {/* <div
+              <div
                 className="relative"
                 onMouseEnter={() => setIsDesktopServicesOpen(true)}
                 onMouseLeave={() => setIsDesktopServicesOpen(false)}
-              > */}
-              {/* <button
+              >
+                <button
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
                   onClick={() =>
                     setIsDesktopServicesOpen(!isDesktopServicesOpen)
                   }
                 >
                   SERVICES <ChevronDown className="ml-1 h-4 w-4" />
-                </button> */}
-              {/* {isDesktopServicesOpen && (
+                </button>
+                {isDesktopServicesOpen && (
                   <div className="absolute top-full left-0  w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
                       <Link
@@ -97,22 +98,78 @@ function Header() {
                       </Link>
                     </div>
                   </div>
-                )} */}
-              {/* </div> */}
+                )}
+              </div>
+
+              {/* Desktop Dropdown */}
+              <div
+                className="relative"
+                onMouseEnter={() => setIsDesktopServiceOpen(true)}
+                onMouseLeave={() => setIsDesktopServiceOpen(false)}
+              >
+                <button
+                  className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
+                  onClick={() => setIsDesktopServiceOpen(!isDesktopServiceOpen)}
+                >
+                  GALA NIGHT <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+                {isDesktopServiceOpen && (
+                  <div className="absolute top-full left-0  w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                    <div className="py-1">
+                      <Link
+                        href="/about-the-program"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        ABOUT THE PROGRAM
+                      </Link>
+                      <Link
+                        href="/nomination"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        NOMINATIONS
+                      </Link>
+                      <Link
+                        href="/become-an-exhibitor"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        BECOME A VENDOR
+                      </Link>
+                      {/* <Link
+                        href="/education"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        EDUCATION & SKILLS DEVELOPMENT
+                      </Link>
+                      <Link
+                        href="/wellness"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        HEALTH & WELLNESS PROGRAMS
+                      </Link>
+                      <Link
+                        href="/settlement"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        SETTLEMENT SUPPORT PROGRAMS
+                      </Link> */}
+                    </div>
+                  </div>
+                )}
+              </div>
 
               {/* <Link
                 href="/nomination"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium "
               >
                 NOMINATION
-              </Link> */}
+              </Link>
 
               <Link
                 href="/become-an-exhibitor"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium "
               >
                 BECOME A VENDOR
-              </Link>
+              </Link> */}
               <Link
                 href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
@@ -120,18 +177,18 @@ function Header() {
                 BUY TICKET
               </Link>
 
-              {/* <Link
+              <Link
                 href="/contact-us"
                 className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium transition-colors duration-200"
               >
                 CONTACT US
-              </Link> */}
-              {/* <a
+              </Link>
+              <a
                 href="tel:438-622-8333"
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-md text-sm font-medium transition-all duration-200 transform hover:scale-105"
               >
                 438-622-8333
-              </a> */}
+              </a>
             </div>
 
             {/* Mobile Hamburger */}
@@ -168,12 +225,10 @@ function Header() {
               </Link>
 
               {/* Mobile Dropdown */}
-              {/* <div className="relative">
+              <div className="relative">
                 <button
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
-                  onClick={() =>
-                    setIsMobileServicesOpen(!isMobileServicesOpen)
-                  }
+                  onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
                 >
                   SERVICES <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
@@ -219,14 +274,64 @@ function Header() {
                     </div>
                   </div>
                 )}
-              </div> */}
+              </div>
+              <div className="relative">
+                <button
+                  className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
+                  onClick={() => setIsMobileServiceOpen(!isMobileServiceOpen)}
+                >
+                  GALA NIGHT <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+                {isMobileServiceOpen && (
+                  <div className=" flex flex-col space-y-2 pl-4 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                    <div className="py-1">
+                      <Link
+                        href="/about-the-program"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        ABOUT THE PROGRAM
+                      </Link>
+                      <Link
+                        href="/nomination"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        NOMINATIONS
+                      </Link>
+                      <Link
+                        href="/community"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        BECOME A VENDOR
+                      </Link>
+                      {/* <Link
+                        href="/education"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        EDUCATION & SKILLS DEVELOPMENT
+                      </Link>
+                      <Link
+                        href="/wellness"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        HEALTH & WELLNESS PROGRAMS
+                      </Link>
+                      <Link
+                        href="/settlement"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        SETTLEMENT SUPPORT PROGRAMS
+                      </Link> */}
+                    </div>
+                  </div>
+                )}
+              </div>
 
-              {/* <Link
+              <Link
                 href="/nomination"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium"
               >
                 NOMINATION
-              </Link> */}
+              </Link>
               <Link
                 href="/become-an-exhibitor"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium"
@@ -240,7 +345,7 @@ function Header() {
                 BUY TICKET
               </Link>
 
-              {/* <Link
+              <Link
                 href="/contact-us"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600"
               >
@@ -251,7 +356,7 @@ function Header() {
                 className="block px-3 py-2 text-blue-600 font-medium"
               >
                 438-622-8333
-              </a> */}
+              </a>
             </div>
           </div>
         )}
