@@ -111,7 +111,7 @@ function Header() {
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
                   onClick={() => setIsDesktopServiceOpen(!isDesktopServiceOpen)}
                 >
-                  GALA NIGHT <ChevronDown className="ml-1 h-4 w-4" />
+                  AWARD NIGHT <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 {isDesktopServiceOpen && (
                   <div className="absolute top-full left-0  w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
@@ -280,7 +280,7 @@ function Header() {
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
                   onClick={() => setIsMobileServiceOpen(!isMobileServiceOpen)}
                 >
-                  GALA NIGHT <ChevronDown className="ml-1 h-4 w-4" />
+                  AWARD NIGHT <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 {isMobileServiceOpen && (
                   <div className=" flex flex-col space-y-2 pl-4 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
