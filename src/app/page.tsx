@@ -149,7 +149,7 @@ function HeroSection(){
                   a passionate movement dedicated to supporting and empowering
                   immigrants from all walks of life.
                 </p>
-                <Link href = "/about-us">
+                <Link href="/about-us">
                   <Button
                     variant="outline"
                     className="border-white text-white hover:bg-white hover:text-gray-900 bg-transparent"
@@ -250,12 +250,14 @@ function HeroSection(){
                     we provide essential, one-on-one support to help you
                     navigate the first steps of your new life. This includes:
                   </p>
-                  <Button
-                    variant="link"
-                    className="text-blue-600 p-0 h-auto font-medium"
-                  >
-                    ABOUT US →
-                  </Button>
+                  <Link href="/about-us">
+                    <Button
+                      variant="link"
+                      className="text-black-600 p-0 h-auto font-medium"
+                    >
+                      ABOUT US →
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
 
@@ -272,12 +274,14 @@ function HeroSection(){
                     programs are designed to bridge the gap between your
                     experience and the Canadian job market.
                   </p>
-                  <Button
-                    variant="link"
-                    className="text-blue-600 p-0 h-auto font-medium"
-                  >
-                    OUR SERVICES →
-                  </Button>
+                  <Link href = "/">
+                    <Button
+                      variant="link"
+                      className="text-black-600 p-0 h-auto font-medium"
+                    >
+                      OUR SERVICES →
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
 
@@ -294,12 +298,14 @@ function HeroSection(){
                     meaningful connections. Share your culture, and get
                     involved.
                   </p>
-                  <Button
-                    variant="link"
-                    className="text-blue-600 p-0 h-auto font-medium"
-                  >
-                    CONTACT US →
-                  </Button>
+                  <Link href="/contact-us">
+                    <Button
+                      variant="link"
+                      className="text-black-600 p-0 h-auto font-medium"
+                    >
+                      CONTACT US →
+                    </Button>
+                  </Link>
                 </CardContent>
               </Card>
             </div>
