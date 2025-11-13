@@ -12,12 +12,17 @@ import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/u
 import { Star, Trophy, Users, Target, Award, Heart, Palette, Medal } from "lucide-react"
 import emailjs from "@emailjs/browser"
 import Image from "next/image"
-import AnchorLink from "react-anchor-link-smooth-scroll"
+// import AnchorLink from "react-anchor-link-smooth-scroll"
 import { Menu, X } from "lucide-react"
 import Link from "next/link"
 
+
+const logo_url = "https://immigrantatlargecanada.ca/migrate.png";
+const eventbrite_link =
+  "https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator";
+  
 // Set your target date here
-const targetDate = new Date("2025-11-20T00:00:00")
+const targetDate = new Date("2025-11-9T00:00:00")
 
 export default function CanadianChoiceAward() {
   const [timeLeft, setTimeLeft] = useState({
@@ -149,8 +154,19 @@ export default function CanadianChoiceAward() {
   }
 
   const handleVoteClick = (categoryTitle: string) => {
-    setSelectedCategory(categoryTitle)
-    setIsVotingFormOpen(true)
+    // Check if nominations are closed
+    if (
+      timeLeft.days <= 0 &&
+      timeLeft.hours <= 0 &&
+      timeLeft.minutes <= 0 &&
+      timeLeft.seconds <= 0
+    ) {
+      alert("Nominations are now closed.");
+      return; // exit early
+    }
+
+    setSelectedCategory(categoryTitle);
+    setIsVotingFormOpen(true);
     setVotingFormData({
       firstName: "",
       lastName: "",
@@ -158,9 +174,10 @@ export default function CanadianChoiceAward() {
       phone: "",
       nominate: "",
       nominee: "",
-    })
-    setVotingSubmitSuccess(false)
-  }
+    });
+    setVotingSubmitSuccess(false);
+  };
+
 
 
   // ✅ Validation function
@@ -234,6 +251,7 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
       templateParams,
       "wglabsWakJL1JDUyr"
     );
+    
 
     // Send confirmation to user
     await emailjs.send(
@@ -244,6 +262,8 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
         from_email: votingFormData.email,
         category: selectedCategory,
         nominee: votingFormData.nominee,
+        eventbrite_link,
+        logo_url,
       },
       "wglabsWakJL1JDUyr"
     );
@@ -457,11 +477,11 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
             >
               CONTACT
             </Link>
-            <AnchorLink href="#category">
+            {/* <AnchorLink href="#category">
               <Button className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg">
                 NOMINATE NOW
               </Button>
-            </AnchorLink>
+            </AnchorLink> */}
           </nav>
 
           {/* Mobile Hamburger */}
@@ -513,11 +533,11 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
               >
                 CONTACT
               </Link>
-              <AnchorLink href="#category">
+              {/* <AnchorLink href="#category">
                 <Button className="bg-canada-gold hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg">
                   NOMINATE NOW
                 </Button>
-              </AnchorLink>
+              </AnchorLink> */}
             </nav>
           </div>
         )}
@@ -538,15 +558,15 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
                     2025
                   </span>
                   <span className="text-2xl sm:text-3xl md:text-4xl text-white block mt-2 drop-shadow-2xl">
-                    ARE NOW OPEN
+                    ARE NOW <span className = "text-red-500">CLOSED</span>
                   </span>
                 </h1>
                 <div className="flex flex-col sm:flex-row gap-4">
-                  <AnchorLink href="#category">
+                  {/* <AnchorLink href="#category">
                     <Button className="border-2 border-yellow-500 text-yellow-500 hover:bg-yellow-500 hover:text-white font-semibold px-6 w-full sm:w-auto shadow-lg transition cursor-pointer">
                       NOMINATE NOW
                     </Button>
-                  </AnchorLink>
+                  </AnchorLink> */}
 
                   <Link href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator">
                     <Button className="bg-gradient-to-r from-yellow-400 to-yellow-600 hover:from-yellow-500 hover:to-yellow-700 text-white font-semibold px-6 w-full sm:w-auto border-0 shadow-lg transition cursor-pointer">
@@ -858,7 +878,7 @@ const handleVotingSubmit = async (e: React.FormEvent) => {
             <span className="text-canada-gold">COUNTDOWN</span>
           </h2>
           <small className="text-canada-gold ">
-            Nominations closes on November 20
+          
           </small>{" "}
           <br /> <br />
           {timeLeft.days <= 0 &&

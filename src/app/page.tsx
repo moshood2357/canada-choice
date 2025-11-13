@@ -1,16 +1,17 @@
 "use client"
 
-import { Button } from "@/components/ui/button"
-import { ChevronLeft, ChevronRight, Users, Briefcase, GraduationCap, Scale, Heart, UserCheck } from "lucide-react"
+// import { Button } from "@/components/ui/button"
+import { ArrowRight, Users, Briefcase, GraduationCap, Scale, Heart, UserCheck } from "lucide-react"
 import { Card, CardContent } from "@/components/ui/card"
 import Footer from "../components/Footer"
 import Header from "../components/header"
 import {TestimonialCarousel} from "../components/testimonial-carousel"
 import Link from "next/link"
+import Image from "next/image";
 
-import { useState, useEffect, useRef } from "react"
+// import { useState, useEffect, useRef } from "react"
 
-const images = ["/group.jpg", "/present.jpg", "/conference.jpg", "/people.jpg"]
+// const images = ["/group.jpg", "/present.jpg", "/conference.jpg", "/people.jpg"]
 
 function HeroSection(){
       const services = [
@@ -63,173 +64,118 @@ function HeroSection(){
     },
   ]
 
-   const [currentSlide, setCurrentSlide] = useState(0)
-   const intervalRef = useRef<NodeJS.Timeout | null>(null)
+  //  const [currentSlide, setCurrentSlide] = useState(0)
+  //  const intervalRef = useRef<NodeJS.Timeout | null>(null)
 
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % images.length)
-  }
+  // const nextSlide = () => {
+  //   setCurrentSlide((prev) => (prev + 1) % images.length)
+  // }
 
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + images.length) % images.length)
-  }
+  // const prevSlide = () => {
+  //   setCurrentSlide((prev) => (prev - 1 + images.length) % images.length)
+  // }
 
-  const goToSlide = (index: number) => {
-    setCurrentSlide(index)
-  }
+  // const goToSlide = (index: number) => {
+  //   setCurrentSlide(index)
+  // }
 
-   const startAutoPlay = () => {
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
-    }
-    intervalRef.current = setInterval(() => {
-      setCurrentSlide((prev) => (prev + 1) % images.length)
-    }, 1500) // Change slide every 3 seconds
-  }
+  //  const startAutoPlay = () => {
+  //   if (intervalRef.current) {
+  //     clearInterval(intervalRef.current)
+  //   }
+  //   intervalRef.current = setInterval(() => {
+  //     setCurrentSlide((prev) => (prev + 1) % images.length)
+  //   }, 1500) // Change slide every 3 seconds
+  // }
 
-  useEffect(() => {
-    startAutoPlay()
-    return () => {
-      if (intervalRef.current) {
-        clearInterval(intervalRef.current)
-      }
-    }
-  }, [])
+  // useEffect(() => {
+  //   startAutoPlay()
+  //   return () => {
+  //     if (intervalRef.current) {
+  //       clearInterval(intervalRef.current)
+  //     }
+  //   }
+  // }, [])
 
-  const handleMouseEnter = () => {
+  // const handleMouseEnter = () => {
 
-    if (intervalRef.current) {
-      clearInterval(intervalRef.current)
+  //   if (intervalRef.current) {
+  //     clearInterval(intervalRef.current)
 
-    }
-  }
+  //   }
+  // }
 
-  const handleMouseLeave = () => {
-    startAutoPlay()
-  }
+  // const handleMouseLeave = () => {
+  //   startAutoPlay()
+  // }
 
-  const handlePrevSlide = () => {
-    prevSlide()
-    startAutoPlay()
-  }
+  // const handlePrevSlide = () => {
+  //   prevSlide()
+  //   startAutoPlay()
+  // }
 
-  const handleNextSlide = () => {
-    nextSlide()
-    startAutoPlay()
-  }
+  // const handleNextSlide = () => {
+  //   nextSlide()
+  //   startAutoPlay()
+  // }
 
     return (
       <div className="p-0">
         <Header />
         {/* hero section */}
-        <section className="relative mt-24 pt-5 bg-gray-900 text-white min-h-[600px] flex items-center">
-          {/* Background image overlay */}
-          <div
-            className="absolute inset-0 bg-cover bg-center bg-no-repeat opacity-10"
-            style={{
-              backgroundImage: `url('/group.jpg')`,
-            }}
-          />
-
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <p className="text-sm font-medium text-blue-300 mb-4 tracking-wide">
-                  EMPOWERING COMMUNITIES:
-                </p>
-                <h1 className="text-4xl lg:text-5xl font-bold mb-6 leading-tight text-balance">
-                  Building Inclusion, Settlement and Integration,
-                  <br />
-                  <span className="text-blue-300">Improving Lives</span>
-                </h1>
-                <p className="text-lg text-gray-300 mb-8 leading-relaxed">
-                  Immigrant at Large Canada was founded with a mission to
-                  amplify the voices of immigrants and advocate for their
-                  rightful recognition and inclusion in Canadian society. We are
-                  a passionate movement dedicated to supporting and empowering
-                  immigrants from all walks of life.
-                </p>
-                <Link href="/about-us">
-                  <Button
-                    variant="outline"
-                    className="border-white text-white hover:bg-white hover:text-gray-900 bg-transparent"
-                  >
-                    DISCOVER MORE →
-                  </Button>
-                </Link>
+        <section className="bg-[#0d2c50] text-white pt-32 pb-16">
+          <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-stretch gap-8">
+            {/* Left: Image */}
+            <div className="flex-1 flex">
+              <div className="rounded-lg overflow-hidden shadow-xl flex-1">
+                <Image
+                  src="/present.jpg"
+                  width={800}
+                  height={600}
+                  alt="Award Ceremony"
+                  className="w-full h-full object-cover"
+                />
               </div>
+            </div>
 
-              <div
-                className="relative overflow-hidden rounded-lg"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                {/* Carousel container */}
-                <div
-                  className="flex transition-transform duration-500 ease-in-out"
-                  style={{ transform: `translateX(-${currentSlide * 100}%)` }}
-                >
-                  {images.map((image, index) => (
-                    <div
-                      key={index}
-                      className="w-full h-80 bg-cover bg-center flex-shrink-0"
-                      style={{
-                        backgroundImage: `url('${image}')`,
-                      }}
-                    />
-                  ))}
-                </div>
+            {/* Right: Text */}
+            <div className="flex-1 flex flex-col z-100 justify-center text-center md:text-left">
+              <h1 className="text-4xl font-extrabold mb-2 leading-tight">
+                EMPOWERING COMMUNITIES:
+              </h1>
 
-                {/* Navigation buttons */}
-                <button
-                  onClick={handlePrevSlide}
-                  className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-transparent bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-200"
-                  aria-label="Previous image"
-                >
-                  <ChevronLeft className="w-6 h-6 text-white" />
-                </button>
+              <h4 className="text-2xl font-serif mb-3 leading-snug text-[#b3c7e6]">
+                Building Inclusion, Settlement and Integration,{" "}
+                <span className="text-[#67bed9]">Improving Lives</span>
+              </h4>
 
-                <button
-                  onClick={handleNextSlide}
-                  className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-transparent bg-opacity-20 hover:bg-opacity-30 rounded-full p-2 transition-all duration-200"
-                  aria-label="Next image"
-                >
-                  <ChevronRight className="w-6 h-6 text-white" />
-                </button>
+              <div className="w-16 h-1 bg-white mb-4 mx-auto md:mx-0"></div>
 
-                {/* Dot indicators */}
-                <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-                  {images.map((_, index) => (
-                    <button
-                      key={index}
-                      onClick={() => goToSlide(index)}
-                      className={`w-2 h-2 rounded-full transition-all duration-200 ${
-                        index === currentSlide
-                          ? "bg-white"
-                          : "bg-white bg-opacity-50 hover:bg-opacity-75"
-                      }`}
-                      aria-label={`Go to slide ${index + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
+              <p className="text-base leading-[1.4] mb-5 text-gray-200">
+                Immigrant at Large Canada was founded with a mission to amplify
+                the voices of immigrants and advocate for their rightful
+                recognition and inclusion in Canadian society. We are a
+                passionate movement dedicated to supporting and empowering
+                immigrants from all walks of life.
+              </p>
 
-              {/* Slide counter */}
-              {/* <div className="text-center mt-4 text-muted-foreground">
-              {currentSlide + 1} / {images.length}
-            </div> */}
+              <button className="group bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-md text-base flex items-center gap-2 w-40 transition-all transform hover:scale-105 mx-auto md:mx-0">
+                Discover More
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
             </div>
           </div>
         </section>
 
+        {/* </section> */}
         {/* featured section */}
-        <section className="py-16 bg-gray-50">
-          <div className="max-w-7xl  px-4 sm:px-6 lg:px-8">
-            <div className="text-center mb-12">
-              <p className="text-sm font-medium text-gray-600 mb-2">
+        <section className="py-16 bg-gradient-to-b from-gray-100 to-gray-200 relative">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+            <div className="mb-12">
+              <h2 className="text-2xl font-bold text-gray-800 mb-4">
                 We Help Immigrants Thrive in 3 Simple Steps
-              </p>
-              <p className="text-gray-700 max-w-2xl mx-auto">
+              </h2>
+              <p className="text-gray-600 max-w-2xl mx-auto">
                 At Immigrant at Large Canada, we provide a clear pathway to help
                 you build your new life with confidence. Our support is
                 structured in three simple, effective steps.
@@ -237,77 +183,68 @@ function HeroSection(){
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <Card className="bg-white border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                    <span className="text-blue-600 font-bold text-xl">01</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
-                    Settle In with Confidence
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    From finding housing to understanding your new environment,
-                    we provide essential, one-on-one support to help you
-                    navigate the first steps of your new life. This includes:
-                  </p>
-                  <Link href="/about-us">
-                    <Button
-                      variant="link"
-                      className="text-black-600 p-0 h-auto font-medium"
-                    >
-                      ABOUT US →
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+              {/* Step 1 */}
+              <div className="bg-[#0B2545] text-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
+                <div className="bg-blue-200 text-[#0B2545] font-bold text-2xl w-12 h-12 rounded-md flex items-center justify-center mb-6">
+                  1
+                </div>
+                <h3 className="text-xl font-bold mb-4 uppercase">
+                  Settle In with Confidence
+                </h3>
+                <p className="text-blue-100 mb-6 text-sm leading-relaxed">
+                  From finding housing to understanding your new environment, we
+                  provide essential, one-on-one support to help you navigate the
+                  first steps of your new life. This includes:
+                </p>
+                <a
+                  href="/about-us"
+                  className="bg-white text-[#0B2545] px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition"
+                >
+                  About Us →
+                </a>
+              </div>
 
-              <Card className="bg-white border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                    <span className="text-blue-600 font-bold text-xl">02</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
-                    Build Your Career & Skills
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    We help you achieve your professional goals in Canada. Our
-                    programs are designed to bridge the gap between your
-                    experience and the Canadian job market.
-                  </p>
-                  <Link href = "/">
-                    <Button
-                      variant="link"
-                      className="text-black-600 p-0 h-auto font-medium"
-                    >
-                      OUR SERVICES →
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+              {/* Step 2 */}
+              <div className="bg-[#0B2545] text-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
+                <div className="bg-blue-200 text-[#0B2545] font-bold text-2xl w-12 h-12 rounded-md flex items-center justify-center mb-6">
+                  2
+                </div>
+                <h3 className="text-xl font-bold mb-4 uppercase">
+                  Build Your Career & Skills
+                </h3>
+                <p className="text-blue-100 mb-6 text-sm leading-relaxed">
+                  We help you achieve your professional goals in Canada. Our
+                  programs are designed to bridge the gap between your
+                  experience and the Canadian job market.
+                </p>
+                <a
+                  href="/services"
+                  className="bg-white text-[#0B2545] px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition"
+                >
+                  Our Services →
+                </a>
+              </div>
 
-              <Card className="bg-white border-0 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="bg-blue-100 w-12 h-12 rounded-lg flex items-center justify-center mb-6">
-                    <span className="text-blue-600 font-bold text-xl">03</span>
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 mb-4">
-                    Connect with Your Community
-                  </h3>
-                  <p className="text-gray-600 mb-6">
-                    Building meaningful connections is key to building
-                    meaningful connections. Share your culture, and get
-                    involved.
-                  </p>
-                  <Link href="/contact-us">
-                    <Button
-                      variant="link"
-                      className="text-black-600 p-0 h-auto font-medium"
-                    >
-                      CONTACT US →
-                    </Button>
-                  </Link>
-                </CardContent>
-              </Card>
+              {/* Step 3 */}
+              <div className="bg-[#0B2545] text-white rounded-2xl shadow-lg p-8 flex flex-col items-center">
+                <div className="bg-blue-200 text-[#0B2545] font-bold text-2xl w-12 h-12 rounded-md flex items-center justify-center mb-6">
+                  3
+                </div>
+                <h3 className="text-xl font-bold mb-4 uppercase">
+                  Connect with Your Community
+                </h3>
+                <p className="text-blue-100 mb-6 text-sm leading-relaxed">
+                  Building meaningful connections is key to feeling at home.
+                  Share your culture, make friends, and get involved in your
+                  community.
+                </p>
+                <a
+                  href="/contact-us"
+                  className="bg-white text-[#0B2545] px-6 py-2 rounded-md font-semibold hover:bg-gray-100 transition"
+                >
+                  Contact Us →
+                </a>
+              </div>
             </div>
           </div>
         </section>
