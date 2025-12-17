@@ -285,10 +285,10 @@ function App() {
                   <div className="flex flex-col space-y-2 pl-4 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
                       <a
-                        href="/about-the-program"
+                        href="/award-night"
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       >
-                        GALA NIGHT
+                        AWARD NIGHT
                       </a>
                       <a
                         href="/nomination"
