@@ -54,7 +54,7 @@ function About() {
             <div className="lg:pl-8">
               <div className="rounded-2xl overflow-hidden shadow-2xl transform hover:scale-105 transition-transform duration-300">
                 <Image
-                  src="/conference.jpg"
+                  src="/leagacies.jpg"
                   alt="Leadership Conference & Gala Night"
                   width={500}
                   height={350}

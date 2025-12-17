@@ -6,9 +6,11 @@ import Link from "next/link";
 
 function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isDesktopPastEventOpen, setIsDesktopPastEventOpen] = useState(false);
+   const [isMobilePastEventOpen, setIsMobilePastEventOpen] = useState(false);
   const [isDesktopServicesOpen, setIsDesktopServicesOpen] = useState(false);
-  const [isDesktopServiceOpen, setIsDesktopServiceOpen] = useState(false);
-  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  // const [isDesktopServiceOpen, setIsDesktopServiceOpen] = useState(false);
+  // const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const [isMobileServiceOpen, setIsMobileServiceOpen] = useState(false);
 
   return (
@@ -99,7 +101,7 @@ function App() {
                 )}
               </div>
 
-              <div
+              {/* <div
                 className="relative"
                 onMouseEnter={() => setIsDesktopServiceOpen(true)}
                 onMouseLeave={() => setIsDesktopServiceOpen(false)}
@@ -134,14 +136,47 @@ function App() {
                     </div>
                   </div>
                 )}
+              </div> */}
+              
+              <div
+                className="relative"
+                onMouseEnter={() => setIsDesktopPastEventOpen(true)}
+                onMouseLeave={() => setIsDesktopPastEventOpen(false)}
+              >
+                <button
+                  className="text-white bg-[#0d2c50] hover:bg-[#0b2543]  px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200 flex items-center"
+                  onClick={() =>
+                    setIsDesktopPastEventOpen(!isDesktopPastEventOpen)
+                  }
+                >
+                  PAST EVENTS <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+                {isDesktopPastEventOpen && (
+                  <div className="absolute top-full left-0 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                    <div className="py-1">
+                      <Link
+                        href="/award-night"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                       AWARD NIGHT
+                      </Link>
+                      <Link
+                        href="/career"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        LEADERSHIP CONFERENCE
+                      </Link>
+                     
+                    </div>
+                  </div>
+                )}
               </div>
-
-              <Link
+              {/* <Link
                 href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
                 className="text-white bg-[#0d2c50] hover:bg-[#0b2543]  px-3 py-2 rounded-md text-sm font-medium transition-colors duration-200"
               >
                 BUY TICKET
-              </Link>
+              </Link> */}
 
               <Link
                 href="/contact-us"
@@ -191,11 +226,11 @@ function App() {
               <div className="relative">
                 <button
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
-                  onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                  onClick={() => setIsMobilePastEventOpen(!isMobilePastEventOpen)}
                 >
                   SERVICES <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
-                {isMobileServicesOpen && (
+                {isMobilePastEventOpen && (
                   <div className="flex flex-col space-y-2 pl-4 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
                     <div className="py-1">
                       <Link
@@ -244,6 +279,39 @@ function App() {
                   className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
                   onClick={() => setIsMobileServiceOpen(!isMobileServiceOpen)}
                 >
+                  PAST EVENTS <ChevronDown className="ml-1 h-4 w-4" />
+                </button>
+                {isMobileServiceOpen && (
+                  <div className="flex flex-col space-y-2 pl-4 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5">
+                    <div className="py-1">
+                      <a
+                        href="/about-the-program"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        GALA NIGHT
+                      </a>
+                      <a
+                        href="/nomination"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        LEADERSHIP CONFERENCE
+                      </a>
+                      {/* <a
+                        href="/become-an-exhibitor"
+                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
+                      >
+                        BECOME A VENDOR
+                      </a> */}
+                    </div>
+                  </div>
+                )}
+              </div>
+
+              {/* <div className="relative">
+                <button
+                  className="text-gray-700 bg-transparent hover:text-blue-600 px-3 py-2 text-sm font-medium flex items-center transition-colors duration-200"
+                  onClick={() => setIsMobileServiceOpen(!isMobileServiceOpen)}
+                >
                   AWARD NIGHT <ChevronDown className="ml-1 h-4 w-4" />
                 </button>
                 {isMobileServiceOpen && (
@@ -270,14 +338,14 @@ function App() {
                     </div>
                   </div>
                 )}
-              </div>
-
+              </div> */}
+{/* 
               <a
                 href="https://www.eventbrite.ca/e/leadership-conference-african-gala-night-2025-tickets-1619187245639?aff=oddtdtcreator"
                 className="block px-3 py-2 text-gray-700 hover:text-blue-600 font-medium"
               >
                 BUY TICKET
-              </a>
+              </a> */}
 
               <a
                 href="/contact-us"

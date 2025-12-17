@@ -8,6 +8,7 @@ import Header from "../components/header"
 import {TestimonialCarousel} from "../components/testimonial-carousel"
 import Link from "next/link"
 import Image from "next/image";
+// import { url } from "inspector"
 
 // import { useState, useEffect, useRef } from "react"
 
@@ -123,10 +124,31 @@ function HeroSection(){
       <div className="p-0">
         <Header />
         {/* hero section */}
-        <section className="bg-[#0d2c50] text-white pt-32 pb-16">
+        <section className="relative bg-[#0d2c50] text-white pt-32 pb-16 overflow-hidden">
+          {/* Background image */}
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage: `url('/bub.png')`,
+              backgroundSize: "cover",
+              backgroundPosition: "center",
+              zIndex: 1,
+            }}
+          ></div>
+
+          {/* Gradient overlay (top + bottom) */}
+          <div
+            className="absolute inset-0"
+            style={{
+              background:
+                "linear-gradient(to bottom, rgba(13,44,80,0.3), rgba(13,44,80,0)), linear-gradient(to top, rgba(13,44,80, 0), rgba(13,44,80,0))",
+              zIndex: 2,
+              pointerEvents: "none",
+            }}
+          ></div>
           <div className="max-w-7xl mx-auto px-6 lg:px-8 flex flex-col md:flex-row items-stretch gap-8">
             {/* Left: Image */}
-            <div className="flex-1 flex">
+            <div className="flex-1 flex z-500">
               <div className="rounded-lg overflow-hidden shadow-xl flex-1">
                 <Image
                   src="/present.jpg"
@@ -139,36 +161,41 @@ function HeroSection(){
             </div>
 
             {/* Right: Text */}
-            <div className="flex-1 flex flex-col z-100 justify-center text-center md:text-left">
-              <h1 className="text-4xl font-extrabold mb-2 leading-tight">
-                EMPOWERING COMMUNITIES:
-              </h1>
+            <div className="flex-1 flex flex-col z-500 justify-center text-center md:text-left">
+              <div className="bg-[#0d2c50]/90 backdrop-blur-sm rounded-2xl p-8 md:p-10 shadow-xl border border-[#1e3a60]/40">
+                <h1 className="text-4xl font-extrabold mb-2 leading-tight text-white">
+                  EMPOWERING COMMUNITIES:
+                </h1>
 
-              <h4 className="text-2xl font-serif mb-3 leading-snug text-[#b3c7e6]">
-                Building Inclusion, Settlement and Integration,{" "}
-                <span className="text-[#67bed9]">Improving Lives</span>
-              </h4>
+                <h4 className="text-2xl font-serif mb-3 leading-snug text-[#b3c7e6]">
+                  Building Inclusion, Settlement and Integration,{" "}
+                  <span className="text-[#67bed9]">Improving Lives</span>
+                </h4>
 
-              <div className="w-16 h-1 bg-white mb-4 mx-auto md:mx-0"></div>
+                <div className="w-16 h-1 bg-white mb-4 mx-auto md:mx-0"></div>
 
-              <p className="text-base leading-[1.4] mb-5 text-gray-200">
-                Immigrant at Large Canada was founded with a mission to amplify
-                the voices of immigrants and advocate for their rightful
-                recognition and inclusion in Canadian society. We are a
-                passionate movement dedicated to supporting and empowering
-                immigrants from all walks of life.
-              </p>
+                <p className="text-base leading-[1.4] mb-5 text-gray-200">
+                  Immigrant at Large Canada was founded with a mission to
+                  amplify the voices of immigrants and advocate for their
+                  rightful recognition and inclusion in Canadian society. We are
+                  a passionate movement dedicated to supporting and empowering
+                  immigrants from all walks of life.
+                </p>
 
-              <button className="group bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-md text-base flex items-center gap-2 w-40 transition-all transform hover:scale-105 mx-auto md:mx-0">
-                Discover More
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </button>
+                <a
+                  href="/about-us"
+                  className="group bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2.5 rounded-md text-base 
+                 flex items-center gap-2 w-40 transition-all transform hover:scale-105 mx-auto md:mx-0"
+                >
+                  Discover More
+                  <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
             </div>
           </div>
         </section>
 
-        {/* </section> */}
-        {/* featured section */}
+        {/* </sink       {/* featured section */}
         <section className="py-16 bg-gradient-to-b from-gray-100 to-gray-200 relative">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <div className="mb-12">
